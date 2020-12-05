@@ -30,14 +30,16 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 
 all: build_libft $(NAME)
+	@echo "\033[44m ==>      Done      <== \033[0m\n"
 
 $(NAME): $(LIBFT_NAME) $(OBJ)
 	gcc -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ)
 
 build_libft:
-	@echo "==> Building libft <=="
+	@echo "\n\033[44m ==> Building libft <== \033[0m"
 	@make -C $(LIBFT_DIR)
-	@echo "==>      Done      <==\n"
+	@echo "\033[44m ==>      Done      <== \033[0m\n"
+	@echo "\033[44m ==> Building cub3d <== \033[0m"
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
