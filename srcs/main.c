@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
-
-#define KEY_LEFT 123
-#define KEY_RIGHT 124
-#define KEY_BOTTOM 125
-#define KEY_UP 126
+#include "cub3d.h"
 
 void *mlx_ptr;
 void *win_ptr;
@@ -26,22 +20,22 @@ int current_y = 250;
 int 	key_handle(int key, void *param)
 {
 	(void)param;
-	if (key == KEY_LEFT)
+	if (key == KEY_LEFT || key == KEY_A)
 	{
 		current_x--;
 		mlx_pixel_put(mlx_ptr, win_ptr, current_x, current_y, 0xFFFFFF);
 	}
-	else if (key == KEY_RIGHT)
+	else if (key == KEY_RIGHT || key == KEY_D)
 	{
 		current_x++;
 		mlx_pixel_put(mlx_ptr, win_ptr, current_x, current_y, 0xFFFFFF);
 	}
-	else if (key == KEY_UP)
+	else if (key == KEY_UP || key == KEY_W)
 	{
 		current_y--;
 		mlx_pixel_put(mlx_ptr, win_ptr, current_x, current_y, 0xFFFFFF);
 	}
-	else if (key == KEY_BOTTOM)
+	else if (key == KEY_BOTTOM || key == KEY_S)
 	{
 		current_y++;
 		mlx_pixel_put(mlx_ptr, win_ptr, current_x, current_y, 0xFFFFFF);
