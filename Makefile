@@ -24,7 +24,12 @@ FLAGS = -Wall -Wextra -Werror
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft -I$(LIBFT_DIR)/includes
 LIBMLX_FLAGS = -I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-FILES = main.c
+FILES = main.c \
+		mlx_put.c \
+		is_moveable.c \
+		is_arrow.c \
+		new_map.c \
+		player.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
