@@ -16,22 +16,22 @@ void	change_direction(t_mlx *mlx_info, int key)
 {
 	if (key == KEY_RIGHT)
 	{
-		if (mlx_info->player->angle == 0)
-			mlx_info->player->angle = 360;
+		if (mlx_info->player->angle == 0.f)
+			mlx_info->player->angle = 359.f;
 		else
 			mlx_info->player->angle--;
 	}
 	else if (key == KEY_LEFT)
 	{
-		if (mlx_info->player->angle == 360)
-			mlx_info->player->angle = 0;
+		if (mlx_info->player->angle == 359.f)
+			mlx_info->player->angle = 0.f;
 		else
 			mlx_info->player->angle++;
 	}
-	ft_printf("Angle: %d\n", mlx_info->player->angle);
+//	ft_printf("Angle: %d\n", mlx_info->player->angle);
 }
 
-void	move(t_mlx *mlx_info, int key, int step)
+void	move(t_mlx *mlx_info, int key, float step)
 {
 	if (key == KEY_A)
 		mlx_info->player->position->x -= step;
@@ -41,5 +41,5 @@ void	move(t_mlx *mlx_info, int key, int step)
 		mlx_info->player->position->y -= step;
 	else if (key == KEY_S)
 		mlx_info->player->position->y += step;
-	ft_printf("x: %d, y: %d\n", mlx_info->player->position->x, mlx_info->player->position->y);
+//	ft_printf("x: %d, y: %d\n", mlx_info->player->position->x, mlx_info->player->position->y);
 }

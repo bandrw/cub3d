@@ -23,20 +23,28 @@
 # define KEY_W 13
 # define KEY_ESC 53
 
-# include <mlx.h>
 # include <math.h>
+# include "mlx.h"
 # include "libft.h"
 #include <stdio.h>
+
 typedef struct	s_point
 {
-	int			x;
-	int			y;
+	float		x;
+	float		y;
 }				t_point;
+
+typedef struct	s_line
+{
+	t_point		coordinate;
+	float		length;
+	float		angle;
+}				t_line;
 
 typedef struct	s_player
 {
 	t_point		*position;
-	int 		angle;
+	float 		angle;
 }				t_player;
 
 typedef struct	s_mlx
@@ -50,10 +58,11 @@ typedef struct	s_mlx
 }				t_mlx;
 
 void	player_move(t_mlx *mlx_info, int key);
-void	put_square(t_mlx *mlx_info, t_point *p, int size);
+void	put_square(t_mlx *mlx_info, t_point p, float size, int color);
+void	put_line(t_mlx *mlx_info, t_line *line, int color);
 int 	is_moveable(int key);
 int 	is_arrow(int key);
-void	move(t_mlx *mlx_info, int key, int step);
+void	move(t_mlx *mlx_info, int key, float step);
 void	change_direction(t_mlx *mlx_info, int key);
 char	**new_map(void);
 

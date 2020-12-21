@@ -10,19 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 LIBFT_DIR = libft
 LIBFT_NAME = $(LIBFT_DIR)/libft.a
+LIBMLX_DIR = minilibx
+LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.a
+
 HEADERS_DIR = includes
 OBJ_DIR = obj
 SRCS_DIR = srcs
 HEADER_FILES = cub3d.h
 HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADER_FILES))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra #-Werror
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft -I$(LIBFT_DIR)/includes
-LIBMLX_FLAGS = -I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
+LIBMLX_FLAGS = -L$(LIBMLX_DIR) -lmlx -I$(LIBMLX_DIR) -framework OpenGL -framework AppKit
 
 FILES = main.c \
 		mlx_put.c \
@@ -34,28 +37,37 @@ FILES = main.c \
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 
-all: build_libft $(NAME)
+all: build_libft build_libmlx build_cub3D $(NAME)
 	@echo "\033[44m ==>      Done      <== \033[0m\n"
 
-$(NAME): $(LIBFT_NAME) $(OBJ)
+$(NAME): $(LIBFT_NAME) $(LIBMLX_NAME) $(OBJ)
 	gcc -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ)
 
 build_libft:
 	@echo "\n\033[44m ==> Building libft <== \033[0m"
 	@make -C $(LIBFT_DIR)
 	@echo "\033[44m ==>      Done      <== \033[0m\n"
-	@echo "\033[44m ==> Building cub3d <== \033[0m"
+
+build_libmlx:
+	@echo "\033[44m ==> Building libmlx <== \033[0m"
+	@make -C $(LIBMLX_DIR)
+	@echo "\033[44m ==>      Done       <== \033[0m\n"
+
+build_cub3D:
+	@echo "\033[44m ==> Building cub3D <== \033[0m"
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
-	gcc $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -c $< -o $@
+	gcc $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR) -c $< -o $@
 
 clean:
 	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(LIBMLX_DIR)
 	/bin/rm -f $(OBJ)
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(LIBMLX_DIR)
 	/bin/rm -f $(NAME)
 
 re: fclean all

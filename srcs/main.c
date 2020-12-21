@@ -11,56 +11,135 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+# include "../minilibx/mlx.h"
 
-static void		main_render(t_mlx *mlx_info)
+static int		close_app(t_mlx *mlx_info)
 {
-	double x;
-	double y;
-	double tmp_angle;
-	double c[mlx_info->width];
+	(void)mlx_info;
+	//destroy(mlx_info);
+	exit(0);
+}
 
-	put_square(mlx_info, mlx_info->player->position, 10);
-	tmp_angle = mlx_info->player->angle - 30;
-	for (int i = 0; i < mlx_info->width; i++)
+static float	ray_cast(t_mlx *mlx_info, float angle)
+{
+	int i;
+	int j;
+	float x;
+	float y;
+	float distance;
+	float step;
+	float x_k;
+	float y_k;
+
+	step = 1.f;
+	distance = 0.f;
+	x = mlx_info->player->position->x;
+	y = mlx_info->player->position->y;
+	i = (int)(10.f * x / (float)mlx_info->width); // 10.f - map size
+	j = (int)(10.f * y / (float)mlx_info->height);
+	x_k = cosf(angle * 3.14f / 180.f);
+	y_k = sinf(angle * 3.14f / 180.f);
+	while (i >= 0 && i < 10 && j >= 0 && j < 10 && mlx_info->map[j][i] != '1') // 10 - map size
 	{
-		c[i] = 0;
-		while (c[i] < mlx_info->width)
+		x += step * x_k;
+		y -= step * y_k;
+		i = (int)(10.f * x / (float)mlx_info->width);
+		j = (int)(10.f * y / (float)mlx_info->height);
+		distance += step;
+	}
+	return (distance);
+}
+
+static void		put_map(t_mlx *mlx_info)
+{
+	float i;
+	float j;
+	t_line line;
+
+	line.length = 50.f;
+	i = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 10)
 		{
-			x = mlx_info->player->position->x + c[i] * cos(tmp_angle * 3.14 / 180.0);
-			y = mlx_info->player->position->y + c[i] * sin(tmp_angle * 3.14 / 180.0);
-			if (x == 0 || y == 0 || mlx_info->width / (int)x == 0 || mlx_info->width / (int)y == 0)
-				break;
-			if (mlx_info->map[10 / (mlx_info->width / (int)x)][10 / (mlx_info->width / (int)y)] == '1')
-				break;
-			c[i] += 0.1;
+			if (mlx_info->map[(int)i][(int)j] == '1')
+			{
+				line.angle = 0.f;
+				line.coordinate.x = j * 50.f;
+				line.coordinate.y = i * 50.f;
+				put_line(mlx_info, &line, 0x3b3b3b);
+				line.angle = -90.f;
+				put_line(mlx_info, &line, 0x3b3b3b);
+				line.coordinate.x += 50.f;
+				line.coordinate.y += 50.f;
+				line.angle = 90.f;
+				put_line(mlx_info, &line, 0x3b3b3b);
+				line.angle = 180.f;
+				put_line(mlx_info, &line, 0x3b3b3b);
+			}
+			j++;
 		}
-		tmp_angle += 60 / (double)mlx_info->width;
-		int j = (int)c[i];
-		while (j > 0)
-		{
-			mlx_pixel_put(mlx_info->init, mlx_info->window, i, (mlx_info->height - (int)c[i]) / 2 + j, 0xFFFFFF - (int)c[i]);
-			j--;
-		}
+		i++;
 	}
 }
 
-static int		key_handle(int key, t_mlx *mlx_info)
+static void		main_render(t_mlx *mlx_info)
 {
-	int step;
+	t_line line;
+	float i;
 
-	step = 10;
+	// 60 degrees view
+	i = mlx_info->player->angle - 30.f;
+	while (i < mlx_info->player->angle + 30.f)
+	{
+		line.coordinate.x = mlx_info->player->position->x;
+		line.coordinate.y = mlx_info->player->position->y;
+		line.length = ray_cast(mlx_info, i);
+		line.angle = i;
+		put_line(mlx_info, &line, 0xEEEEEE);
+		i += 1.f;
+	}
+
+	// one line
+//	line.coordinate.x = mlx_info->player->position->x;
+//	line.coordinate.y = mlx_info->player->position->y;
+//	line.length = ray_cast(mlx_info, mlx_info->player->angle);
+//	line.angle = mlx_info->player->angle;
+//	put_line(mlx_info, &line, 0xEEEEEE);
+
+	put_map(mlx_info);
+
+	t_point tmp_point;
+	tmp_point.x = mlx_info->player->position->x - 5;
+	tmp_point.y = mlx_info->player->position->y - 5;
+	put_square(mlx_info, tmp_point, 10, 0x00FF00);
+
+	// length output
+//	char tmp[100];
+//	sprintf(tmp, "length = %f", line.length);
+//	mlx_string_put(mlx_info->init, mlx_info->window, 10, 10, 0xFFFFFF, tmp);
+}
+
+static int		key_press(int key, t_mlx *mlx_info)
+{
+	float step;
+
+	step = 10.f;
+	if (key == KEY_ESC)
+		close_app(mlx_info);
 	if (is_moveable(key) || is_arrow(key))
 		mlx_clear_window(mlx_info->init, mlx_info->window);
 	if (is_moveable(key))
 		move(mlx_info, key, step);
-	else if (is_arrow(key))
+	if (is_arrow(key))
 		change_direction(mlx_info, key);
 	if (is_moveable(key) || is_arrow(key))
 		main_render(mlx_info);
 	return (0);
 }
 
-static t_player	*new_player(int width, int height)
+static t_player	*new_player(float width, float height)
 {
 	t_player *player;
 
@@ -71,9 +150,9 @@ static t_player	*new_player(int width, int height)
 		free(player);
 		return (0);
 	}
-	player->position->x = width / 2;
-	player->position->y = height / 2;
-	player->angle = 90;
+	player->position->x = width / 2.f;
+	player->position->y = height / 2.f;
+	player->angle = 90.f;
 	return (player);
 }
 
@@ -83,7 +162,7 @@ static t_mlx	*new_mlx(int width, int height, char *title)
 
 	if ((mlx_info = (t_mlx*)malloc(sizeof(t_mlx))) == 0)
 		return (0);
-	if ((mlx_info->player = new_player(width, height)) == 0)
+	if ((mlx_info->player = new_player((float)width, (float)height)) == 0)
 	{
 		free(mlx_info);
 		return (0);
@@ -105,10 +184,11 @@ int				main(void)
 {
 	t_mlx *mlx_info;
 
-	if (!(mlx_info = new_mlx(500, 500, "Cub 3D")))
+	if (!(mlx_info = new_mlx(500, 500, "Kfriese's Cub 3D")))
 		return (1);
 	main_render(mlx_info);
-	mlx_key_hook(mlx_info->window, &key_handle, mlx_info);
+	mlx_hook(mlx_info->window, 2, 0, &key_press, mlx_info);
+	mlx_hook(mlx_info->window, 17, 0, &close_app, mlx_info);
 	mlx_loop(mlx_info->init);
 	return (0);
 }

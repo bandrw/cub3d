@@ -20,13 +20,13 @@ char	**new_map(void)
 		return (0);
 	map[0] = ft_strdup("1111111111");
 	map[1] = ft_strdup("1000000001");
-	map[2] = ft_strdup("1000000001");
-	map[3] = ft_strdup("1000000001");
+	map[2] = ft_strdup("1000000101");
+	map[3] = ft_strdup("1000000101");
 	map[4] = ft_strdup("1000000001");
 	map[5] = ft_strdup("1000000001");
 	map[6] = ft_strdup("1000000001");
-	map[7] = ft_strdup("1000000001");
-	map[8] = ft_strdup("1000000001");
+	map[7] = ft_strdup("1001100001");
+	map[8] = ft_strdup("1010000001");
 	map[9] = ft_strdup("1111111111");
 	return (map);
 }
