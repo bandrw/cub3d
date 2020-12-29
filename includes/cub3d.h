@@ -41,11 +41,27 @@ typedef struct	s_line
 	float		angle;
 }				t_line;
 
+typedef struct	s_rectangle
+{
+	t_point		start;
+	int 		width;
+	int 		heigth;
+}				t_rectangle;
+
 typedef struct	s_player
 {
-	t_point		*position;
+	t_point		position;
 	float 		angle;
 }				t_player;
+
+typedef struct	s_img
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_img;
 
 typedef struct	s_mlx
 {
@@ -53,13 +69,14 @@ typedef struct	s_mlx
 	void		*window;
 	int			width;
 	int			height;
-	t_player	*player;
+	t_player	player;
 	char		**map;
 }				t_mlx;
 
-void	player_move(t_mlx *mlx_info, int key);
-void	put_square(t_mlx *mlx_info, t_point p, float size, int color);
-void	put_line(t_mlx *mlx_info, t_line *line, int color);
+void	img_pixel_put(t_img *img_data, int x, int y, int color);
+void	put_square(t_img *img_data, t_point p, float size, int color);
+void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color);
+void	put_line(t_img *img_data, t_line *line, int color);
 int 	is_moveable(int key);
 int 	is_arrow(int key);
 void	move(t_mlx *mlx_info, int key, float step);

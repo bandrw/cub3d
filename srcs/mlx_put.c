@@ -12,14 +12,22 @@
 
 #include "cub3d.h"
 
-static float ft_absf(float a)
+static float	ft_absf(float a)
 {
 	if (a < 0)
 		return (-a);
 	return (a);
 }
 
-void	put_square(t_mlx *mlx_info, t_point p, float size, int color)
+void	img_pixel_put(t_img *img_data, int x, int y, int color)
+{
+	char *dst;
+
+	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	put_square(t_img *img_data, t_point p, float size, int color)
 {
 	float i;
 	float j;
@@ -30,14 +38,36 @@ void	put_square(t_mlx *mlx_info, t_point p, float size, int color)
 		j = p.y;
 		while (j < p.y + size)
 		{
-			mlx_pixel_put(mlx_info->init, mlx_info->window, (int)i, (int)j, color);
+			img_pixel_put(img_data, (int)i, (int)j, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	put_line(t_mlx *mlx_info, t_line *line, int color)
+void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
+{
+	int start_x;
+	int start_y;
+	int i;
+	int j;
+
+	start_x = (int)rectangle->start.x;
+	start_y = (int)rectangle->start.y;
+	i = start_x;
+	while (i < start_x + rectangle->width)
+	{
+		j = start_y;
+		while (j < start_y + rectangle->heigth)
+		{
+			img_pixel_put(img_data->img, i, j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	put_line(t_img *img_data, t_line *line, int color)
 {
 	t_point p2;
 	int tmp;
@@ -59,7 +89,7 @@ void	put_line(t_mlx *mlx_info, t_line *line, int color)
 			delta = -1;
 		while (ft_absf((float)tmp - line->coordinate.x) < x_projection)
 		{
-			mlx_pixel_put(mlx_info->init, mlx_info->window, tmp, (int)(line->coordinate.y - (ft_absf((float)tmp) - line->coordinate.x) * k), color);
+			img_pixel_put(img_data, tmp, (int)(line->coordinate.y - (ft_absf((float)tmp) - line->coordinate.x) * k), color);
 			tmp += delta;
 		}
 	}
@@ -70,7 +100,7 @@ void	put_line(t_mlx *mlx_info, t_line *line, int color)
 			delta = -1;
 		while (ft_absf((float)tmp - line->coordinate.y) < y_projection)
 		{
-			mlx_pixel_put(mlx_info->init, mlx_info->window, (int)(line->coordinate.x - ((float)tmp - line->coordinate.y) / k), tmp, color);
+			img_pixel_put(img_data, (int)(line->coordinate.x - ((float)tmp - line->coordinate.y) / k), tmp, color);
 			tmp += delta;
 		}
 	}

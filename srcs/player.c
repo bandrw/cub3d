@@ -14,32 +14,33 @@
 
 void	change_direction(t_mlx *mlx_info, int key)
 {
+	int step;
+
+	step = 5;
 	if (key == KEY_RIGHT)
 	{
-		if (mlx_info->player->angle == 0.f)
-			mlx_info->player->angle = 359.f;
+		if (mlx_info->player.angle == 0.f)
+			mlx_info->player.angle = 359.f;
 		else
-			mlx_info->player->angle--;
+			mlx_info->player.angle -= (float)step;
 	}
 	else if (key == KEY_LEFT)
 	{
-		if (mlx_info->player->angle == 359.f)
-			mlx_info->player->angle = 0.f;
+		if (mlx_info->player.angle == 359.f)
+			mlx_info->player.angle = 0.f;
 		else
-			mlx_info->player->angle++;
+			mlx_info->player.angle += (float)step;
 	}
-//	ft_printf("Angle: %d\n", mlx_info->player->angle);
 }
 
 void	move(t_mlx *mlx_info, int key, float step)
 {
 	if (key == KEY_A)
-		mlx_info->player->position->x -= step;
+		mlx_info->player.position.x -= step;
 	else if (key == KEY_D)
-		mlx_info->player->position->x += step;
+		mlx_info->player.position.x += step;
 	else if (key == KEY_W)
-		mlx_info->player->position->y -= step;
+		mlx_info->player.position.y -= step;
 	else if (key == KEY_S)
-		mlx_info->player->position->y += step;
-//	ft_printf("x: %d, y: %d\n", mlx_info->player->position->x, mlx_info->player->position->y);
+		mlx_info->player.position.y += step;
 }
