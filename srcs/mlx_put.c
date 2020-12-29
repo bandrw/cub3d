@@ -60,7 +60,7 @@ void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
 		j = start_y;
 		while (j < start_y + rectangle->heigth)
 		{
-			img_pixel_put(img_data->img, i, j, color);
+			img_pixel_put(img_data, i, j, color);
 			j++;
 		}
 		i++;

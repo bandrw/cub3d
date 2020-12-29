@@ -86,30 +86,27 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 
 static void		main_render(t_mlx *mlx_info)
 {
-	t_line	line;
 	float	i;
 	t_img	img_data;
+	float	cast;
+	float	x_tmp;
+	t_rectangle rectangle;
 
 	img_data.img = mlx_new_image(mlx_info->init, 500, 500);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
-	// 60 degrees view
 	i = mlx_info->player.angle - 30.f;
+	x_tmp = 500.f;
 	while (i < mlx_info->player.angle + 30.f)
 	{
-		line.coordinate.x = mlx_info->player.position.x;
-		line.coordinate.y = mlx_info->player.position.y;
-		line.length = ray_cast(mlx_info, i);
-		line.angle = i;
-		put_line(&img_data, &line, 0xEEEEEE);
+		cast = ray_cast(mlx_info, i);
 		i += 0.5f;
+		x_tmp -= 500.f / 120.f;
+		rectangle.width = 1;
+		rectangle.heigth = (int)(500.f - cast * cosf((mlx_info->player.angle - i) * 3.14f / 180.f));
+		rectangle.start.x = x_tmp;
+		rectangle.start.y = (500.f - (float)rectangle.heigth) / 2.f;
+		put_rectangle(&img_data, &rectangle, 0xFFFFFF);
 	}
-
-	put_map(mlx_info, &img_data);
-
-	t_point tmp_point;
-	tmp_point.x = mlx_info->player.position.x - 5;
-	tmp_point.y = mlx_info->player.position.y - 5;
-	put_square(&img_data, tmp_point, 10, 0x00FF00);
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, img_data.img, 0, 0);
 }
 
