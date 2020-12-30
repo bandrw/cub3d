@@ -61,6 +61,8 @@ typedef struct	s_img
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			width;
+	int 		height;
 }				t_img;
 
 typedef struct	s_mlx
@@ -74,6 +76,8 @@ typedef struct	s_mlx
 }				t_mlx;
 
 void	img_pixel_put(t_img *img_data, int x, int y, int color);
+int		img_get_pixel(t_img *img_data, int x, int y);
+void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height);
 void	put_square(t_img *img_data, t_point p, float size, int color);
 void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color);
 void	put_line(t_img *img_data, t_line *line, int color);

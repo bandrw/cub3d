@@ -86,14 +86,19 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 
 static void		main_render(t_mlx *mlx_info)
 {
-	float	i;
-	t_img	img_data;
-	float	cast;
-	float	x_tmp;
-	t_rectangle rectangle;
+	float		i;
+	t_img		img_data;
+	float		cast;
+	float		x_tmp;
+	t_rectangle	rectangle;
+	t_img		texture;
+	int			width;
+	int			height;
 
 	img_data.img = mlx_new_image(mlx_info->init, 500, 500);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
+	texture.img = mlx_xpm_file_to_image(mlx_info->init, "img/test.xpm", &texture.width, &texture.height);
+	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel, &texture.line_length, &texture.endian);
 	i = mlx_info->player.angle - 30.f;
 	x_tmp = 500.f;
 	while (i < mlx_info->player.angle + 30.f)
@@ -102,10 +107,12 @@ static void		main_render(t_mlx *mlx_info)
 		i += 0.5f;
 		x_tmp -= 500.f / 120.f;
 		rectangle.width = 1;
-		rectangle.heigth = (int)(500.f - cast * cosf((mlx_info->player.angle - i) * 3.14f / 180.f));
+		rectangle.heigth = (int)(500.f * 50.f / (cast * cosf((mlx_info->player.angle - i) * 3.14f / 180.f)));
+		if (rectangle.heigth > 499)
+			rectangle.heigth = 499;
 		rectangle.start.x = x_tmp;
 		rectangle.start.y = (500.f - (float)rectangle.heigth) / 2.f;
-		put_rectangle(&img_data, &rectangle, 0xFFFFFF);
+		put_line_from_image(&texture, &img_data, (int)x_tmp, (int)((500.f - (float)rectangle.heigth) / 2.f), rectangle.heigth);
 	}
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, img_data.img, 0, 0);
 }
@@ -145,8 +152,9 @@ int				main(void)
 	t_mlx mlx_info;
 
 	new_mlx(&mlx_info, 500, 500, "Kfriese's Cub 3D");
+	mlx_do_key_autorepeaton(mlx_info.init);
 	main_render(&mlx_info);
-	mlx_hook(mlx_info.window, 2, 0, &key_press, &mlx_info);
+	mlx_hook(mlx_info.window, 2, 1L << 2, &key_press, &mlx_info);
 	mlx_hook(mlx_info.window, 17, 0, &close_app, &mlx_info);
 	mlx_loop(mlx_info.init);
 	return (0);

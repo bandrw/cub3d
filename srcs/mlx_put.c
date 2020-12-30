@@ -27,6 +27,26 @@ void	img_pixel_put(t_img *img_data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int		img_get_pixel(t_img *img_data, int x, int y)
+{
+	char *dst;
+
+	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
+	return (*(int*)dst);
+}
+
+void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height)
+{
+	int i;
+
+	i = 0;
+	while (i < height)
+	{
+		img_pixel_put(dest, x, y + i, img_get_pixel(src, 32, i != 0 ? height / i : 0));
+		i++;
+	}
+}
+
 void	put_square(t_img *img_data, t_point p, float size, int color)
 {
 	float i;
