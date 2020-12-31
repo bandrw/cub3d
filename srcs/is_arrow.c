@@ -14,6 +14,5 @@
 
 int 	is_arrow(int key)
 {
-	return (key == KEY_BOTTOM || key == KEY_RIGHT || key == KEY_LEFT ||
-		key == KEY_UP);
+	return (key == KEY_RIGHT || key == KEY_LEFT);
 }

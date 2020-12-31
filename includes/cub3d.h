@@ -75,6 +75,7 @@ typedef struct	s_mlx
 	char		**map;
 }				t_mlx;
 
+float	ft_absf(float a);
 void	img_pixel_put(t_img *img_data, int x, int y, int color);
 int		img_get_pixel(t_img *img_data, int x, int y);
 void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height);
@@ -86,5 +87,6 @@ int 	is_arrow(int key);
 void	move(t_mlx *mlx_info, int key, float step);
 void	change_direction(t_mlx *mlx_info, int key);
 char	**new_map(void);
+float	ray_cast(t_mlx *mlx_info, float angle, t_img *tmp);
 
 #endif

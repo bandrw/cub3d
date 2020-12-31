@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static float	ft_absf(float a)
+float	ft_absf(float a)
 {
 	if (a < 0)
 		return (-a);

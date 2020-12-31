@@ -32,7 +32,8 @@ FILES = main.c \
 		is_moveable.c \
 		is_arrow.c \
 		new_map.c \
-		player.c
+		player.c \
+		ray_cast.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
