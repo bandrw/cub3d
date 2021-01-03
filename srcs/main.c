@@ -56,17 +56,13 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 
 static void		main_render(t_mlx *mlx_info)
 {
-	t_img		img_data;
+	t_img	img_data;
+	float	i;
 
 	img_data.img = mlx_new_image(mlx_info->init, 500, 500);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
 	t_line line;
 
-	line.angle = mlx_info->player.angle;
-	line.coordinate.x = mlx_info->player.position.x;
-	line.coordinate.y = mlx_info->player.position.y;
-	line.length = ray_cast(mlx_info, mlx_info->player.angle, &img_data);
-	put_line(&img_data, &line, 0x00FF00);
 	put_map(mlx_info, &img_data);
 	t_rectangle rectangle;
 	rectangle.width = 8;
@@ -74,21 +70,16 @@ static void		main_render(t_mlx *mlx_info)
 	rectangle.start.x = mlx_info->player.position.x - 4;
 	rectangle.start.y = mlx_info->player.position.y - 4;
 	put_rectangle(&img_data, &rectangle, 0xFFFF00);
-//	i = mlx_info->player.angle - 30.f;
-//	x_tmp = 500.f;
-//	while (i < mlx_info->player.angle + 30.f)
-//	{
-//		cast = ray_cast(mlx_info, i);
-//		i += 0.5f;
-//		x_tmp -= 500.f / 120.f;
-//		rectangle.width = 1;
-//		rectangle.heigth = (int)(500.f * 50.f / (cast * cosf((mlx_info->player.angle - i) * 3.14f / 180.f)));
-//		if (rectangle.heigth > 499)
-//			rectangle.heigth = 499;
-//		rectangle.start.x = x_tmp;
-//		rectangle.start.y = (500.f - (float)rectangle.heigth) / 2.f;
-//		put_line_from_image(&texture, &img_data, (int)x_tmp, (int)((500.f - (float)rectangle.heigth) / 2.f), rectangle.heigth);
-//	}
+	i = mlx_info->player.angle - 30.f;
+	while (i < mlx_info->player.angle + 30.f)
+	{
+		line.angle = i;
+		line.coordinate.x = mlx_info->player.position.x;
+		line.coordinate.y = mlx_info->player.position.y;
+		line.length = ray_cast(mlx_info, i, &img_data);
+		put_line(&img_data, &line, 0x00FF00);
+		i += 0.5f;
+	}
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, img_data.img, 0, 0);
 }
 

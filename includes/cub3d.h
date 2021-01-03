@@ -76,6 +76,7 @@ typedef struct	s_mlx
 }				t_mlx;
 
 float	ft_absf(float a);
+float	ft_to_radians(float degrees);
 void	img_pixel_put(t_img *img_data, int x, int y, int color);
 int		img_get_pixel(t_img *img_data, int x, int y);
 void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height);
