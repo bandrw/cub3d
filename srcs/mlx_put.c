@@ -42,7 +42,7 @@ void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height, int 
 	i = 0;
 	while (i < height)
 	{
-		img_pixel_put(dest, x, y + i, img_get_pixel(src, x_src, i != 0 ? height / i : 0));
+		img_pixel_put(dest, x, y + i, img_get_pixel(src, x_src, (int)(i / (float)height * src->width)));
 		i++;
 	}
 }

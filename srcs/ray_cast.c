@@ -12,41 +12,28 @@
 
 #include "cub3d.h"
 
-static void write_rectangle(float ray_x, float ray_y, t_img *tmp, int color)
+static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 {
-	t_rectangle rectangle;
-
-	rectangle.start.x = ray_x - 2.f;
-	rectangle.start.y = ray_y - 2.f;
-	rectangle.heigth = 4;
-	rectangle.width = 4;
-	if (rectangle.start.x < 496 && rectangle.start.y < 496 && rectangle.start.x > 0 && rectangle.start.y > 0)
-		put_rectangle(tmp, &rectangle, color);
-}
-
-static float	ray_cast_horizontal(t_mlx *mlx_info, float angle, t_img *tmp)
-{
-	float	distance;
 	float	x_delta;
 	float	y_delta;
 	float	ray_x;
 	float	ray_y;
 
 	if (ft_absf(sinf(ft_to_radians(angle))) < 0.001f)
-		return (-1.f);
-	distance = 0.f;
-	// смещение в пределах одной клетки
+	{
+		cast->length = -1.f;
+		return ;
+	}
+	cast->length = 0.f;
 	y_delta = mlx_info->player.position.y - (float)((int)mlx_info->player.position.y / 50 * 50.f);
 	if (sinf(ft_to_radians(angle)) < 0)
 		y_delta = 50.f - y_delta;
 	x_delta = ft_absf((float)y_delta / tanf(ft_to_radians(angle)));
 	if (cosf(ft_to_radians(angle)) < 0)
 		x_delta = -x_delta;
-	distance += ft_absf((float)y_delta / sinf(ft_to_radians(angle)));
+	cast->length += ft_absf((float)y_delta / sinf(ft_to_radians(angle)));
 	ray_x = mlx_info->player.position.x + x_delta;
 	ray_y = mlx_info->player.position.y - (sinf(ft_to_radians(angle)) > 0 ? y_delta : -y_delta);
-//	write_rectangle(ray_x, ray_y, tmp, 0xFFFF00);
-	// смещение пока не встретим стену
 	x_delta = 50.f / ft_absf(tanf(ft_to_radians(angle)));
 	if (cosf(ft_to_radians(angle)) < 0)
 		x_delta = -x_delta;
@@ -56,37 +43,40 @@ static float	ray_cast_horizontal(t_mlx *mlx_info, float angle, t_img *tmp)
 	{
 		ray_x += x_delta;
 		ray_y -= y_delta;
-//		write_rectangle(ray_x, ray_y, tmp, 0xFFFF00);
-		distance += 50.f / ft_absf(sinf(ft_to_radians(angle)));
+		cast->length += 50.f / ft_absf(sinf(ft_to_radians(angle)));
 	}
-	return (distance);
+	cast->end.x = ray_x;
+	cast->end.y = ray_y;
+	if (sinf(ft_to_radians(angle)) < 0)
+		cast->direction = North;
+	else
+		cast->direction = South;
 }
 
-static float	ray_cast_vertical(t_mlx *mlx_info, float angle, t_img *tmp)
+static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 {
-	float	distance;
 	float	x_delta;
 	float	y_delta;
 	float	ray_x;
 	float	ray_y;
 
 	if (ft_absf(cosf(ft_to_radians(angle))) < 0.001f)
-		return (-1.f);
-	distance = 0.f;
-	// смещение в пределах одной клетки
+	{
+		cast->length = -1.f;
+		return ;
+	}
+	cast->length = 0.f;
 	x_delta = mlx_info->player.position.x - (float)((int)mlx_info->player.position.x / 50 * 50);
 	if (cosf(ft_to_radians(angle)) > 0)
 		x_delta = 50 - x_delta;
 	y_delta = ft_absf(x_delta * tanf(ft_to_radians(angle)));
 	if (sinf(ft_to_radians(angle)) < 0)
 		y_delta = -y_delta;
-	distance += ft_absf(x_delta / cosf(ft_to_radians(angle)));
+	cast->length += ft_absf(x_delta / cosf(ft_to_radians(angle)));
 	ray_x = mlx_info->player.position.x + ((cosf(ft_to_radians(angle)) > 0) ? x_delta : -x_delta);
 	ray_y = mlx_info->player.position.y - y_delta;
-//	write_rectangle(ray_x, ray_y, tmp, 0xFF0000);
-	// смещение пока не встретим стену
 	y_delta = 50 * ft_absf(tanf(angle * 3.14f / 180.f));
-	if (sinf(ft_to_radians(angle)) < 0)
+	if (sinf(ft_to_radians(angle)) < 0.f)
 		y_delta = -y_delta;
 	x_delta = cosf(ft_to_radians(angle)) > 0 ? 50 : -50;
 	while (ray_y < 500 && ray_x < 500 && ray_y > 0 && ray_x > 0 &&
@@ -94,20 +84,33 @@ static float	ray_cast_vertical(t_mlx *mlx_info, float angle, t_img *tmp)
 	{
 		ray_x += x_delta;
 		ray_y -= y_delta;
-//		write_rectangle(ray_x, ray_y, tmp, 0xFF0000);
-		distance += 50.f / ft_absf(cosf(ft_to_radians(angle)));
+		cast->length += 50.f / ft_absf(cosf(ft_to_radians(angle)));
 	}
-	return (distance);
+	cast->end.x = ray_x;
+	cast->end.y = ray_y;
+	if (cosf(ft_to_radians(angle)) > 0)
+		cast->direction = West;
+	else
+		cast->direction = East;
 }
 
-float	ray_cast(t_mlx *mlx_info, float angle, t_img *tmp)
+void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
 {
-	float a;
-	float b;
+	t_ray a;
+	t_ray b;
 
-	a = ray_cast_horizontal(mlx_info, angle, tmp);
-	b = ray_cast_vertical(mlx_info, angle, tmp);
-	if (a < 0 || (b < a && b >= 0))
-		return (b);
-	return (a);
+	ray_cast_horizontal(mlx_info, &a, angle);
+	ray_cast_vertical(mlx_info, &b, angle);
+	if (a.length < 0 || (b.length < a.length && b.length >= 0))
+	{
+		cast->length = b.length;
+		cast->end = b.end;
+		cast->direction = b.direction;
+	}
+	else
+	{
+		cast->length = a.length;
+		cast->end = a.end;
+		cast->direction = a.direction;
+	}
 }

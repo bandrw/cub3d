@@ -28,6 +28,14 @@
 # include "libft.h"
 #include <stdio.h>
 
+typedef enum	e_direction
+{
+	North,
+	East,
+	South,
+	West
+}               t_direction;
+
 typedef struct	s_point
 {
 	float		x;
@@ -75,6 +83,13 @@ typedef struct	s_mlx
 	char		**map;
 }				t_mlx;
 
+typedef struct  s_ray
+{
+	float		length;
+	t_point		end;
+	t_direction direction;
+}               t_ray;
+
 float	ft_absf(float a);
 float	ft_to_radians(float degrees);
 void	img_pixel_put(t_img *img_data, int x, int y, int color);
@@ -88,6 +103,6 @@ int 	is_arrow(int key);
 void	move(t_mlx *mlx_info, int key, float step);
 void	change_direction(t_mlx *mlx_info, int key);
 char	**new_map(void);
-float	ray_cast(t_mlx *mlx_info, float angle, t_img *tmp);
+void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 
 #endif
