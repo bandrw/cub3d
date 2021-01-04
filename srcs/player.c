@@ -26,11 +26,23 @@ void	change_direction(t_mlx *mlx_info, int key)
 void	move(t_mlx *mlx_info, int key, float step)
 {
 	if (key == KEY_A)
-		mlx_info->player.position.x -= step;
+	{
+		mlx_info->player.position.y -= step * sinf(ft_to_radians(mlx_info->player.angle + 90.f));
+		mlx_info->player.position.x += step * cosf(ft_to_radians(mlx_info->player.angle + 90.f));
+	}
 	else if (key == KEY_D)
-		mlx_info->player.position.x += step;
+	{
+		mlx_info->player.position.y -= step * sinf(ft_to_radians(mlx_info->player.angle - 90.f));
+		mlx_info->player.position.x += step * cosf(ft_to_radians(mlx_info->player.angle - 90.f));
+	}
 	else if (key == KEY_W)
-		mlx_info->player.position.y -= step;
+	{
+		mlx_info->player.position.y -= step * sinf(ft_to_radians(mlx_info->player.angle));
+		mlx_info->player.position.x += step * cosf(ft_to_radians(mlx_info->player.angle));
+	}
 	else if (key == KEY_S)
-		mlx_info->player.position.y += step;
+	{
+		mlx_info->player.position.y += step * sinf(ft_to_radians(mlx_info->player.angle));
+		mlx_info->player.position.x -= step * cosf(ft_to_radians(mlx_info->player.angle));
+	}
 }

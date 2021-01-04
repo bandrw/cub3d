@@ -56,30 +56,39 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 
 static void		main_render(t_mlx *mlx_info)
 {
-	t_img	img_data;
-	float	i;
+	float	    angle;
+	float       cast;
+	float       x_tmp;
+	t_img	    img_data;
+	t_img       texture;
+	t_rectangle rectangle;
 
 	img_data.img = mlx_new_image(mlx_info->init, 500, 500);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
-	t_line line;
-
-	put_map(mlx_info, &img_data);
-	t_rectangle rectangle;
-	rectangle.width = 8;
-	rectangle.heigth = 8;
-	rectangle.start.x = mlx_info->player.position.x - 4;
-	rectangle.start.y = mlx_info->player.position.y - 4;
-	put_rectangle(&img_data, &rectangle, 0xFFFF00);
-	i = mlx_info->player.angle - 30.f;
-	while (i < mlx_info->player.angle + 30.f)
+	texture.img = mlx_xpm_file_to_image(mlx_info->init, "img/test.xpm", &texture.width, &texture.height);
+	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel, &texture.line_length, &texture.endian);
+	x_tmp = 0;
+	angle = mlx_info->player.angle + 33.f;
+	while (x_tmp < 500)
 	{
-		line.angle = i;
-		line.coordinate.x = mlx_info->player.position.x;
-		line.coordinate.y = mlx_info->player.position.y;
-		line.length = ray_cast(mlx_info, i, &img_data);
-		put_line(&img_data, &line, 0x00FF00);
-		i += 0.5f;
+		cast = ray_cast(mlx_info, angle, &img_data);
+		rectangle.heigth = (int)(500.f * 50.f / (cast * cosf(ft_to_radians(mlx_info->player.angle - angle))));
+		if (rectangle.heigth > 500)
+			rectangle.heigth = 500;
+		rectangle.width = 1;
+		rectangle.start.x = x_tmp;
+		rectangle.start.y = (500.f - (float)rectangle.heigth) / 2.f;
+		put_rectangle(&img_data, &rectangle, 0xFFFF00);
+//		put_line_from_image(&texture, &img_data, (int)x_tmp, (int)((500.f - (float)rectangle.heigth) / 2.f), rectangle.heigth, x_src);
+		angle -= 66.f / 500.f;
+		x_tmp++;
 	}
+//	put_map(mlx_info, &img_data);
+//	rectangle.width = 8;
+//	rectangle.heigth = 8;
+//	rectangle.start.x = mlx_info->player.position.x - 4;
+//	rectangle.start.y = mlx_info->player.position.y - 4;
+//	put_rectangle(&img_data, &rectangle, 0xFFFF00);
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, img_data.img, 0, 0);
 }
 

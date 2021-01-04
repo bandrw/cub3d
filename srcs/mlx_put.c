@@ -35,14 +35,14 @@ int		img_get_pixel(t_img *img_data, int x, int y)
 	return (*(int*)dst);
 }
 
-void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height)
+void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height, int x_src)
 {
 	int i;
 
 	i = 0;
 	while (i < height)
 	{
-		img_pixel_put(dest, x, y + i, img_get_pixel(src, 32, i != 0 ? height / i : 0));
+		img_pixel_put(dest, x, y + i, img_get_pixel(src, x_src, i != 0 ? height / i : 0));
 		i++;
 	}
 }
