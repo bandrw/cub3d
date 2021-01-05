@@ -34,29 +34,30 @@ FILES = main.c \
 		new_map.c \
 		player.c \
 		ray_cast.c \
-		ft_to_radians.c
+		ft_to_radians.c \
+		parse_config.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 
 all: build_libft build_libmlx build_cub3D $(NAME)
-	@echo "\033[44m ==>      Done      <== \033[0m\n"
+	@echo "\033[44m  ✔︎      Done      ✔︎  \033[0m\n"
 
 $(NAME): $(LIBFT_NAME) $(LIBMLX_NAME) $(OBJ)
 	gcc -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ)
 
 build_libft:
-	@echo "\n\033[44m ==> Building libft <== \033[0m"
+	@echo "\n\033[44m ⏤  Building libft ⏤  \033[0m"
 	@make -C $(LIBFT_DIR)
-	@echo "\033[44m ==>      Done      <== \033[0m\n"
+	@echo "\033[44m  ✔︎      Done      ✔︎  \033[0m\n"
 
 build_libmlx:
-	@echo "\033[44m ==> Building libmlx <== \033[0m"
+	@echo "\033[44m ⏤  Building libmlx ⏤  \033[0m"
 	@make -C $(LIBMLX_DIR)
-	@echo "\033[44m ==>      Done       <== \033[0m\n"
+	@echo "\033[44m  ✔︎      Done       ✔︎  \033[0m\n"
 
 build_cub3D:
-	@echo "\033[44m ==> Building cub3D <== \033[0m"
+	@echo "\033[44m ⏤  Building cub3D ⏤  \033[0m"
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)

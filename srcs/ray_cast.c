@@ -25,25 +25,25 @@ static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 		return ;
 	}
 	cast->length = 0.f;
-	y_delta = mlx_info->player.position.y - (float)((int)mlx_info->player.position.y / 50 * 50.f);
+	y_delta = mlx_info->player.position.y - (float)((int)mlx_info->player.position.y / (int)(mlx_info->height / mlx_info->map_height) * (int)((float)mlx_info->height / mlx_info->map_height));
 	if (sinf(ft_to_radians(angle)) < 0)
-		y_delta = 50.f - y_delta;
+		y_delta = ((float)mlx_info->height / mlx_info->map_height) - y_delta;
 	x_delta = ft_absf((float)y_delta / tanf(ft_to_radians(angle)));
 	if (cosf(ft_to_radians(angle)) < 0)
 		x_delta = -x_delta;
 	cast->length += ft_absf((float)y_delta / sinf(ft_to_radians(angle)));
 	ray_x = mlx_info->player.position.x + x_delta;
 	ray_y = mlx_info->player.position.y - (sinf(ft_to_radians(angle)) > 0 ? y_delta : -y_delta);
-	x_delta = 50.f / ft_absf(tanf(ft_to_radians(angle)));
+	x_delta = ((float)mlx_info->height / mlx_info->map_height) / ft_absf(tanf(ft_to_radians(angle)));
 	if (cosf(ft_to_radians(angle)) < 0)
 		x_delta = -x_delta;
-	y_delta = sinf(ft_to_radians(angle)) > 0 ? 50.f : -50.f;
-	while (ray_y < 500 && ray_x < 500 && ray_y > 0 && ray_x > 0 &&
-		mlx_info->map[(int)(10.f * ray_y / (float)mlx_info->height - (float)(sinf(ft_to_radians(angle)) > 0))][(int)(10.f * ray_x / (float)mlx_info->width)] != '1')
+	y_delta = sinf(ft_to_radians(angle)) > 0 ? ((float)mlx_info->height / mlx_info->map_height) : -((float)mlx_info->height / mlx_info->map_height);
+	while (ray_y < (float)mlx_info->height && ray_x < (float)mlx_info->width && ray_y > 0 && ray_x > 0 &&
+		mlx_info->map[(int)(mlx_info->map_height * ray_y / (float)mlx_info->height - (float)(sinf(ft_to_radians(angle)) > 0))][(int)(mlx_info->map_width * ray_x / (float)mlx_info->width)] != '1')
 	{
 		ray_x += x_delta;
 		ray_y -= y_delta;
-		cast->length += 50.f / ft_absf(sinf(ft_to_radians(angle)));
+		cast->length += ((float)mlx_info->height / mlx_info->map_height) / ft_absf(sinf(ft_to_radians(angle)));
 	}
 	cast->end.x = ray_x;
 	cast->end.y = ray_y;
@@ -66,25 +66,25 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 		return ;
 	}
 	cast->length = 0.f;
-	x_delta = mlx_info->player.position.x - (float)((int)mlx_info->player.position.x / 50 * 50);
+	x_delta = mlx_info->player.position.x - (float)((int)mlx_info->player.position.x / (int)((float)mlx_info->height / mlx_info->map_height) * (int)((float)mlx_info->height / mlx_info->map_height));
 	if (cosf(ft_to_radians(angle)) > 0)
-		x_delta = 50 - x_delta;
+		x_delta = (int)((float)mlx_info->height / mlx_info->map_height) - x_delta;
 	y_delta = ft_absf(x_delta * tanf(ft_to_radians(angle)));
 	if (sinf(ft_to_radians(angle)) < 0)
 		y_delta = -y_delta;
 	cast->length += ft_absf(x_delta / cosf(ft_to_radians(angle)));
 	ray_x = mlx_info->player.position.x + ((cosf(ft_to_radians(angle)) > 0) ? x_delta : -x_delta);
 	ray_y = mlx_info->player.position.y - y_delta;
-	y_delta = 50 * ft_absf(tanf(angle * 3.14f / 180.f));
+	y_delta = (int)((float)mlx_info->height / mlx_info->map_height) * ft_absf(tanf(ft_to_radians(angle)));
 	if (sinf(ft_to_radians(angle)) < 0.f)
 		y_delta = -y_delta;
-	x_delta = cosf(ft_to_radians(angle)) > 0 ? 50 : -50;
-	while (ray_y < 500 && ray_x < 500 && ray_y > 0 && ray_x > 0 &&
-		   mlx_info->map[(int)(10.f * ray_y / (float)mlx_info->height)][(int)(10.f * ray_x / (float)mlx_info->width - (float)(cosf(ft_to_radians(angle)) < 0))] != '1')
+	x_delta = cosf(ft_to_radians(angle)) > 0 ? ((float)mlx_info->height / mlx_info->map_height) : -((float)mlx_info->height / mlx_info->map_height);
+	while (ray_y < (float)mlx_info->height && ray_x < (float)mlx_info->width && ray_y > 0 && ray_x > 0 &&
+		   mlx_info->map[(int)(mlx_info->map_height * ray_y / (float)mlx_info->height)][(int)(mlx_info->map_width * ray_x / (float)mlx_info->width - (float)(cosf(ft_to_radians(angle)) < 0))] != '1')
 	{
 		ray_x += x_delta;
 		ray_y -= y_delta;
-		cast->length += 50.f / ft_absf(cosf(ft_to_radians(angle)));
+		cast->length += ((float)mlx_info->height / mlx_info->map_height) / ft_absf(cosf(ft_to_radians(angle)));
 	}
 	cast->end.x = ray_x;
 	cast->end.y = ray_y;

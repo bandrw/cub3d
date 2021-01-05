@@ -26,7 +26,8 @@
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
-#include <stdio.h>
+# include <fcntl.h>
+# include <stdio.h>
 
 typedef enum	e_direction
 {
@@ -81,13 +82,22 @@ typedef struct	s_mlx
 	int			height;
 	t_player	player;
 	char		**map;
+	char		*north_tetxture;
+	char		*south_texture;
+	char		*west_texture;
+	char		*east_texture;
+	char		*sprite_texture;
+	int			floor_color;
+	int			ceilling_color;
+	float		map_width;
+	float		map_height;
 }				t_mlx;
 
-typedef struct  s_ray
+typedef struct	s_ray
 {
 	float		length;
 	t_point		end;
-	t_direction direction;
+	t_direction	direction;
 }               t_ray;
 
 float	ft_absf(float a);
@@ -104,5 +114,6 @@ void	move(t_mlx *mlx_info, int key, float step);
 void	change_direction(t_mlx *mlx_info, int key);
 char	**new_map(void);
 void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
+void	parse_config(t_mlx *mlx_info, char *file);
 
 #endif
