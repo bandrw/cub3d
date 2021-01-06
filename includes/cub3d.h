@@ -89,8 +89,8 @@ typedef struct	s_mlx
 	char		*sprite_texture;
 	int			floor_color;
 	int			ceilling_color;
-	float		map_width;
-	float		map_height;
+	int			map_width;
+	int			map_height;
 }				t_mlx;
 
 typedef struct	s_ray

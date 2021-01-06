@@ -23,6 +23,8 @@ void	img_pixel_put(t_img *img_data, int x, int y, int color)
 {
 	char *dst;
 
+	if (x >= img_data->width || x < 0 || y >= img_data->height || y < 0)
+		return ;
 	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
@@ -80,7 +82,8 @@ void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
 		j = start_y;
 		while (j < start_y + rectangle->heigth)
 		{
-			img_pixel_put(img_data, i, j, color);
+			if (i >= 0 && j >= 0 && i < img_data->width && j < img_data->height)
+				img_pixel_put(img_data, i, j, color);
 			j++;
 		}
 		i++;
@@ -96,11 +99,11 @@ void	put_line(t_img *img_data, t_line *line, int color)
 	float x_projection;
 	float y_projection;
 
-	x_projection = ft_absf(line->length * cosf(line->angle * 3.14f / 180.f));
-	y_projection = ft_absf(line->length * sinf(line->angle * 3.14f / 180.f));
-	k = tanf(line->angle * 3.14f / 180.f);
-	p2.x = line->coordinate.x + line->length * cosf(line->angle * 3.14f / 180.f);
-	p2.y = line->coordinate.y - line->length * sinf(line->angle * 3.14f / 180.f);
+	x_projection = ft_absf(line->length * cosf(ft_to_radians(line->angle)));
+	y_projection = ft_absf(line->length * sinf(ft_to_radians(line->angle)));
+	k = tanf(ft_to_radians(line->angle));
+	p2.x = line->coordinate.x + line->length * cosf(ft_to_radians(line->angle));
+	p2.y = line->coordinate.y - line->length * sinf(ft_to_radians(line->angle));
 	delta = 1;
 	if (x_projection > y_projection)
 	{

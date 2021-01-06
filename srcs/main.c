@@ -22,44 +22,71 @@ static int		close_app(t_mlx *mlx_info)
 
 static void		put_map(t_mlx *mlx_info, t_img *img_data)
 {
-	float i;
-	float j;
+	int i;
+	int j;
 	t_rectangle rectangle;
 
 	i = 0;
-	while (i < (float)mlx_info->map_height)
+	while (i < mlx_info->map_height)
 	{
 		j = 0;
-		while (j < (float)mlx_info->map_width)
+		while (j < mlx_info->map_width)
 		{
-			if (mlx_info->map[(int)i][(int)j] == '1')
+			if (mlx_info->map[i][j] == '1')
 			{
-				rectangle.width = (int)((float)mlx_info->width / mlx_info->map_width);
+				rectangle.start.x = (float)mlx_info->width / 2.f - 50.f * (mlx_info->player.position.x / (float)mlx_info->width * (float)mlx_info->map_width - (float)j);
+				rectangle.start.y = (float)mlx_info->height / 2.f - 50.f * (mlx_info->player.position.y / (float)mlx_info->height * (float)mlx_info->map_height - (float)i);
+				rectangle.width = 50;
 				rectangle.heigth = 1;
-				rectangle.start.x = j * ((float)mlx_info->width / mlx_info->map_width);
-				rectangle.start.y = i * ((float)mlx_info->height / mlx_info->map_height);
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
 				rectangle.width = 1;
-				rectangle.heigth = (int)((float)mlx_info->height / mlx_info->map_height);
+				rectangle.heigth = 50;
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
-				rectangle.start.x += ((float)mlx_info->width / mlx_info->map_width);
+				rectangle.start.x += 50;
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
-				rectangle.start.y += ((float)mlx_info->height / mlx_info->map_height);
-				rectangle.start.x -= ((float)mlx_info->width / mlx_info->map_width);
-				rectangle.width = (int)((float)mlx_info->width / mlx_info->map_width);
+				rectangle.start.y += 50.f;
+				rectangle.start.x -= 50.f;
+				rectangle.width = 50;
 				rectangle.heigth = 1;
-				if (rectangle.start.y < (float)mlx_info->height)
-					put_rectangle(img_data, &rectangle, 0x3B3B3B);
+				put_rectangle(img_data, &rectangle, 0x3B3B3B);
 			}
-			j++;
+			j += 1;
 		}
-		i++;
+		i += 1;
 	}
 }
 
 static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 {
+	t_rectangle player;
+	t_line line;
+	t_ray cast;
+
+	ray_cast(mlx_info, &cast, mlx_info->player.angle);
+	player.start.x = (float)mlx_info->width / 2.f - 4.f;
+	player.start.y = (float)mlx_info->height / 2.f - 4.f;
+	player.heigth = 8;
+	player.width = 8;
+	put_rectangle(img_data, &player, 0x00FF00);
+	line.angle = mlx_info->player.angle;
+	line.length = cast.length;
+	line.coordinate.x = player.start.x + 4.f;
+	line.coordinate.y = player.start.y + 4.f;
+	put_line(img_data, &line, 0x00FF00);
 	put_map(mlx_info, img_data);
+}
+
+void			put_ceilling_and_floor(t_mlx *mlx_info, t_img *img_data)
+{
+	t_rectangle rectangle;
+
+	rectangle.width = mlx_info->width;
+	rectangle.heigth = mlx_info->height / 2;
+	rectangle.start.x = 0;
+	rectangle.start.y = 0;
+	put_rectangle(img_data, &rectangle, mlx_info->ceilling_color);
+	rectangle.start.y = (float)mlx_info->height / 2.f;
+	put_rectangle(img_data, &rectangle, mlx_info->floor_color);
 }
 
 static void		main_render(t_mlx *mlx_info)
@@ -72,8 +99,11 @@ static void		main_render(t_mlx *mlx_info)
 	int		height;
 	int		x_src;
 
+	img_data.width = mlx_info->width;
+	img_data.height = mlx_info->height;
 	img_data.img = mlx_new_image(mlx_info->init, mlx_info->width, mlx_info->height);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
+//	put_ceilling_and_floor(mlx_info, &img_data);
 	render_2d(mlx_info, &img_data);
 //	texture.img = mlx_xpm_file_to_image(mlx_info->init, "img/test.xpm", &texture.width, &texture.height);
 //	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel, &texture.line_length, &texture.endian);
@@ -117,20 +147,20 @@ static int		key_press(int key, t_mlx *mlx_info)
 static void		new_mlx(t_mlx *mlx_info, char *file, char *title)
 {
 	parse_config(mlx_info, file);
-	printf("Size: %d %d\n", mlx_info->width, mlx_info->height);
-	printf("NO: %s\n", mlx_info->north_tetxture);
-	printf("SO: %s\n", mlx_info->south_texture);
-	printf("WE: %s\n", mlx_info->west_texture);
-	printf("EA: %s\n", mlx_info->east_texture);
-	printf("Sprite: %s\n", mlx_info->sprite_texture);
-	printf("Floor: %.6X\n", mlx_info->floor_color);
-	printf("Ceiling: %.6X\n", mlx_info->ceilling_color);
-	int i = 0;
-	while (mlx_info->map[i] != 0)
-	{
-		printf("%s\n", mlx_info->map[i]);
-		i++;
-	}
+//	printf("Size: %d %d\n", mlx_info->width, mlx_info->height);
+//	printf("NO: %s\n", mlx_info->north_tetxture);
+//	printf("SO: %s\n", mlx_info->south_texture);
+//	printf("WE: %s\n", mlx_info->west_texture);
+//	printf("EA: %s\n", mlx_info->east_texture);
+//	printf("Sprite: %s\n", mlx_info->sprite_texture);
+//	printf("Floor: %.6X\n", mlx_info->floor_color);
+//	printf("Ceiling: %.6X\n", mlx_info->ceilling_color);
+//	int i = 0;
+//	while (mlx_info->map[i] != 0)
+//	{
+//		printf("%s\n", mlx_info->map[i]);
+//		i++;
+//	}
 	mlx_info->init = mlx_init();
 	mlx_info->window = mlx_new_window(mlx_info->init, mlx_info->width, mlx_info->height, title);
 }

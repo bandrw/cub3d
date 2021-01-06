@@ -66,9 +66,9 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 		return ;
 	}
 	cast->length = 0.f;
-	x_delta = mlx_info->player.position.x - (float)((int)mlx_info->player.position.x / (int)((float)mlx_info->height / mlx_info->map_height) * (int)((float)mlx_info->height / mlx_info->map_height));
+	x_delta = mlx_info->player.position.x - (float)((int)mlx_info->player.position.x / (int)(mlx_info->height / mlx_info->map_height) * (int)((float)mlx_info->height / mlx_info->map_height));
 	if (cosf(ft_to_radians(angle)) > 0)
-		x_delta = (int)((float)mlx_info->height / mlx_info->map_height) - x_delta;
+		x_delta = (float)mlx_info->height / mlx_info->map_height - x_delta;
 	y_delta = ft_absf(x_delta * tanf(ft_to_radians(angle)));
 	if (sinf(ft_to_radians(angle)) < 0)
 		y_delta = -y_delta;
@@ -80,7 +80,7 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 		y_delta = -y_delta;
 	x_delta = cosf(ft_to_radians(angle)) > 0 ? ((float)mlx_info->height / mlx_info->map_height) : -((float)mlx_info->height / mlx_info->map_height);
 	while (ray_y < (float)mlx_info->height && ray_x < (float)mlx_info->width && ray_y > 0 && ray_x > 0 &&
-		   mlx_info->map[(int)(mlx_info->map_height * ray_y / (float)mlx_info->height)][(int)(mlx_info->map_width * ray_x / (float)mlx_info->width - (float)(cosf(ft_to_radians(angle)) < 0))] != '1')
+		   mlx_info->map[(int)((float)mlx_info->map_height * ray_y / (float)mlx_info->height)][(int)((float)mlx_info->map_width * ray_x / (float)mlx_info->width - (float)(cosf(ft_to_radians(angle)) < 0))] != '1')
 	{
 		ray_x += x_delta;
 		ray_y -= y_delta;

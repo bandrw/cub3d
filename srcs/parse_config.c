@@ -115,20 +115,20 @@ int		check_map(t_mlx *mlx_info, char **arr)
 	len = 0;
 	while (arr[len] != 0)
 		len++;
-	mlx_info->map_height = (float)len;
+	mlx_info->map_height = len;
 	mlx_info->map_width = 0;
 	i = 0;
 	while (arr[i] != 0)
 	{
 		j = 0;
-		if (ft_strlen(arr[i]) > mlx_info->map_width)
+		if ((int)ft_strlen(arr[i]) > mlx_info->map_width)
 			mlx_info->map_width = ft_strlen(arr[i]);
 		while (arr[i][j] != '\0')
 		{
 			if (arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'W' || arr[i][j] == 'E')
 			{
 				mlx_info->player.position.x = (float)(j * mlx_info->width) / (float)ft_strlen(arr[i]);
-				mlx_info->player.position.y = (float)(i * mlx_info->height) / mlx_info->map_height;
+				mlx_info->player.position.y = (float)(i * mlx_info->height) / (float)mlx_info->map_height;
 				if (arr[i][j] == 'N')
 					mlx_info->player.angle = 90.f;
 				else if (arr[i][j] == 'S')
