@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-# include "../minilibx/mlx.h"
+
+t_img g_img;
 
 static int		close_app(t_mlx *mlx_info)
 {
@@ -69,7 +70,10 @@ static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 	player.width = 8;
 	put_rectangle(img_data, &player, 0x00FF00);
 	line.angle = mlx_info->player.angle;
-	line.length = cast.length;
+	if (cast.direction == North || cast.direction == South)
+		line.length = cast.length * (50.f / ((float)mlx_info->height / (float)mlx_info->map_height));
+	else
+		line.length = cast.length * (50.f / ((float)mlx_info->width / (float)mlx_info->map_width));
 	line.coordinate.x = player.start.x + 4.f;
 	line.coordinate.y = player.start.y + 4.f;
 	put_line(img_data, &line, 0x00FF00);
@@ -103,6 +107,7 @@ static void		main_render(t_mlx *mlx_info)
 	img_data.height = mlx_info->height;
 	img_data.img = mlx_new_image(mlx_info->init, mlx_info->width, mlx_info->height);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
+	g_img = img_data;
 //	put_ceilling_and_floor(mlx_info, &img_data);
 	render_2d(mlx_info, &img_data);
 //	texture.img = mlx_xpm_file_to_image(mlx_info->init, "img/test.xpm", &texture.width, &texture.height);
@@ -179,7 +184,7 @@ int				main(int argc, char **argv)
 	}
 	new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D");
 	main_render(&mlx_info);
-	mlx_hook(mlx_info.window, 2, 1L << 2, &key_press, &mlx_info);
+	mlx_hook(mlx_info.window, 2, 0, &key_press, &mlx_info);
 	mlx_hook(mlx_info.window, 17, 0, &close_app, &mlx_info);
 	mlx_loop(mlx_info.init);
 	return (0);
