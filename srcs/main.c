@@ -25,18 +25,20 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 {
 	int i;
 	int j;
+	int len;
 	t_rectangle rectangle;
 
 	i = 0;
 	while (i < mlx_info->map_height)
 	{
 		j = 0;
-		while (j < mlx_info->map_width)
+		len = (int)ft_strlen(mlx_info->map[i]);
+		while (j < len)
 		{
 			if (mlx_info->map[i][j] == '1')
 			{
-				rectangle.start.x = (float)mlx_info->width / 2.f - 50.f * (mlx_info->player.position.x / (float)mlx_info->width * (float)mlx_info->map_width - (float)j);
-				rectangle.start.y = (float)mlx_info->height / 2.f - 50.f * (mlx_info->player.position.y / (float)mlx_info->height * (float)mlx_info->map_height - (float)i);
+				rectangle.start.x = (float)j * 50.f - mlx_info->player.position.x + mlx_info->width / 2.f;
+				rectangle.start.y = (float)i * 50.f - mlx_info->player.position.y + mlx_info->height / 2.f;
 				rectangle.width = 50;
 				rectangle.heigth = 1;
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
@@ -59,24 +61,36 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 
 static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 {
-	t_rectangle player;
-	t_line line;
 	t_ray cast;
+	t_line line;
+	t_rectangle player;
+	float angle;
+	int color;
 
-	ray_cast(mlx_info, &cast, mlx_info->player.angle);
-	player.start.x = (float)mlx_info->width / 2.f - 4.f;
-	player.start.y = (float)mlx_info->height / 2.f - 4.f;
 	player.heigth = 8;
 	player.width = 8;
+	player.start.x = (float)mlx_info->width / 2.f - player.width / 2.f;
+	player.start.y = (float)mlx_info->height / 2.f - player.heigth / 2.f;
+	angle = mlx_info->player.angle - 33.f;
+	while (angle < mlx_info->player.angle + 33.f)
+	{
+		ray_cast(mlx_info, &cast, angle);
+		line.angle = angle;
+		line.length = cast.length;
+		line.coordinate.x = player.start.x + player.width / 2.f;
+		line.coordinate.y = player.start.y + player.width / 2.f;
+		if (cast.direction == North)
+			color = 0x039BE2;
+		else if (cast.direction == West)
+			color = 0xFFA500;
+		else if (cast.direction == South)
+			color = 0xFF0800;
+		else
+			color = 0x149414;
+		put_line(img_data, &line, color);
+		angle += 66.f / (float)mlx_info->width;
+	}
 	put_rectangle(img_data, &player, 0x00FF00);
-	line.angle = mlx_info->player.angle;
-	if (cast.direction == North || cast.direction == South)
-		line.length = cast.length * (50.f / ((float)mlx_info->height / (float)mlx_info->map_height));
-	else
-		line.length = cast.length * (50.f / ((float)mlx_info->width / (float)mlx_info->map_width));
-	line.coordinate.x = player.start.x + 4.f;
-	line.coordinate.y = player.start.y + 4.f;
-	put_line(img_data, &line, 0x00FF00);
 	put_map(mlx_info, img_data);
 }
 
@@ -107,7 +121,7 @@ static void		main_render(t_mlx *mlx_info)
 	img_data.height = mlx_info->height;
 	img_data.img = mlx_new_image(mlx_info->init, mlx_info->width, mlx_info->height);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
-	g_img = img_data;
+	g_img = img_data; // tmp
 //	put_ceilling_and_floor(mlx_info, &img_data);
 	render_2d(mlx_info, &img_data);
 //	texture.img = mlx_xpm_file_to_image(mlx_info->init, "img/test.xpm", &texture.width, &texture.height);
@@ -135,7 +149,7 @@ static int		key_press(int key, t_mlx *mlx_info)
 {
 	float step;
 
-	step = 10.f;
+	step = 25.f;
 	if (key == KEY_ESC)
 		close_app(mlx_info);
 	if (is_moveable(key) || is_arrow(key))
@@ -175,17 +189,11 @@ int				main(int argc, char **argv)
 	t_mlx mlx_info;
 
 	if (argc != 2)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putstr_fd("Usage: ", 2);
-		ft_putstr_fd(argv[0], 2);
-		ft_putstr_fd(" map.cub\n", 2);
-		return (1);
-	}
+		return (usage_error(argv));
 	new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D");
 	main_render(&mlx_info);
-	mlx_hook(mlx_info.window, 2, 0, &key_press, &mlx_info);
-	mlx_hook(mlx_info.window, 17, 0, &close_app, &mlx_info);
+	mlx_hook(mlx_info.window, 2, 1L << 1, &key_press, &mlx_info);
+	mlx_hook(mlx_info.window, 17, 1L << 17, &close_app, &mlx_info);
 	mlx_loop(mlx_info.init);
 	return (0);
 }

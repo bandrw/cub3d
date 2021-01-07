@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_config.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/07 12:37:05 by kfriese           #+#    #+#             */
+/*   Updated: 2021/01/07 12:37:09 by kfriese          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	ft_skip(void *obj)
@@ -121,14 +133,15 @@ int		check_map(t_mlx *mlx_info, char **arr)
 	while (arr[i] != 0)
 	{
 		j = 0;
-		if ((int)ft_strlen(arr[i]) > mlx_info->map_width)
-			mlx_info->map_width = ft_strlen(arr[i]);
+		len = (int)ft_strlen(arr[i]);
+		if (len > mlx_info->map_width)
+			mlx_info->map_width = len;
 		while (arr[i][j] != '\0')
 		{
 			if (arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'W' || arr[i][j] == 'E')
 			{
-				mlx_info->player.position.x = (float)(j * mlx_info->width) / (float)ft_strlen(arr[i]);
-				mlx_info->player.position.y = (float)(i * mlx_info->height) / (float)mlx_info->map_height;
+				mlx_info->player.position.x = j * 50.f;
+				mlx_info->player.position.y = i * 50.f;
 				if (arr[i][j] == 'N')
 					mlx_info->player.angle = 90.f;
 				else if (arr[i][j] == 'S')

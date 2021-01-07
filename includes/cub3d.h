@@ -23,9 +23,9 @@
 # define KEY_W 13
 # define KEY_ESC 53
 
-# include <math.h>
-# include "mlx.h"
 # include "libft.h"
+# include "mlx.h"
+# include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 
@@ -35,7 +35,7 @@ typedef enum	e_direction
 	East,
 	South,
 	West
-}               t_direction;
+}				t_direction;
 
 typedef struct	s_point
 {
@@ -98,7 +98,7 @@ typedef struct	s_ray
 	float		length;
 	t_point		end;
 	t_direction	direction;
-}               t_ray;
+}				t_ray;
 
 float	ft_absf(float a);
 float	ft_to_radians(float degrees);
@@ -115,5 +115,6 @@ void	change_direction(t_mlx *mlx_info, int key);
 char	**new_map(void);
 void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void	parse_config(t_mlx *mlx_info, char *file);
+int		usage_error(char **argv);
 
 #endif
