@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-t_img g_img;
-
 static int		close_app(t_mlx *mlx_info)
 {
 	(void)mlx_info;
@@ -109,39 +107,38 @@ void			put_ceilling_and_floor(t_mlx *mlx_info, t_img *img_data)
 
 static void		main_render(t_mlx *mlx_info)
 {
-	float	angle;
 	t_ray	cast;
+	float	angle;
 	float	x_tmp;
 	t_img	img_data;
 	t_img	texture;
 	int		height;
 	int		x_src;
+	int		i;
 
 	img_data.width = mlx_info->width;
 	img_data.height = mlx_info->height;
 	img_data.img = mlx_new_image(mlx_info->init, mlx_info->width, mlx_info->height);
 	img_data.addr = mlx_get_data_addr(img_data.img, &img_data.bits_per_pixel, &img_data.line_length, &img_data.endian);
-	g_img = img_data; // tmp
-//	put_ceilling_and_floor(mlx_info, &img_data);
-	render_2d(mlx_info, &img_data);
-//	texture.img = mlx_xpm_file_to_image(mlx_info->init, "img/test.xpm", &texture.width, &texture.height);
-//	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel, &texture.line_length, &texture.endian);
-//	x_tmp = 0;
-//	angle = mlx_info->player.angle + 33.f;
-//	while (x_tmp < (float)mlx_info->width)
-//	{
-//		ray_cast(mlx_info, &cast, angle);
-//		height = (int)((float)mlx_info->height * 40.f / (cast.length * cosf(ft_to_radians(mlx_info->player.angle - angle))));
-//		if (height > mlx_info->height)
-//			height = mlx_info->height;
-//		if (cast.direction == West || cast.direction == East)
-//			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
-//		else
-//			x_src = (int)((float)texture.width * (float)(cast.end.x - (float)((int)cast.end.x / 50 * 50)) / 50.f);
-//		put_line_from_image(&texture, &img_data, (int)x_tmp, (int)((500.f - (float)height) / 2.f), height, x_src);
-//		angle -= 66.f / (float)mlx_info->width;
-//		x_tmp++;
-//	}
+	put_ceilling_and_floor(mlx_info, &img_data);
+	texture.img = mlx_xpm_file_to_image(mlx_info->init, "img/test.xpm", &texture.width, &texture.height);
+	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel, &texture.line_length, &texture.endian);
+	x_tmp = 0;
+	angle = mlx_info->player.angle + 33.f;
+	while (x_tmp < (float)mlx_info->width)
+	{
+		ray_cast(mlx_info, &cast, angle);
+		height = (int)((float)mlx_info->height * 60.f / (cast.length * cosf(ft_to_radians(mlx_info->player.angle - angle))));
+		if (cast.direction == West || cast.direction == East)
+			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
+		else
+			x_src = (int)((float)texture.width * (float)(cast.end.x - (float)((int)cast.end.x / 50 * 50)) / 50.f);
+		i = -1;
+		while (++i < height)
+			img_pixel_put(&img_data, (int)x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)(i / (float)height * texture.width)));
+		angle -= 66.f / (float)mlx_info->width;
+		x_tmp++;
+	}
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, img_data.img, 0, 0);
 }
 
@@ -149,7 +146,7 @@ static int		key_press(int key, t_mlx *mlx_info)
 {
 	float step;
 
-	step = 25.f;
+	step = 10.f;
 	if (key == KEY_ESC)
 		close_app(mlx_info);
 	if (is_moveable(key) || is_arrow(key))
@@ -157,9 +154,25 @@ static int		key_press(int key, t_mlx *mlx_info)
 	if (is_moveable(key))
 		move(mlx_info, key, step);
 	if (is_arrow(key))
-		change_direction(mlx_info, key);
+		change_direction(mlx_info, key, 5.f);
 	if (is_moveable(key) || is_arrow(key))
 		main_render(mlx_info);
+	return (0);
+}
+
+static int		mouse_movement(int x, int y, t_mlx *mlx_info)
+{
+	float angle;
+
+	(void)y;
+	angle = ft_absf(x - mlx_info->width / 2.f) / 30.f;
+	if (x > mlx_info->width / 2.f)
+		change_direction(mlx_info, KEY_RIGHT, angle);
+	else
+		change_direction(mlx_info, KEY_LEFT, angle);
+	mlx_mouse_move(mlx_info->window, mlx_info->width / 2.f,
+				mlx_info->height / 2.f);
+	main_render(mlx_info);
 	return (0);
 }
 
@@ -192,7 +205,11 @@ int				main(int argc, char **argv)
 		return (usage_error(argv));
 	new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D");
 	main_render(&mlx_info);
+	mlx_mouse_hide();
+	mlx_mouse_move(mlx_info.window, mlx_info.width / 2.f, mlx_info.height / 2.f);
+	mlx_do_key_autorepeaton(mlx_info.init);
 	mlx_hook(mlx_info.window, 2, 1L << 1, &key_press, &mlx_info);
+	mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
 	mlx_hook(mlx_info.window, 17, 1L << 17, &close_app, &mlx_info);
 	mlx_loop(mlx_info.init);
 	return (0);

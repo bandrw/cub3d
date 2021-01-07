@@ -19,14 +19,15 @@ float	ft_absf(float a)
 	return (a);
 }
 
-void	img_pixel_put(t_img *img_data, int x, int y, int color)
+int		img_pixel_put(t_img *img_data, int x, int y, int color)
 {
 	char *dst;
 
 	if (x >= img_data->width || x < 0 || y >= img_data->height || y < 0)
-		return ;
+		return (1);
 	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+	return (0);
 }
 
 int		img_get_pixel(t_img *img_data, int x, int y)
@@ -35,18 +36,6 @@ int		img_get_pixel(t_img *img_data, int x, int y)
 
 	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
 	return (*(int*)dst);
-}
-
-void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height, int x_src)
-{
-	int i;
-
-	i = 0;
-	while (i < height)
-	{
-		img_pixel_put(dest, x, y + i, img_get_pixel(src, x_src, (int)(i / (float)height * src->width)));
-		i++;
-	}
 }
 
 void	put_square(t_img *img_data, t_point p, float size, int color)

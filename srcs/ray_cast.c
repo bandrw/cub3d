@@ -13,19 +13,6 @@
 #include "cub3d.h"
 #include "../includes/cub3d.h"
 
-extern t_img g_img;
-
-static void write_rectangle(t_mlx *mlx_info, float ray_x, float ray_y, int color)
-{
-	t_rectangle rectangle;
-
-	rectangle.start.x = ray_x;
-	rectangle.start.y = ray_y * (50.f / (mlx_info->height / mlx_info->map_height)) - 2.f;
-	rectangle.heigth = 4;
-	rectangle.width = 4;
-	put_rectangle(&g_img, &rectangle, color);
-}
-
 static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 {
 	float	x_delta;

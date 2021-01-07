@@ -74,5 +74,6 @@ int					ft_putstr(char *s);
 void				ft_putnbr(int n);
 int					ft_max(int a, int b);
 char				*ft_hexstr(unsigned long p);
+int					ft_abs(int a);
 
 #endif

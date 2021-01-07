@@ -12,15 +12,12 @@
 
 #include "cub3d.h"
 
-void	change_direction(t_mlx *mlx_info, int key)
+void	change_direction(t_mlx *mlx_info, int key, float step)
 {
-	int step;
-
-	step = 5;
 	if (key == KEY_RIGHT)
-		mlx_info->player.angle -= (float)step;
+		mlx_info->player.angle -= step;
 	else if (key == KEY_LEFT)
-		mlx_info->player.angle += (float)step;
+		mlx_info->player.angle += step;
 }
 
 void	move(t_mlx *mlx_info, int key, float step)

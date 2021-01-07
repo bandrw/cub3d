@@ -102,16 +102,15 @@ typedef struct	s_ray
 
 float	ft_absf(float a);
 float	ft_to_radians(float degrees);
-void	img_pixel_put(t_img *img_data, int x, int y, int color);
+int		img_pixel_put(t_img *img_data, int x, int y, int color);
 int		img_get_pixel(t_img *img_data, int x, int y);
-void	put_line_from_image(t_img *src, t_img *dest, int x, int y, int height, int x_src);
 void	put_square(t_img *img_data, t_point p, float size, int color);
 void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color);
 void	put_line(t_img *img_data, t_line *line, int color);
 int 	is_moveable(int key);
 int 	is_arrow(int key);
 void	move(t_mlx *mlx_info, int key, float step);
-void	change_direction(t_mlx *mlx_info, int key);
+void	change_direction(t_mlx *mlx_info, int key, float step);
 char	**new_map(void);
 void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void	parse_config(t_mlx *mlx_info, char *file);
