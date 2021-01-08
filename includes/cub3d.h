@@ -74,6 +74,23 @@ typedef struct	s_img
 	int 		height;
 }				t_img;
 
+typedef struct	s_ray
+{
+	float		length;
+	t_point		end;
+	t_direction	direction;
+}				t_ray;
+
+typedef struct	s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left_arrow;
+	int			right_arrow;
+}				t_keys;
+
 typedef struct	s_mlx
 {
 	void		*init;
@@ -92,14 +109,8 @@ typedef struct	s_mlx
 	int			ceilling_color;
 	int			map_width;
 	int			map_height;
+	t_keys		active_keys;
 }				t_mlx;
-
-typedef struct	s_ray
-{
-	float		length;
-	t_point		end;
-	t_direction	direction;
-}				t_ray;
 
 float	ft_absf(float a);
 float	ft_to_radians(float degrees);

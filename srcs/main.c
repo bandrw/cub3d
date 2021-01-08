@@ -134,14 +134,20 @@ void		main_render(t_mlx *mlx_info)
 			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
 		else
 			x_src = (int)((float)texture.width * (float)(cast.end.x - (float)((int)cast.end.x / 50 * 50)) / 50.f);
-		if (height > mlx_info->height)
-			i = height / 2 - mlx_info->height;
-		else
-			i = -1;
-		printf("%d %d\n", height, i);
-//		printf("%d: %d -> %d\n", height, i, i + mlx_info->height);
+//		if (height > mlx_info->height)
+//		{
+//			i = height / 2 - mlx_info->height;
+//			while (++i < height / 2 + mlx_info->height)
+//			{
+//				img_pixel_put(&mlx_info->stage, (int)x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)(i / (float)height * texture.width)));
+//			}
+//		}
+//		else
+//		{
+		i = -1;
 		while (++i < height)
 			img_pixel_put(&mlx_info->stage, (int)x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)(i / (float)height * texture.width)));
+//		}
 		angle -= 66.f / (float)mlx_info->width;
 		x_tmp++;
 	}
@@ -150,31 +156,63 @@ void		main_render(t_mlx *mlx_info)
 
 static int		key_press(int key, t_mlx *mlx_info)
 {
-	float step;
-	int smoothness;
-	int i;
-
-	step = 10.f;
-	smoothness = 1;
 	if (key == KEY_ESC)
 		close_app(mlx_info);
-	if (is_moveable(key) || is_arrow(key))
-	{
-		mlx_clear_window(mlx_info->init, mlx_info->window);
-		if (is_moveable(key))
-		{
-			i = -1;
-			while (i++ < smoothness - 1)
-			{
-				mlx_clear_window(mlx_info->init, mlx_info->window);
-				move(mlx_info, key, step / (float)smoothness);
-				main_render(mlx_info);
-			}
-		}
-		if (is_arrow(key))
-			change_direction(mlx_info, key, 5.f);
-		main_render(mlx_info);
-	}
+	if (key == KEY_W)
+		mlx_info->active_keys.w = 1;
+	if (key == KEY_A)
+		mlx_info->active_keys.a = 1;
+	if (key == KEY_S)
+		mlx_info->active_keys.s = 1;
+	if (key == KEY_D)
+		mlx_info->active_keys.d = 1;
+	if (key == KEY_LEFT)
+		mlx_info->active_keys.left_arrow = 1;
+	if (key == KEY_RIGHT)
+		mlx_info->active_keys.right_arrow = 1;
+	return (0);
+}
+
+static int		key_release(int key, t_mlx *mlx_info)
+{
+	if (key == KEY_W)
+		mlx_info->active_keys.w = 0;
+	if (key == KEY_A)
+		mlx_info->active_keys.a = 0;
+	if (key == KEY_S)
+		mlx_info->active_keys.s = 0;
+	if (key == KEY_D)
+		mlx_info->active_keys.d = 0;
+	if (key == KEY_LEFT)
+		mlx_info->active_keys.left_arrow = 0;
+	if (key == KEY_RIGHT)
+		mlx_info->active_keys.right_arrow = 0;
+	return (0);
+}
+
+static int		key_handle(t_mlx *mlx_info)
+{
+	int count;
+	int step;
+
+	count = 0;
+	step = 5.f;
+	count = mlx_info->active_keys.w + mlx_info->active_keys.s +
+			mlx_info->active_keys.a + mlx_info->active_keys.d;
+	mlx_clear_window(mlx_info->init, mlx_info->window);
+	if (mlx_info->active_keys.w)
+		move(mlx_info, KEY_W, step / (float)count);
+	if (mlx_info->active_keys.a)
+		move(mlx_info, KEY_A, step / 2.f);
+	if (mlx_info->active_keys.s)
+		move(mlx_info, KEY_S, step / (float)count);
+	if (mlx_info->active_keys.d)
+		move(mlx_info, KEY_D, step / 2.f);
+	if (mlx_info->active_keys.left_arrow)
+		change_direction(mlx_info, KEY_LEFT, 1.5f);
+	if (mlx_info->active_keys.right_arrow)
+		change_direction(mlx_info, KEY_RIGHT, 1.5f);
+	main_render(mlx_info);
 	return (0);
 }
 
@@ -190,12 +228,13 @@ static int		mouse_movement(int x, int y, t_mlx *mlx_info)
 		change_direction(mlx_info, KEY_LEFT, angle);
 	mlx_mouse_move(mlx_info->window, mlx_info->width / 2.f,
 				mlx_info->height / 2.f);
-	main_render(mlx_info);
+//	main_render(mlx_info);
 	return (0);
 }
 
 static void		new_mlx(t_mlx *mlx_info, char *file, char *title)
 {
+	ft_bzero(&mlx_info->active_keys, sizeof(mlx_info->active_keys));
 	mlx_info->init = mlx_init();
 	parse_config(mlx_info, file);
 	mlx_info->window = mlx_new_window(mlx_info->init, mlx_info->width, mlx_info->height, title);
@@ -215,10 +254,11 @@ int				main(int argc, char **argv)
 	main_render(&mlx_info);
 	mlx_mouse_hide();
 	mlx_mouse_move(mlx_info.window, mlx_info.width / 2.f, mlx_info.height / 2.f);
-	mlx_do_key_autorepeaton(mlx_info.init);
 	mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
+	mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
 	mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
 	mlx_hook(mlx_info.window, 17, 1L << 17, close_app, &mlx_info);
+	mlx_loop_hook(mlx_info.init, key_handle, &mlx_info);
 	mlx_loop(mlx_info.init);
 	return (0);
 }
