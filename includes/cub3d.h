@@ -80,13 +80,14 @@ typedef struct	s_mlx
 	void		*window;
 	int			width;
 	int			height;
+	t_img		stage;
 	t_player	player;
 	char		**map;
-	char		*north_tetxture;
-	char		*south_texture;
-	char		*west_texture;
-	char		*east_texture;
-	char		*sprite_texture;
+	t_img		north_texture;
+	t_img		south_texture;
+	t_img		west_texture;
+	t_img		east_texture;
+	t_img		sprite_texture;
 	int			floor_color;
 	int			ceilling_color;
 	int			map_width;
@@ -115,5 +116,6 @@ char	**new_map(void);
 void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void	parse_config(t_mlx *mlx_info, char *file);
 int		usage_error(char **argv);
+void	main_render(t_mlx *mlx_info);
 
 #endif

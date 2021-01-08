@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "../includes/cub3d.h"
+#include "../libft/includes/libft.h"
 
 static void	ft_skip(void *obj)
 {
@@ -69,6 +71,19 @@ static void render_size_parse(t_mlx *mlx_info, char *str)
 	free(str);
 }
 
+static void	new_texture(t_mlx *mlx_info, t_img *texture, char *file)
+{
+	texture->img = mlx_xpm_file_to_image(mlx_info->init, file, &texture->width, &texture->height);
+	if (texture->img == 0)
+	{
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": ", 2);
+		perror(0);
+		exit(2);
+	}
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->line_length, &texture->endian);
+}
+
 static void texture_parse(t_mlx *mlx_info, char *str)
 {
 	int i;
@@ -77,15 +92,15 @@ static void texture_parse(t_mlx *mlx_info, char *str)
 	while (str[i] == ' ')
 		i++;
 	if (ft_strncmp(str, "NO", 2) == 0)
-		mlx_info->north_tetxture = ft_strdup(str + i);
+		new_texture(mlx_info, &mlx_info->north_texture, str + i);
 	else if (ft_strncmp(str, "SO", 2) == 0)
-		mlx_info->south_texture = ft_strdup(str + i);
+		new_texture(mlx_info, &mlx_info->south_texture, str + i);
 	else if (ft_strncmp(str, "WE", 2) == 0)
-		mlx_info->west_texture = ft_strdup(str + i);
+		new_texture(mlx_info, &mlx_info->west_texture, str + i);
 	else if (ft_strncmp(str, "EA", 2) == 0)
-		mlx_info->east_texture = ft_strdup(str + i);
+		new_texture(mlx_info, &mlx_info->east_texture, str + i);
 	else if (ft_strncmp(str, "S ", 2) == 0)
-		mlx_info->sprite_texture = ft_strdup(str + i);
+		new_texture(mlx_info, &mlx_info->sprite_texture, str + i);
 	free(str);
 }
 
