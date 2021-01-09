@@ -14,11 +14,6 @@
 #include "../includes/cub3d.h"
 #include "../libft/includes/libft.h"
 
-static void	ft_skip(void *obj)
-{
-	(void)obj;
-}
-
 static char **get_config_array(int fd)
 {
 	char **arr;
@@ -42,7 +37,7 @@ static char **get_config_array(int fd)
 		i++;
 		config = config->next;
 	}
-	ft_lstclear(&config, ft_skip);
+	ft_lstclear(&config, 0);
 	arr[i] = 0;
 	return (arr);
 }

@@ -28,6 +28,7 @@ static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 		return ;
 	}
 	cast->length = 0.f;
+	cast->sprites = 0;
 	y_delta = mlx_info->player.position.y - (float)((int)mlx_info->player.position.y / 50 * 50);
 	if (sinf(ft_to_radians(angle)) < 0)
 		y_delta = 50.f - y_delta;
@@ -46,6 +47,8 @@ static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 	while (index_x >= 0 && index_y >= 0 && index_y < mlx_info->map_height && index_x < (int)ft_strlen(mlx_info->map[index_y])
 			&& mlx_info->map[index_y][index_x] != '1')
 	{
+		if (mlx_info->map[index_y][index_x] == '2')
+			ft_lstadd_front(&cast->sprites, ft_lstnew((int)cast->length));
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / ft_absf(sinf(ft_to_radians(angle)));
@@ -75,6 +78,7 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 		return ;
 	}
 	cast->length = 0.f;
+	cast->sprites = 0;
 	x_delta = mlx_info->player.position.x - (float)((int)mlx_info->player.position.x / 50 * 50);
 	if (cosf(ft_to_radians(angle)) > 0)
 		x_delta = 50.f - x_delta;
@@ -93,6 +97,8 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 	while (index_x >= 0 && index_y >= 0 && index_y < mlx_info->map_height && index_x < (int)ft_strlen(mlx_info->map[index_y])
 		   && mlx_info->map[index_y][index_x] != '1')
 	{
+		if (mlx_info->map[index_y][index_x] == '2')
+			ft_lstadd_front(&cast->sprites, ft_lstnew((int)cast->length));
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / ft_absf(cosf(ft_to_radians(angle)));
@@ -116,14 +122,18 @@ void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
 	ray_cast_vertical(mlx_info, &vertical, angle);
 	if (horizontal.length < 0 || (vertical.length < horizontal.length && vertical.length >= 0))
 	{
+		cast->sprites = vertical.sprites;
 		cast->length = vertical.length;
 		cast->end = vertical.end;
 		cast->direction = vertical.direction;
+//		ft_lstclear(&horizontal.sprites, 0);
 	}
 	else
 	{
+		cast->sprites = horizontal.sprites;
 		cast->length = horizontal.length;
 		cast->end = horizontal.end;
 		cast->direction = horizontal.direction;
+//		ft_lstclear(&vertical.sprites, 0);
 	}
 }

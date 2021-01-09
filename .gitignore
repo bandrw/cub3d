@@ -1,3 +1,4 @@
-cub3d
-obj
+cub3D
+**/obj
+**/*.o
 **/.*

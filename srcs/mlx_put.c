@@ -35,7 +35,9 @@ int		img_get_pixel(t_img *img_data, int x, int y)
 	char *dst;
 
 	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
-	return (*(int*)dst);
+	if (dst)
+		return (*(int*)dst);
+	return (0);
 }
 
 void	put_square(t_img *img_data, t_point p, float size, int color)

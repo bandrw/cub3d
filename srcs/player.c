@@ -46,5 +46,12 @@ void	move(t_mlx *mlx_info, int key, float step)
 		mlx_info->player.position.x -= step * cosf(ft_to_radians(mlx_info->player.angle));
 	}
 	if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)(mlx_info->player.position.x / 50.f)] == '1')
-		mlx_info->player.position = old;
+	{
+		if (mlx_info->map[(int)(old.y / 50.f)][(int)(mlx_info->player.position.x / 50.f)] == '0')
+			mlx_info->player.position.y = old.y;
+		else if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)(old.x / 50.f)] == '0')
+			mlx_info->player.position.x = old.x;
+		else
+			mlx_info->player.position = old;
+	}
 }

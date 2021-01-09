@@ -77,6 +77,7 @@ typedef struct	s_img
 typedef struct	s_ray
 {
 	float		length;
+	t_list		*sprites;
 	t_point		end;
 	t_direction	direction;
 }				t_ray;
