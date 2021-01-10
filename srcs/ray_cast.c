@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "../includes/cub3d.h"
 
 static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 {

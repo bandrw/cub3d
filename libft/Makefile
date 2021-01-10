@@ -83,13 +83,17 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ_DIR)/ft_printf $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
+$(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/ft_printf:
 	@mkdir -p $(OBJ_DIR)/ft_printf
+
+$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	gcc $(FLAGS) -I$(HEADERS_DIR) -c $< -o $@
 
 clean:

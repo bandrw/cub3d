@@ -62,6 +62,7 @@ static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 	t_ray cast;
 	t_line line;
 	t_rectangle player;
+	t_rectangle sprite;
 	float angle;
 	int color;
 
@@ -77,15 +78,23 @@ static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 		line.length = cast.length;
 		line.coordinate.x = player.start.x + player.width / 2.f;
 		line.coordinate.y = player.start.y + player.width / 2.f;
-		if (cast.direction == North)
-			color = 0x039BE2;
-		else if (cast.direction == West)
-			color = 0xFFA500;
-		else if (cast.direction == South)
-			color = 0xFF0800;
-		else
-			color = 0x149414;
+//		if (cast.direction == North)
+//			color = 0x039BE2;
+//		else if (cast.direction == West)
+//			color = 0xFFA500;
+//		else if (cast.direction == South)
+//			color = 0xFF0800;
+//		else
+//			color = 0x149414;
+		color = 0xDDDDDD;
 		put_line(img_data, &line, color);
+		if (cast.sprites)
+		{
+			sprite.width = 30;
+			sprite.heigth = 30;
+//			sprite.start.x =
+		}
+		ft_lstclear(&cast.sprites, 0);
 		angle += 66.f / (float)mlx_info->width;
 	}
 	put_rectangle(img_data, &player, 0x00FF00);
@@ -105,6 +114,24 @@ void			put_ceilling_and_floor(t_mlx *mlx_info)
 	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->floor_color);
 }
 
+void		clear_stage(t_img *stage)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < stage->width)
+	{
+		j = 0;
+		while (j < stage->height)
+		{
+			img_pixel_put(stage, i, j, 0);
+			j++;
+		}
+		i++;
+	}
+}
+
 void		main_render(t_mlx *mlx_info)
 {
 	t_ray	cast;
@@ -115,42 +142,47 @@ void		main_render(t_mlx *mlx_info)
 	int		x_src;
 	int		i;
 
-	put_ceilling_and_floor(mlx_info);
-	x_tmp = 0;
-	angle = mlx_info->player.angle + 33.f;
-	while (x_tmp < (float)mlx_info->width)
-	{
-		ray_cast(mlx_info, &cast, angle);
-		if (cast.direction == North)
-			texture = mlx_info->north_texture;
-		else if (cast.direction == West)
-			texture = mlx_info->west_texture;
-		else if (cast.direction == South)
-			texture = mlx_info->south_texture;
-		else
-			texture = mlx_info->east_texture;
-		height = (int)((float)mlx_info->height * 60.f / (cast.length * cosf(ft_to_radians(mlx_info->player.angle - angle))));
-		if (cast.direction == West || cast.direction == East)
-			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
-		else
-			x_src = (int)((float)texture.width * (float)(cast.end.x - (float)((int)cast.end.x / 50 * 50)) / 50.f);
+	mlx_clear_window(mlx_info->init, mlx_info->window);
+	clear_stage(&mlx_info->stage);
+//	put_ceilling_and_floor(mlx_info);
+//	x_tmp = 0;
+//	angle = mlx_info->player.angle + 33.f;
+//	while (x_tmp < (float)mlx_info->width)
+//	{
+//		ray_cast(mlx_info, &cast, angle);
+//		if (cast.direction == North)
+//			texture = mlx_info->north_texture;
+//		else if (cast.direction == West)
+//			texture = mlx_info->west_texture;
+//		else if (cast.direction == South)
+//			texture = mlx_info->south_texture;
+//		else
+//			texture = mlx_info->east_texture;
+//		height = (int)((float)mlx_info->height * 60.f / (cast.length * cosf(ft_to_radians(mlx_info->player.angle - angle))));
+//		if (cast.direction == West || cast.direction == East)
+//			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
+//		else
+//			x_src = (int)((float)texture.width * (float)(cast.end.x - (float)((int)cast.end.x / 50 * 50)) / 50.f);
+//		i = -1;
 //		if (height > mlx_info->height)
 //		{
-//			i = height / 2 - mlx_info->height;
-//			while (++i < height / 2 + mlx_info->height)
-//			{
-//				img_pixel_put(&mlx_info->stage, (int)x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)(i / (float)height * texture.width)));
-//			}
+//			while (++i < mlx_info->height)
+//				img_pixel_put(&mlx_info->stage, (int)x_tmp, i, img_get_pixel(&texture, x_src, (int)((float)texture.height / ((float)height / ((float)i + (float)(height - mlx_info->height) / 2.f)))));
 //		}
 //		else
 //		{
-		i = -1;
-		while (++i < height)
-			img_pixel_put(&mlx_info->stage, (int)x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)(i / (float)height * texture.width)));
+//			while (++i < height)
+//				img_pixel_put(&mlx_info->stage, (int)x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)((float)i / (float)height * (float)texture.height)));
 //		}
-		angle -= 66.f / (float)mlx_info->width;
-		x_tmp++;
-	}
+//		while (cast.sprites)
+//		{
+//			img_pixel_put(&mlx_info->stage, (int)x_tmp, 500, 0xFF0000);
+//			cast.sprites = cast.sprites->next;
+//		}
+//		angle -= 66.f / (float)mlx_info->width;
+//		x_tmp++;
+//	}
+	render_2d(mlx_info, &mlx_info->stage);
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, mlx_info->stage.img, 0, 0);
 }
 
@@ -193,21 +225,20 @@ static int		key_release(int key, t_mlx *mlx_info)
 static int		key_handle(t_mlx *mlx_info)
 {
 	int count;
-	int step;
+	float step;
 
-	count = 0;
-	step = 5.f;
+	step = 3.5f;
 	count = mlx_info->active_keys.w + mlx_info->active_keys.s +
 			mlx_info->active_keys.a + mlx_info->active_keys.d;
-	mlx_clear_window(mlx_info->init, mlx_info->window);
+	step /= (float)count;
 	if (mlx_info->active_keys.w)
-		move(mlx_info, KEY_W, step / (float)count);
+		move(mlx_info, KEY_W, step);
 	if (mlx_info->active_keys.a)
-		move(mlx_info, KEY_A, step / 2.f);
+		move(mlx_info, KEY_A, step);
 	if (mlx_info->active_keys.s)
-		move(mlx_info, KEY_S, step / (float)count);
+		move(mlx_info, KEY_S, step);
 	if (mlx_info->active_keys.d)
-		move(mlx_info, KEY_D, step / 2.f);
+		move(mlx_info, KEY_D, step);
 	if (mlx_info->active_keys.left_arrow)
 		change_direction(mlx_info, KEY_LEFT, 1.5f);
 	if (mlx_info->active_keys.right_arrow)
@@ -221,14 +252,9 @@ static int		mouse_movement(int x, int y, t_mlx *mlx_info)
 	float angle;
 
 	(void)y;
-	angle = ft_absf(x - mlx_info->width / 2.f) / 33.f;
-	if (x > mlx_info->width / 2.f)
-		change_direction(mlx_info, KEY_RIGHT, angle);
-	else
-		change_direction(mlx_info, KEY_LEFT, angle);
-	mlx_mouse_move(mlx_info->window, mlx_info->width / 2.f,
-				mlx_info->height / 2.f);
-//	main_render(mlx_info);
+	angle = ((float)x - (float)mlx_info->width / 2.f) / 60.f;
+	change_direction(mlx_info, KEY_RIGHT, angle);
+	mlx_mouse_move(mlx_info->window, mlx_info->width / 2, mlx_info->height / 2);
 	return (0);
 }
 
@@ -253,7 +279,7 @@ int				main(int argc, char **argv)
 	new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D");
 	main_render(&mlx_info);
 	mlx_mouse_hide();
-	mlx_mouse_move(mlx_info.window, mlx_info.width / 2.f, mlx_info.height / 2.f);
+	mlx_mouse_move(mlx_info.window, mlx_info.width / 2, mlx_info.height / 2);
 	mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
 	mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
 	mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
