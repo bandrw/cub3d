@@ -46,8 +46,9 @@ static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 	while (index_x >= 0 && index_y >= 0 && index_y < mlx_info->map_height && index_x < (int)ft_strlen(mlx_info->map[index_y])
 			&& mlx_info->map[index_y][index_x] != '1')
 	{
-		if (mlx_info->map[index_y][index_x] == '2')
-			ft_lstadd_front(&cast->sprites, ft_lstnew((int)cast->length));
+		if (mlx_info->map[index_y][index_x] == '2' || mlx_info->map[index_y + (sinf(ft_to_radians(angle)) > 0)][index_x] == '2' ||
+			mlx_info->map[index_y][index_x - (cosf(ft_to_radians(angle)) < 0)] == '2')
+			ft_lstadd_front(&cast->sprites, ft_lstnew(new_sprite(cast->length, ray_x, ray_y)));
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / ft_absf(sinf(ft_to_radians(angle)));
@@ -96,8 +97,9 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 	while (index_x >= 0 && index_y >= 0 && index_y < mlx_info->map_height && index_x < (int)ft_strlen(mlx_info->map[index_y])
 		   && mlx_info->map[index_y][index_x] != '1')
 	{
-		if (mlx_info->map[index_y][index_x] == '2')
-			ft_lstadd_front(&cast->sprites, ft_lstnew((int)cast->length));
+		if (mlx_info->map[index_y][index_x] == '2' || mlx_info->map[index_y][index_x - (cosf(ft_to_radians(angle)) < 0)] == '2' ||
+			mlx_info->map[index_y - 1][index_x] == '2')
+			ft_lstadd_front(&cast->sprites, ft_lstnew(new_sprite(cast->length, ray_x, ray_y)));
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / ft_absf(cosf(ft_to_radians(angle)));

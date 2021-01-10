@@ -36,7 +36,8 @@ FILES = main.c \
 		ray_cast.c \
 		ft_to_radians.c \
 		parse_config.c \
-		error_handle.c
+		error_handle.c \
+		sprite.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))

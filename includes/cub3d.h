@@ -74,6 +74,12 @@ typedef struct	s_img
 	int 		height;
 }				t_img;
 
+typedef struct	s_sprite
+{
+	float		length;
+	t_point		end;
+}				t_sprite;
+
 typedef struct	s_ray
 {
 	float		length;
@@ -113,21 +119,22 @@ typedef struct	s_mlx
 	t_keys		active_keys;
 }				t_mlx;
 
-float	ft_absf(float a);
-float	ft_to_radians(float degrees);
-int		img_pixel_put(t_img *img_data, int x, int y, int color);
-int		img_get_pixel(t_img *img_data, int x, int y);
-void	put_square(t_img *img_data, t_point p, float size, int color);
-void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color);
-void	put_line(t_img *img_data, t_line *line, int color);
-int 	is_moveable(int key);
-int 	is_arrow(int key);
-void	move(t_mlx *mlx_info, int key, float step);
-void	change_direction(t_mlx *mlx_info, int key, float step);
-char	**new_map(void);
-void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
-void	parse_config(t_mlx *mlx_info, char *file);
-int		usage_error(char **argv);
-void	main_render(t_mlx *mlx_info);
+float		ft_absf(float a);
+float		ft_to_radians(float degrees);
+int			img_pixel_put(t_img *img_data, int x, int y, int color);
+int			img_get_pixel(t_img *img_data, int x, int y);
+void		put_square(t_img *img_data, t_point p, float size, int color);
+void		put_rectangle(t_img *img_data, t_rectangle *rectangle, int color);
+void		put_line(t_img *img_data, t_line *line, int color);
+int 		is_moveable(int key);
+int 		is_arrow(int key);
+void		move(t_mlx *mlx_info, int key, float step);
+void		change_direction(t_mlx *mlx_info, int key, float step);
+char		**new_map(void);
+void		ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
+void		parse_config(t_mlx *mlx_info, char *file);
+int			usage_error(char **argv);
+void		main_render(t_mlx *mlx_info);
+t_sprite	*new_sprite(float length, float x, float y);
 
 #endif
