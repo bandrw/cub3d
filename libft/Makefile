@@ -76,7 +76,9 @@ FILES = ft_memset.c \
 		ft_max.c \
 		ft_putstr.c \
 		ft_hexstr.c \
-		ft_abs.c
+		ft_abs.c \
+		ft_lstmerge.c \
+		ft_lstsort.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))

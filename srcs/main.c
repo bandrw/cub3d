@@ -19,6 +19,7 @@ static int		close_app(t_mlx *mlx_info)
 	exit(0);
 }
 
+/*
 static void		put_map(t_mlx *mlx_info, t_img *img_data)
 {
 	int i;
@@ -56,7 +57,7 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 		i += 1;
 	}
 }
-/*
+
 static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 {
 	t_ray cast;
@@ -98,6 +99,7 @@ static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 	put_map(mlx_info, img_data);
 }
 */
+
 void			put_ceilling_and_floor(t_mlx *mlx_info)
 {
 	t_rectangle rectangle;
@@ -177,7 +179,6 @@ void		main_render(t_mlx *mlx_info)
 				img_pixel_put(&mlx_info->stage, x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)((float)i / (float)height * (float)texture.height)));
 		}
 		sprites[x_tmp] = (t_list*)(cast.sprites);
-//		ft_lstclear(&cast.sprites, 0);
 		angle -= 66.f / (float)mlx_info->width;
 		x_tmp++;
 	}
@@ -185,14 +186,12 @@ void		main_render(t_mlx *mlx_info)
 	while (++x_tmp < mlx_info->width)
 	{
 		tmp = sprites[x_tmp];
-		if (tmp)
-			x_tmp += 50;
 		while (tmp)
 		{
 			sprite = (t_sprite*)tmp->content;
 			i = -1;
 			while (++i < 50)
-				img_pixel_put(&mlx_info->stage, x_tmp - 51, mlx_info->height / 2 + i, 0xFF0000);
+				img_pixel_put(&mlx_info->stage, x_tmp, mlx_info->height / 2 + i, 0xFF0000);
 			tmp = tmp->next;
 		}
 	}
