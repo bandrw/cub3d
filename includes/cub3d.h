@@ -53,14 +53,14 @@ typedef struct	s_line
 typedef struct	s_rectangle
 {
 	t_point		start;
-	int 		width;
-	int 		heigth;
+	int			width;
+	int			heigth;
 }				t_rectangle;
 
 typedef struct	s_player
 {
 	t_point		position;
-	float 		angle;
+	float		angle;
 }				t_player;
 
 typedef struct	s_img
@@ -71,13 +71,13 @@ typedef struct	s_img
 	int			line_length;
 	int			endian;
 	int			width;
-	int 		height;
+	int			height;
 }				t_img;
 
 typedef struct	s_sprite
 {
+	t_point		coordinate;
 	float		length;
-	t_point		end;
 }				t_sprite;
 
 typedef struct	s_ray
@@ -113,28 +113,31 @@ typedef struct	s_mlx
 	t_img		east_texture;
 	t_img		sprite_texture;
 	int			floor_color;
-	int			ceilling_color;
+	int			ceiling_color;
 	int			map_width;
 	int			map_height;
 	t_keys		active_keys;
+	t_list		*sprites;
 }				t_mlx;
 
-float		ft_absf(float a);
-float		ft_to_radians(float degrees);
-int			img_pixel_put(t_img *img_data, int x, int y, int color);
-int			img_get_pixel(t_img *img_data, int x, int y);
-void		put_square(t_img *img_data, t_point p, float size, int color);
-void		put_rectangle(t_img *img_data, t_rectangle *rectangle, int color);
-void		put_line(t_img *img_data, t_line *line, int color);
-int 		is_moveable(int key);
-int 		is_arrow(int key);
-void		move(t_mlx *mlx_info, int key, float step);
-void		change_direction(t_mlx *mlx_info, int key, float step);
-char		**new_map(void);
-void		ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
-void		parse_config(t_mlx *mlx_info, char *file);
-int			usage_error(char **argv);
-void		main_render(t_mlx *mlx_info);
-t_sprite	*new_sprite(float length, float x, float y);
+float			ft_absf(float a);
+float			ft_to_radians(float degrees);
+int				img_pixel_put(t_img *img_data, int x, int y, int color);
+int				img_get_pixel(t_img *img_data, int x, int y);
+void			put_square(t_img *img_data, t_point p, float size, int color);
+void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
+								int color);
+void			put_line(t_img *img_data, t_line *line, int color);
+int				is_moveable(int key);
+int				is_arrow(int key);
+void			move(t_mlx *mlx_info, int key, float step);
+void			change_direction(t_mlx *mlx_info, int key, float step);
+char			**new_map(void);
+void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
+void			parse_config(t_mlx *mlx_info, char *file);
+int				usage_error(char **argv);
+void			main_render(t_mlx *mlx_info);
+t_sprite		*new_sprite(float x, float y, float length);
+void			put_sprites(t_mlx *mlx_info, float lengths[mlx_info->width]);
 
 #endif

@@ -108,7 +108,7 @@ void			put_ceilling_and_floor(t_mlx *mlx_info)
 	rectangle.heigth = mlx_info->height / 2;
 	rectangle.start.x = 0;
 	rectangle.start.y = 0;
-	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->ceilling_color);
+	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->ceiling_color);
 	rectangle.start.y = (float)mlx_info->height / 2.f;
 	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->floor_color);
 }
@@ -140,13 +140,9 @@ void		main_render(t_mlx *mlx_info)
 	int		height;
 	int		x_src;
 	int		i;
-	int		color;
-	t_list	*tmp;
-	t_list	*sprites[mlx_info->width];
-	t_sprite *sprite;
+	float	lengths[mlx_info->width];
 
 	mlx_mouse_hide();
-	mlx_clear_window(mlx_info->init, mlx_info->window);
 	clear_stage(&mlx_info->stage);
 	put_ceilling_and_floor(mlx_info);
 	x_tmp = 0;
@@ -163,7 +159,7 @@ void		main_render(t_mlx *mlx_info)
 			texture = mlx_info->south_texture;
 		else
 			texture = mlx_info->east_texture;
-		height = (int)((float)mlx_info->height * 60.f / (cast.length * cosf(ft_to_radians(mlx_info->player.angle - angle))));
+		height = (int)((float)mlx_info->width * 40.f / (cast.length * cosf(ft_to_radians(mlx_info->player.angle - angle))));
 		if (cast.direction == West || cast.direction == East)
 			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
 		else
@@ -179,30 +175,11 @@ void		main_render(t_mlx *mlx_info)
 			while (++i < height)
 				img_pixel_put(&mlx_info->stage, x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)((float)i / (float)height * (float)texture.height)));
 		}
-		sprites[x_tmp] = (t_list*)(cast.sprites);
+		lengths[x_tmp] = cast.length;
 		angle -= 66.f / (float)mlx_info->width;
 		x_tmp++;
 	}
-	x_tmp = -1;
-	while (++x_tmp < mlx_info->width)
-	{
-		tmp = sprites[x_tmp];
-		while (tmp)
-		{
-			sprite = tmp->content;
-			i = -1;
-			sprite->length = (int)sprite->length / 50 * 50;
-			height = (int)((float)mlx_info->height * 40.f / sprite->length);
-			while (++i < height)
-			{
-				color = img_get_pixel(&mlx_info->sprite_texture, x_tmp, (int)((float)i / (float)height * (float)mlx_info->sprite_texture.height));
-				if ((unsigned int)color != 0xFF000000)
-					img_pixel_put(&mlx_info->stage, x_tmp, mlx_info->height / 2 + i, color);
-			}
-			tmp = tmp->next;
-		}
-	}
-	ft_lstclear(&cast.sprites, free);
+	put_sprites(mlx_info, lengths);
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, mlx_info->stage.img, 0, 0);
 }
 

@@ -122,7 +122,7 @@ static void	color_parse(t_mlx *mlx_info, const char *str)
 	if (ft_strncmp(str, "F ", 2) == 0)
 		mlx_info->floor_color = color;
 	else
-		mlx_info->ceilling_color = color;
+		mlx_info->ceiling_color = color;
 	while (i-- < 3)
 		free(arr[i]);
 	free(arr);
@@ -150,8 +150,8 @@ int		check_map(t_mlx *mlx_info, char **arr)
 		{
 			if (arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'W' || arr[i][j] == 'E')
 			{
-				mlx_info->player.position.x = j * 50.f;
-				mlx_info->player.position.y = i * 50.f;
+				mlx_info->player.position.x = (float)j * 50.f;
+				mlx_info->player.position.y = (float)i * 50.f;
 				if (arr[i][j] == 'N')
 					mlx_info->player.angle = 90.f;
 				else if (arr[i][j] == 'S')
@@ -161,6 +161,8 @@ int		check_map(t_mlx *mlx_info, char **arr)
 				else
 					mlx_info->player.angle = 0.f;
 			}
+			if (arr[i][j] == '2')
+				ft_lstadd_back(&mlx_info->sprites, ft_lstnew(new_sprite((float)j * 50.f, (float)i * 50.f)));
 			j++;
 		}
 		i++;
@@ -168,7 +170,8 @@ int		check_map(t_mlx *mlx_info, char **arr)
 	return (1);
 }
 
-void	map_copy(t_mlx *mlx_info, char **arr) {
+void	map_copy(t_mlx *mlx_info, char **arr)
+{
 	int i;
 
 	if (!check_map(mlx_info, arr))
