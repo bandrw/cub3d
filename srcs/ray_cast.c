@@ -119,7 +119,7 @@ int		compare_sprites(void *content1, void *content2)
 
 	sprite1 = content1;
 	sprite2 = content2;
-	return (sprite1->length > sprite2->length);
+	return (sprite1->length < sprite2->length);
 }
 
 void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
@@ -151,6 +151,9 @@ void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
 	{
 		sprite = cast->sprites->content;
 		if (cast->length < sprite->length)
+		{
+			ft_lstclear(&cast->sprites, free);
 			cast->sprites = 0;
+		}
 	}
 }

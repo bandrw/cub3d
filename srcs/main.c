@@ -140,6 +140,7 @@ void		main_render(t_mlx *mlx_info)
 	int		height;
 	int		x_src;
 	int		i;
+	int		color;
 	t_list	*tmp;
 	t_list	*sprites[mlx_info->width];
 	t_sprite *sprite;
@@ -188,10 +189,16 @@ void		main_render(t_mlx *mlx_info)
 		tmp = sprites[x_tmp];
 		while (tmp)
 		{
-			sprite = (t_sprite*)tmp->content;
+			sprite = tmp->content;
 			i = -1;
-			while (++i < 50)
-				img_pixel_put(&mlx_info->stage, x_tmp, mlx_info->height / 2 + i, 0xFF0000);
+			sprite->length = (int)sprite->length / 50 * 50;
+			height = (int)((float)mlx_info->height * 40.f / sprite->length);
+			while (++i < height)
+			{
+				color = img_get_pixel(&mlx_info->sprite_texture, x_tmp, (int)((float)i / (float)height * (float)mlx_info->sprite_texture.height));
+				if ((unsigned int)color != 0xFF000000)
+					img_pixel_put(&mlx_info->stage, x_tmp, mlx_info->height / 2 + i, color);
+			}
 			tmp = tmp->next;
 		}
 	}
@@ -243,15 +250,16 @@ static int		key_handle(t_mlx *mlx_info)
 	step = 3.5f;
 	count = mlx_info->active_keys.w + mlx_info->active_keys.s +
 			mlx_info->active_keys.a + mlx_info->active_keys.d;
-	step /= (float)count;
+	if (count == 2)
+		step /= 1.7f;
 	if (mlx_info->active_keys.w)
 		move(mlx_info, KEY_W, step);
 	if (mlx_info->active_keys.a)
-		move(mlx_info, KEY_A, step / 1.5f);
+		move(mlx_info, KEY_A, step);
 	if (mlx_info->active_keys.s)
 		move(mlx_info, KEY_S, step);
 	if (mlx_info->active_keys.d)
-		move(mlx_info, KEY_D, step / 1.5f);
+		move(mlx_info, KEY_D, step);
 	if (mlx_info->active_keys.left_arrow)
 		change_direction(mlx_info, KEY_LEFT, 1.25f);
 	if (mlx_info->active_keys.right_arrow)
