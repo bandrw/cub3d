@@ -11,11 +11,18 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "../includes/cub3d.h"
-#include "../libft/includes/libft.h"
-// todo delete this "../shit"
 
-t_sprite	*new_sprite(float x, float y, float length)
+void		sprite_add_xtmp(void *sprite, void *data)
+{
+	int			*x_tmp;
+	t_sprite	*tmp;
+
+	tmp = sprite;
+	x_tmp = data;
+	tmp->x_start = *x_tmp;
+}
+
+t_sprite	*new_sprite(t_mlx *mlx_info, float x, float y)
 {
 	t_sprite *sprite;
 
@@ -24,40 +31,43 @@ t_sprite	*new_sprite(float x, float y, float length)
 		exit(3);
 	sprite->coordinate.x = x;
 	sprite->coordinate.y = y;
-	sprite->length = length;
+	sprite->length = sqrtf((x - mlx_info->player.position.x) *
+		(x - mlx_info->player.position.x) + (y - mlx_info->player.position.y) *
+		(y - mlx_info->player.position.y));
 	return (sprite);
 }
 
-static int	is_visible(t_mlx *mlx_info, t_sprite *sprite)
+void		put_sprites(t_mlx *mlx_info, t_list *sprites,
+						const float lengths[mlx_info->width])
 {
-	return (1);
-}
+	t_sprite		*sprite;
+	float			size;
+	int				i;
+	int				j;
+	int				y;
+	unsigned int	color;
 
-static void	draw_sprite(t_mlx *mlx_info, t_sprite *sprite, float lengths[mlx_info->width])
-{
-	int x_tmp;
-
-	x_tmp = 0;
-	while (x_tmp < mlx_info->width)
+	while (sprites)
 	{
-		if (lengths[x_tmp] > sprite->length)
-			//draw line
-		x_tmp++;
+		sprite = sprites->content;
+		size = 30.f * (float)mlx_info->width / sprite->length;
+		i = 0;
+		y = mlx_info->height / 2 - (int)size / 2;
+		while (i < (int)size)
+		{
+			if (sprite->length < lengths[sprite->x_start + i])
+			{
+				j = 0;
+				while (j < (int)size && j < mlx_info->height)
+				{
+					color = img_get_pixel(&mlx_info->sprite_texture, i * (mlx_info->sprite_texture.width / size), j * (mlx_info->sprite_texture.height / size));
+					if (color != 0xFF000000)
+						img_pixel_put(&mlx_info->stage, sprite->x_start + i, y + j, (int)color);
+					j++;
+				}
+			}
+			i++;
+		}
+		sprites = sprites->next;
 	}
-}
-
-void		put_sprites(t_mlx *mlx_info, float lengths[mlx_info->width])
-{
-	t_list		*tmp;
-	t_sprite	*sprite;
-
-	tmp = mlx_info->sprites;
-	while (tmp)
-	{
-		sprite = tmp->content;
-		if (is_visible(mlx_info, sprite))
-			draw_sprite(mlx_info, sprite, lengths);
-		tmp = tmp->next;
-	}
-	ft_lstclear(&mlx_info->sprites, free);
 }

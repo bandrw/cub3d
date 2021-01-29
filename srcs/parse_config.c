@@ -161,8 +161,6 @@ int		check_map(t_mlx *mlx_info, char **arr)
 				else
 					mlx_info->player.angle = 0.f;
 			}
-			if (arr[i][j] == '2')
-				ft_lstadd_back(&mlx_info->sprites, ft_lstnew(new_sprite((float)j * 50.f, (float)i * 50.f)));
 			j++;
 		}
 		i++;

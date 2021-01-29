@@ -45,6 +45,11 @@ static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 	while (index_x >= 0 && index_y >= 0 && index_y < mlx_info->map_height && index_x < (int)ft_strlen(mlx_info->map[index_y])
 			&& mlx_info->map[index_y][index_x] != '1')
 	{
+		if (mlx_info->map[index_y][index_x] == '2')
+		{
+			ft_lstadd_back(&cast->sprites, ft_lstnew(new_sprite(mlx_info, (float)index_x * 50.f, (float)index_y * 50.f)));
+			mlx_info->map[index_y][index_x] = '3';
+		}
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / ft_absf(sinf(ft_to_radians(angle)));
@@ -93,6 +98,11 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 			index_x < (int)ft_strlen(mlx_info->map[index_y]) &&
 			mlx_info->map[index_y][index_x] != '1')
 	{
+		if (mlx_info->map[index_y][index_x] == '2')
+		{
+			ft_lstadd_back(&cast->sprites, ft_lstnew(new_sprite(mlx_info, (float)index_x * 50.f, (float)index_y * 50.f)));
+			mlx_info->map[index_y][index_x] = '3';
+		}
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / ft_absf(cosf(ft_to_radians(angle)));
@@ -107,25 +117,35 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 		cast->direction = East;
 }
 
+int		sprites_cmp(t_sprite *s1, t_sprite *s2)
+{
+	if (s1->length < s2->length)
+		return (1);
+	return (-1);
+}
+
 void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
 {
-	t_ray	*horizontal;
-	t_ray	*vertical;
+	t_ray horizontal;
+	t_ray vertical;
 
-	horizontal = (t_ray*)ft_calloc(1, sizeof(t_ray));
-	vertical = (t_ray*)ft_calloc(1, sizeof(t_ray));
-	ray_cast_horizontal(mlx_info, horizontal, angle);
-	ray_cast_vertical(mlx_info, vertical, angle);
-	if (horizontal->length < 0 || (vertical->length < horizontal->length && vertical->length >= 0))
+	ft_bzero(&horizontal, sizeof(t_ray));
+	ft_bzero(&vertical, sizeof(t_ray));
+	ray_cast_horizontal(mlx_info, &horizontal, angle);
+	ray_cast_vertical(mlx_info, &vertical, angle);
+	ft_lstmerge(&horizontal.sprites, vertical.sprites);
+	cast->sprites = horizontal.sprites;
+	if (horizontal.length < 0 ||
+		(vertical.length < horizontal.length && vertical.length >= 0))
 	{
-		cast->length = vertical->length;
-		cast->end = vertical->end;
-		cast->direction = vertical->direction;
+		cast->length = vertical.length;
+		cast->end = vertical.end;
+		cast->direction = vertical.direction;
 	}
 	else
 	{
-		cast->length = horizontal->length;
-		cast->end = horizontal->end;
-		cast->direction = horizontal->direction;
+		cast->length = horizontal.length;
+		cast->end = horizontal.end;
+		cast->direction = horizontal.direction;
 	}
 }

@@ -131,6 +131,25 @@ void		clear_stage(t_img *stage)
 	}
 }
 
+void		normalize_map(t_mlx *mlx_info)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < mlx_info->map_width)
+	{
+		j = 0;
+		while (j < mlx_info->map_height)
+		{
+			if (mlx_info->map[j][i] == '3')
+				mlx_info->map[j][i] = '2';
+			j++;
+		}
+		i++;
+	}
+}
+
 void		main_render(t_mlx *mlx_info)
 {
 	t_ray	cast;
@@ -141,13 +160,16 @@ void		main_render(t_mlx *mlx_info)
 	int		x_src;
 	int		i;
 	float	lengths[mlx_info->width];
+	t_list	*sprites;
 
+	sprites = 0;
 	mlx_mouse_hide();
+	mlx_clear_window(mlx_info->init, mlx_info->window);
 	clear_stage(&mlx_info->stage);
 	put_ceilling_and_floor(mlx_info);
 	x_tmp = 0;
 	angle = mlx_info->player.angle + 33.f;
-	while (x_tmp < (int)mlx_info->width)
+	while (x_tmp < mlx_info->width)
 	{
 		ft_bzero(&cast, sizeof(cast));
 		ray_cast(mlx_info, &cast, angle);
@@ -176,11 +198,16 @@ void		main_render(t_mlx *mlx_info)
 				img_pixel_put(&mlx_info->stage, x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)((float)i / (float)height * (float)texture.height)));
 		}
 		lengths[x_tmp] = cast.length;
+		ft_lstiter(cast.sprites, sprite_add_xtmp, &x_tmp);
+		ft_lstmerge(&sprites, cast.sprites);
 		angle -= 66.f / (float)mlx_info->width;
 		x_tmp++;
 	}
-	put_sprites(mlx_info, lengths);
+	ft_lstsort(&sprites, sprites_cmp);
+	put_sprites(mlx_info, sprites, lengths);
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, mlx_info->stage.img, 0, 0);
+	ft_lstclear(&sprites, free);
+	normalize_map(mlx_info);
 }
 
 static int		key_press(int key, t_mlx *mlx_info)
@@ -221,8 +248,8 @@ static int		key_release(int key, t_mlx *mlx_info)
 
 static int		key_handle(t_mlx *mlx_info)
 {
-	int count;
-	float step;
+	int		count;
+	float	step;
 
 	step = 3.5f;
 	count = mlx_info->active_keys.w + mlx_info->active_keys.s +
