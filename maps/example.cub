@@ -2,7 +2,7 @@ R 1000 600
 NO img/cobblestone.xpm
 SO img/stone.xpm
 WE img/bricks.xpm
-EA img/wall_cobblestone.xpm
+EA img/tile.xpm
 
 S img/sprite.xpm
 F 255,228,205

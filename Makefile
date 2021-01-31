@@ -15,7 +15,7 @@ NAME = cub3D
 LIBFT_DIR = libft
 LIBFT_NAME = $(LIBFT_DIR)/libft.a
 LIBMLX_DIR = minilibx
-LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.dylib
+LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.a
 
 HEADERS_DIR = includes
 OBJ_DIR = obj
@@ -43,7 +43,7 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 
 all: $(OBJ_DIR) build_libft build_libmlx build_cub3D $(NAME)
-	@echo "\033[44m  ✔︎      Done      ✔︎  \033[0m\n"
+	@echo "\033[44m ✔︎      Done      ✔︎ \033[0m\n"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -54,12 +54,12 @@ $(NAME): $(LIBFT_NAME) $(LIBMLX_NAME) $(OBJ)
 build_libft:
 	@echo "\n\033[44m ⏤  Building libft ⏤  \033[0m"
 	@make -C $(LIBFT_DIR)
-	@echo "\033[44m  ✔︎      Done      ✔︎  \033[0m\n"
+	@echo "\033[44m ✔︎      Done      ✔︎ \033[0m\n"
 
 build_libmlx:
 	@echo "\033[44m ⏤  Building libmlx ⏤  \033[0m"
 	@make -C $(LIBMLX_DIR)
-	@echo "\033[44m  ✔︎      Done       ✔︎  \033[0m\n"
+	@echo "\033[44m ✔︎      Done       ✔︎ \033[0m\n"
 
 build_cub3D:
 	@echo "\033[44m ⏤  Building cub3D ⏤  \033[0m"

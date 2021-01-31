@@ -59,10 +59,14 @@ static void render_size_parse(t_mlx *mlx_info, char *str)
 	while (str[i] == ' ')
 		i++;
 	mlx_info->width = ft_atoi(str + i);
+	if (mlx_info->width > 2560)
+		mlx_info->width = 2560;
 	i += ft_nbrlen(mlx_info->width);
 	while (str[i] == ' ')
 		i++;
 	mlx_info->height = ft_atoi(str + i);
+	if (mlx_info->height > 1440)
+		mlx_info->height = 1440;
 	free(str);
 }
 
