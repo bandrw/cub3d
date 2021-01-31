@@ -15,11 +15,11 @@
 void		sprite_add_xtmp(void *sprite, void *data)
 {
 	int			*x_tmp;
-	t_sprite	*tmp;
+	t_sprite	*sprite_tmp;
 
-	tmp = sprite;
+	sprite_tmp = sprite;
 	x_tmp = data;
-	tmp->x_start += *x_tmp;
+	sprite_tmp->x_start += *x_tmp;
 }
 
 float		get_sprite_length(t_mlx *mlx_info, float x, float y)
@@ -29,9 +29,10 @@ float		get_sprite_length(t_mlx *mlx_info, float x, float y)
 		(y - mlx_info->player.position.y)));
 }
 
-t_sprite	*new_sprite(float x, float y, float length, int is_vertical)
+t_list	*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction direction)
 {
-	t_sprite *sprite;
+	t_list		*list;
+	t_sprite	*sprite;
 
 	sprite = (t_sprite*)malloc(sizeof(t_sprite));
 	if (!sprite)
@@ -39,12 +40,18 @@ t_sprite	*new_sprite(float x, float y, float length, int is_vertical)
 	sprite->coordinate.x = x;
 	sprite->coordinate.y = y;
 	sprite->length = length;
-	sprite->x_start = 0;
-//	if (is_vertical)
-//		sprite->x_start = (int)-(7 * sinf(ft_to_radians(45)) * (y - (int)y / 50 * 50));
-//	else
-//		sprite->x_start = (int)-(sqrtf(2) * 25 + 7 * sinf(ft_to_radians(45)) * (x - (int)x / 50 * 50));
-	return (sprite);
+	if (direction == South)
+		sprite->x_start = (int)(((int)x / 50 * 50.f - x) * (float)mlx_info->width / sprite->length);
+	else if (direction == North)
+		sprite->x_start = (int)((x - (int)x / 50 * 50.f - 50) * (float)mlx_info->width / sprite->length);
+	else if (direction == East)
+		sprite->x_start = (int)((y - (int)y / 50 * 50.f - 50) * (float)mlx_info->width / sprite->length);
+	else
+		sprite->x_start = (int)(((int)y / 50 * 50.f - y) * (float)mlx_info->width / sprite->length);
+	list = ft_lstnew(sprite);
+	if (!list)
+		exit(3);
+	return (list);
 }
 
 void		put_sprites(t_mlx *mlx_info, t_list *sprites,

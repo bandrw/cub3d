@@ -90,11 +90,11 @@ void	put_line(t_img *img_data, t_line *line, int color)
 	float x_projection;
 	float y_projection;
 
-	x_projection = ft_absf(line->length * cosf(ft_to_radians(line->angle)));
-	y_projection = ft_absf(line->length * sinf(ft_to_radians(line->angle)));
-	k = tanf(ft_to_radians(line->angle));
-	p2.x = line->coordinate.x + line->length * cosf(ft_to_radians(line->angle));
-	p2.y = line->coordinate.y - line->length * sinf(ft_to_radians(line->angle));
+	x_projection = ft_absf(line->length * cosf(to_rad(line->angle)));
+	y_projection = ft_absf(line->length * sinf(to_rad(line->angle)));
+	k = tanf(to_rad(line->angle));
+	p2.x = line->coordinate.x + line->length * cosf(to_rad(line->angle));
+	p2.y = line->coordinate.y - line->length * sinf(to_rad(line->angle));
 	delta = 1;
 	if (x_projection > y_projection)
 	{

@@ -88,7 +88,7 @@ static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 			sprite.width = 5;
 			sprite.heigth = 5;
 			sprite.start.x = (float)mlx_info->width / 2.f + item->length * cosf(ft_to_radians(angle));
-			sprite.start.y = (float)mlx_info->height / 2.f - item->length * sinf(ft_to_radians(angle));
+			sprite.start.y = (float)mlx_info->height / 2.f - item->length * sinf(to_rad(angle));
 			put_rectangle(img_data, &sprite, 0xFF0000);
 			tmp = tmp->next;
 		}
@@ -181,7 +181,8 @@ void		main_render(t_mlx *mlx_info)
 			texture = mlx_info->south_texture;
 		else
 			texture = mlx_info->east_texture;
-		height = (int)((float)mlx_info->width * 40.f / (cast.length * cosf(ft_to_radians(mlx_info->player.angle - angle))));
+		height = (int)((float)mlx_info->width * 40.f / (cast.length * cosf(
+				to_rad(mlx_info->player.angle - angle))));
 		if (cast.direction == West || cast.direction == East)
 			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
 		else

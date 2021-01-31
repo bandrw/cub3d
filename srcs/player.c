@@ -27,23 +27,31 @@ void	move(t_mlx *mlx_info, int key, float step)
 	old = mlx_info->player.position;
 	if (key == KEY_A)
 	{
-		mlx_info->player.position.y -= step * sinf(ft_to_radians(mlx_info->player.angle + 90.f));
-		mlx_info->player.position.x += step * cosf(ft_to_radians(mlx_info->player.angle + 90.f));
+		mlx_info->player.position.y -= step * sinf(
+				to_rad(mlx_info->player.angle + 90.f));
+		mlx_info->player.position.x += step * cosf(
+				to_rad(mlx_info->player.angle + 90.f));
 	}
 	else if (key == KEY_D)
 	{
-		mlx_info->player.position.y -= step * sinf(ft_to_radians(mlx_info->player.angle - 90.f));
-		mlx_info->player.position.x += step * cosf(ft_to_radians(mlx_info->player.angle - 90.f));
+		mlx_info->player.position.y -= step * sinf(
+				to_rad(mlx_info->player.angle - 90.f));
+		mlx_info->player.position.x += step * cosf(
+				to_rad(mlx_info->player.angle - 90.f));
 	}
 	else if (key == KEY_W)
 	{
-		mlx_info->player.position.y -= step * sinf(ft_to_radians(mlx_info->player.angle));
-		mlx_info->player.position.x += step * cosf(ft_to_radians(mlx_info->player.angle));
+		mlx_info->player.position.y -= step * sinf(
+				to_rad(mlx_info->player.angle));
+		mlx_info->player.position.x += step * cosf(
+				to_rad(mlx_info->player.angle));
 	}
 	else if (key == KEY_S)
 	{
-		mlx_info->player.position.y += step * sinf(ft_to_radians(mlx_info->player.angle));
-		mlx_info->player.position.x -= step * cosf(ft_to_radians(mlx_info->player.angle));
+		mlx_info->player.position.y += step * sinf(
+				to_rad(mlx_info->player.angle));
+		mlx_info->player.position.x -= step * cosf(
+				to_rad(mlx_info->player.angle));
 	}
 	if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)(mlx_info->player.position.x / 50.f)] == '1')
 	{
