@@ -152,23 +152,23 @@ void		normalize_map(t_mlx *mlx_info)
 
 void		main_render(t_mlx *mlx_info)
 {
-	t_ray	cast;
-	float	angle;
-	int		x_tmp;
-	t_img	texture;
-	int		height;
-	int		x_src;
-	int		i;
 	float	lengths[mlx_info->width];
 	t_list	*sprites;
+	int x_tmp;
+	float angle;
+	t_ray cast;
+	t_img texture;
+	int height;
+	int x_src;
+	int i;
 
 	sprites = 0;
 	mlx_mouse_hide();
 	mlx_clear_window(mlx_info->init, mlx_info->window);
 	clear_stage(&mlx_info->stage);
 	put_ceilling_and_floor(mlx_info);
-	x_tmp = 0;
 	angle = mlx_info->player.angle + 33.f;
+	x_tmp = 0;
 	while (x_tmp < mlx_info->width)
 	{
 		ft_bzero(&cast, sizeof(cast));
@@ -298,17 +298,20 @@ static void		new_mlx(t_mlx *mlx_info, char *file, char *title)
 int				main(int argc, char **argv)
 {
 	t_mlx mlx_info;
-
-	if (argc != 2)
-		return (usage_error(argv));
+//
+//	if (argc != 2)
+//		return (usage_error(argv));
 	new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D");
-	main_render(&mlx_info);
-	mlx_mouse_move(mlx_info.window, mlx_info.width / 2, mlx_info.height / 2);
-	mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
-	mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
-	mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
-	mlx_hook(mlx_info.window, 17, 1L << 17, close_app, &mlx_info);
-	mlx_loop_hook(mlx_info.init, key_handle, &mlx_info);
-	mlx_loop(mlx_info.init);
+	int x, y;
+	mlx_get_screen_size(mlx_info.init, &x, &y);
+	printf("%d %d\n", x, y);
+//	main_render(&mlx_info);
+//	mlx_mouse_move(mlx_info.window, mlx_info.width / 2, mlx_info.height / 2);
+//	mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
+//	mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
+//	mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
+//	mlx_hook(mlx_info.window, 17, 1L << 17, close_app, &mlx_info);
+//	mlx_loop_hook(mlx_info.init, key_handle, &mlx_info);
+//	mlx_loop(mlx_info.init);
 	return (0);
 }

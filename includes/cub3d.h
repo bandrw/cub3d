@@ -123,7 +123,8 @@ typedef struct	s_mlx
 
 float			ft_absf(float a);
 float			ft_to_radians(float degrees);
-int				img_pixel_put(t_img *img_data, int x, int y, int color);
+int				img_pixel_put(t_img *img_data, int x, int y,
+								unsigned int color);
 int				img_get_pixel(t_img *img_data, int x, int y);
 void			put_square(t_img *img_data, t_point p, float size, int color);
 void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
@@ -138,10 +139,11 @@ void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void			parse_config(t_mlx *mlx_info, char *file);
 int				usage_error(char **argv);
 void			main_render(t_mlx *mlx_info);
-t_sprite		*new_sprite(t_mlx *mlx_info, float x, float y);
+t_sprite		*new_sprite(float x, float y, float length, int is_vertical);
 void			put_sprites(t_mlx *mlx_info, t_list *sprites,
 					const float lengths[mlx_info->width]);
-void			sprite_add_xtmp(void *sprite, void *data);
 int				sprites_cmp(t_sprite *s1, t_sprite *s2);
+float			get_sprite_length(t_mlx *mlx_info, float x, float y);
+void			sprite_add_xtmp(void *sprite, void *data);
 
 #endif

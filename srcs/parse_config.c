@@ -50,7 +50,7 @@ static int	is_texture_config(char *str)
 			ft_strncmp(str, "EA ", 3) == 0 ||
 			ft_strncmp(str, "S ", 2) == 0);
 }
-
+//todo: handle 0 width and so on
 static void render_size_parse(t_mlx *mlx_info, char *str)
 {
 	int i;

@@ -30,13 +30,41 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="промежуточный">
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="so so sprites view">
+      <change afterPath="$PROJECT_DIR$/minilibx/interface.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/man/man3/mlx.3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/man/man3/mlx_loop.3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/man/man3/mlx_new_image.3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/man/man3/mlx_new_window.3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/man/man3/mlx_pixel_put.3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/mlx_image.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/mlx_init.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/mlx_string_put.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minilibx/mlx_window.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/includes/libft.h" beforeDir="false" afterPath="$PROJECT_DIR$/libft/includes/libft.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/srcs/ft_lstiter.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/srcs/ft_lstiter.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/font.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/font.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/font.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx.h" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/mlx.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_init_loop.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_int.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_int_str_to_wordtab.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_mouse.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_new_image.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_new_window.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_new_window.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_opengl.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_opengl.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_png.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/mlx_png.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_png.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_shaders.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx_xpm.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/mlx_xpm.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/mlx_put.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/mlx_put.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/ray_cast.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ray_cast.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
@@ -102,13 +130,6 @@
       <recent name="$PROJECT_DIR$/maps" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -121,7 +142,8 @@
       <workItem from="1609801472375" duration="20191000" />
       <workItem from="1609885684733" duration="20585000" />
       <workItem from="1610101214104" duration="20813000" />
-      <workItem from="1611564246943" duration="32058000" />
+      <workItem from="1611564246943" duration="44754000" />
+      <workItem from="1612012728503" duration="1625000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -158,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610002005381</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="so so sprites view">
+      <created>1611960884130</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1611960884130</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +211,8 @@
     <MESSAGE value="map parser, map extension (todo)" />
     <MESSAGE value="dynamic map walking with any render size" />
     <MESSAGE value="промежуточный" />
-    <option name="LAST_COMMIT_MESSAGE" value="промежуточный" />
+    <MESSAGE value="so so sprites view" />
+    <option name="LAST_COMMIT_MESSAGE" value="so so sprites view" />
   </component>
   <component name="WindowStateProjectService">
     <state x="434" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609902989402">
@@ -194,19 +224,19 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1609741053340" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1610104361814">
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1611960886797">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1609843981039" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1610104361814" />
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1611960886797" />
     <state x="521" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611564260498">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="521" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1611564260498" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1611948714641">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612013179394">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1610191811888" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1611948714641" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1612013179394" />
   </component>
 </project>

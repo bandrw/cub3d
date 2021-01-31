@@ -19,7 +19,7 @@ float	ft_absf(float a)
 	return (a);
 }
 
-int		img_pixel_put(t_img *img_data, int x, int y, int color)
+int		img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
 {
 	char *dst;
 

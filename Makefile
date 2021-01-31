@@ -15,7 +15,7 @@ NAME = cub3D
 LIBFT_DIR = libft
 LIBFT_NAME = $(LIBFT_DIR)/libft.a
 LIBMLX_DIR = minilibx
-LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.a
+LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.dylib
 
 HEADERS_DIR = includes
 OBJ_DIR = obj

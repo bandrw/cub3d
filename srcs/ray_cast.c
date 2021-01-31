@@ -47,7 +47,7 @@ static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 	{
 		if (mlx_info->map[index_y][index_x] == '2')
 		{
-			ft_lstadd_back(&cast->sprites, ft_lstnew(new_sprite(mlx_info, (float)index_x * 50.f, (float)index_y * 50.f)));
+			ft_lstadd_back(&cast->sprites, ft_lstnew(new_sprite(ray_x, ray_y, get_sprite_length(mlx_info, (float)index_x * 50.f, (float)index_y * 50.f), 0)));
 			mlx_info->map[index_y][index_x] = '3';
 		}
 		ray_x += x_delta;
@@ -100,7 +100,7 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 	{
 		if (mlx_info->map[index_y][index_x] == '2')
 		{
-			ft_lstadd_back(&cast->sprites, ft_lstnew(new_sprite(mlx_info, (float)index_x * 50.f, (float)index_y * 50.f)));
+			ft_lstadd_back(&cast->sprites, ft_lstnew(new_sprite(ray_x, ray_y, get_sprite_length(mlx_info, (float)index_x * 50.f, (float)index_y * 50.f - y_delta), 1)));
 			mlx_info->map[index_y][index_x] = '3';
 		}
 		ray_x += x_delta;
