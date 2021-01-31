@@ -78,8 +78,7 @@ typedef struct	s_sprite
 {
 	t_point		coordinate;
 	float		length;
-	int			x_start;
-	float		size;
+	float		x_start;
 }				t_sprite;
 
 typedef struct	s_ray
@@ -140,7 +139,7 @@ void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void			parse_config(t_mlx *mlx_info, char *file);
 int				usage_error(char **argv);
 void			main_render(t_mlx *mlx_info);
-t_list			*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction direction);
+t_list			*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction direction, float angle);
 void			put_sprites(t_mlx *mlx_info, t_list *sprites,
 					const float lengths[mlx_info->width]);
 int				sprites_cmp(t_sprite *s1, t_sprite *s2);

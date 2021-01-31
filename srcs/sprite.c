@@ -29,7 +29,7 @@ float		get_sprite_length(t_mlx *mlx_info, float x, float y)
 		(y - mlx_info->player.position.y)));
 }
 
-t_list	*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction direction)
+t_list	*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction direction, float angle)
 {
 	t_list		*list;
 	t_sprite	*sprite;
@@ -41,13 +41,14 @@ t_list	*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction 
 	sprite->coordinate.y = y;
 	sprite->length = length;
 	if (direction == South)
-		sprite->x_start = (int)(((int)x / 50 * 50.f - x) * (float)mlx_info->width / sprite->length);
+		sprite->x_start = ((int)x / 50 * 50.f - x) * sinf(to_rad(angle));
 	else if (direction == North)
-		sprite->x_start = (int)((x - (int)x / 50 * 50.f - 50) * (float)mlx_info->width / sprite->length);
+		sprite->x_start = (50 - x + (int)x / 50 * 50.f) * sinf(to_rad(angle));
 	else if (direction == East)
-		sprite->x_start = (int)((y - (int)y / 50 * 50.f - 50) * (float)mlx_info->width / sprite->length);
+		sprite->x_start = (y - (int)y / 50 * 50.f - 50) * -sinf(to_rad(90 - angle));
 	else
-		sprite->x_start = (int)(((int)y / 50 * 50.f - y) * (float)mlx_info->width / sprite->length);
+		sprite->x_start = ((int)y / 50 * 50.f - y) * sinf(to_rad(90 - angle));
+	sprite->x_start *= (float)mlx_info->width / sprite->length;
 	list = ft_lstnew(sprite);
 	if (!list)
 		exit(3);
@@ -57,25 +58,25 @@ t_list	*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction 
 void		put_sprites(t_mlx *mlx_info, t_list *sprites,
 						const float lengths[mlx_info->width])
 {
-	t_sprite		*sprite;
-	float			size;
 	int				i;
 	int				j;
 	int				y;
+	float			size;
+	t_sprite		*sprite;
 	unsigned int	color;
 
 	while (sprites)
 	{
 		sprite = sprites->content;
 		size = 30.f * (float)mlx_info->width / sprite->length;
-		sprite->x_start += (int)(size / 3.f);
+		sprite->x_start += size / 3.f;
 		i = 0;
 		y = mlx_info->height / 2 - (int)size / 2;
 		while (i < (int)size)
 		{
 			if (sprite->x_start + i >= 0 &&
 				sprite->x_start + i < mlx_info->width &&
-				sprite->length < lengths[sprite->x_start + i])
+				sprite->length < lengths[(int)sprite->x_start + i])
 			{
 				j = 0;
 				while (j < (int)size && y + j < mlx_info->height)

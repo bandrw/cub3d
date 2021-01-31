@@ -34,7 +34,7 @@ FILES = main.c \
 		new_map.c \
 		player.c \
 		ray_cast.c \
-		ft_to_radians.c \
+		to_rad.c \
 		parse_config.c \
 		error_handle.c \
 		sprite.c

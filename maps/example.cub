@@ -1,4 +1,4 @@
-R 1000 600
+R 600 600
 NO img/cobblestone.xpm
 SO img/stone.xpm
 WE img/bricks.xpm
