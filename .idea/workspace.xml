@@ -30,18 +30,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="attempt to draw sprites with ray casting">
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="nice sprites attempt - Part 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/mlx_put.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/mlx_put.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/player.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/player.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/ray_cast.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ray_cast.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/to_rad.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/math_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +118,7 @@
       <workItem from="1609885684733" duration="20585000" />
       <workItem from="1610101214104" duration="20813000" />
       <workItem from="1612212176338" duration="9080000" />
-      <workItem from="1612269661344" duration="19379000" />
+      <workItem from="1612269661344" duration="22854000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -168,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612278351910</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="nice sprites attempt - Part 1">
+      <created>1612301854541</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1612301854541</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,7 +194,8 @@
     <MESSAGE value="dynamic map walking with any render size" />
     <MESSAGE value="промежуточный" />
     <MESSAGE value="attempt to draw sprites with ray casting" />
-    <option name="LAST_COMMIT_MESSAGE" value="attempt to draw sprites with ray casting" />
+    <MESSAGE value="nice sprites attempt - Part 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="nice sprites attempt - Part 1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612097665304">
@@ -206,11 +208,11 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1609741053340" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612278355395">
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612301856936">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1609843981039" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1612278355395" />
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1612301856936" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612212814929">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -78,6 +78,7 @@ typedef struct	s_sprite
 {
 	int			x_index;
 	int			y_index;
+	float		length;
 }				t_sprite;
 
 typedef struct	s_ray

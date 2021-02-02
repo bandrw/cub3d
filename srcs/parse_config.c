@@ -181,8 +181,8 @@ int		check_map(t_mlx *mlx_info, char **map)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				mlx_info->player.position.x = (float)j * 50.f;
-				mlx_info->player.position.y = (float)i * 50.f;
+				mlx_info->player.position.x = (float)j * 50.f + 25.f;
+				mlx_info->player.position.y = (float)i * 50.f + 25.f;
 				if (map[i][j] == 'N')
 					mlx_info->player.angle = 90.f;
 				else if (map[i][j] == 'S')
