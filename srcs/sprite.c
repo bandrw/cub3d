@@ -12,84 +12,73 @@
 
 #include "cub3d.h"
 
-void		sprite_add_xtmp(void *sprite, void *data)
+static int	is_visible(float sprite, float player)
 {
-	int			*x_tmp;
-	t_sprite	*sprite_tmp;
-
-	sprite_tmp = sprite;
-	x_tmp = data;
-	sprite_tmp->x_start += (float)*x_tmp;
+	if (sprite < player + 33.f && sprite > player - 33.f)
+		return (1);
+	if (player < 0)
+		player += 360.f;
+	if (sprite < 0)
+		sprite += 360.f;
+	return (sprite < player + 33.f && sprite > player - 33.f);
 }
 
-float		get_sprite_length(t_mlx *mlx_info, float x, float y)
+static int	get_x_start(int width, float sprite, float player)
 {
-	return (sqrtf(powf(x - mlx_info->player.position.x, 2) +
-			powf(y - mlx_info->player.position.y, 2)));
+	if (player < 180 && player > 114 && sprite < -114 && sprite > -180)
+		return ((int)((player + 33.f - (sprite + 360)) / 66.f * (float)width));
+	if (player < -114 && player > -180 && sprite < 180 && sprite > 114)
+		return ((int)((player + 360.f + 33.f - sprite) / 66.f * (float)width));
+	return ((int)((player + 33.f - sprite) / 66.f * (float)width));
 }
 
-t_list	*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction direction, float angle)
+float		get_sprite_length(t_mlx *mlx_info, int index)
 {
-	t_list		*list;
-	t_sprite	*sprite;
+	return (sqrtf(powf((float)mlx_info->sprites[index].x_index * 50.f - mlx_info->player.position.x, 2) +
+			powf((float)mlx_info->sprites[index].y_index * 50.f - mlx_info->player.position.y, 2)));
+}
 
-	if (!(sprite = (t_sprite*)malloc(sizeof(t_sprite))))
-		exit(3);
-	sprite->coordinate.x = x;
-	sprite->coordinate.y = y;
-	sprite->length = length;
-	if (direction == South)
-		sprite->x_start = -fmodf(x, 50.f) * sinf(to_rad(angle));
-	else if (direction == North)
+static void	draw_sprite(t_mlx *mlx_info, float length, float sprite, const float lengths[mlx_info->width])
+{
+	int		i;
+	int		j;
+	float	size;
+	int		x_start;
+	int		y_start;
+
+	x_start = get_x_start(mlx_info->width, sprite, mlx_info->player.angle);
+	size = 30.f * (float)mlx_info->width / length;
+	y_start = mlx_info->height / 2 - (int)size / 2;
+	printf("\t[drawing] x_start: %d, size: %f\n", x_start, size);
+	i = -1;
+	while ((float)++i < size)
 	{
-		sprite->x_start = (50.f - fmodf(x, 50.f)) * sinf(to_rad(angle));
-//		if (cosf(to_rad(angle)) < 0)
-//			sprite->x_start = -(50.f * 1.4f - sprite->x_start);
-	}
-	else if (direction == East)
-		sprite->x_start = -(50.f - fmodf(y, 50.f)) * fabsf(sinf(to_rad(90 - angle)));
-	else
-		sprite->x_start = -fmodf(y, 50.f) * fabsf(sinf(to_rad(90 - angle)));
-	sprite->x_start *= (float)mlx_info->width / sprite->length;
-	if (!(list = ft_lstnew(sprite)))
-		exit(3);
-	return (list);
-}
-
-void		put_sprites(t_mlx *mlx_info, t_list *sprites,
-						const float lengths[mlx_info->width])
-{
-	int				i;
-	int				j;
-	int				y;
-	float			size;
-	t_sprite		*sprite;
-	unsigned int	color;
-
-	while (sprites)
-	{
-		sprite = sprites->content;
-		size = 30.f * (float)mlx_info->width / sprite->length;
-		sprite->x_start += size / 3.f;
-		i = 0;
-		y = mlx_info->height / 2 - (int)size / 2;
-		while (i < (int)size)
-		{
-			if (sprite->x_start + (float)i >= 0 &&
-				sprite->x_start + (float)i < (float)mlx_info->width &&
-				sprite->length < lengths[(int)sprite->x_start + i])
+		j = -1;
+//		if (length < lengths[i + x_start])
+//		{
+			while ((float)++j < size && y_start + j < mlx_info->height && y_start + j >= 0)
 			{
-				j = 0;
-				while (j < (int)size && y + j < mlx_info->height)
-				{
-					color = img_get_pixel(&mlx_info->sprite_texture, i * (mlx_info->sprite_texture.width / size), j * (mlx_info->sprite_texture.height / size));
-					if (color != 0xFF000000)
-						img_pixel_put(&mlx_info->stage, (int)(sprite->x_start + (float)i), y + j, color);
-					j++;
-				}
+				img_pixel_put(&mlx_info->stage, i + x_start, j + y_start, 0xFF0000);
 			}
-			i++;
-		}
-		sprites = sprites->next;
+//		}
 	}
+}
+
+void		put_sprites(t_mlx *mlx_info, const float lengths[mlx_info->width])
+{
+	int		i;
+	float	sprite;
+
+	i = -1;
+	while (++i < mlx_info->sprites_count)
+	{
+		sprite = to_deg(atan2f(mlx_info->player.position.y -
+				(float)mlx_info->sprites[i].y_index * 50.f,
+				(float)mlx_info->sprites[i].x_index * 50.f -
+				mlx_info->player.position.x));
+		printf("sprite: %f, player: %f\n", sprite, mlx_info->player.angle);
+		if (is_visible(sprite, mlx_info->player.angle))
+			draw_sprite(mlx_info, get_sprite_length(mlx_info, i), sprite, lengths);
+	}
+	printf("\n");
 }

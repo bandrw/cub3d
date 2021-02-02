@@ -49,11 +49,6 @@ static void	ray_cast_horizontal(t_mlx *mlx_info, t_ray *cast, float angle)
 	while (index_x >= 0 && index_y >= 0 && index_y < mlx_info->map_height && index_x < (int)ft_strlen(mlx_info->map[index_y])
 			&& mlx_info->map[index_y][index_x] != '1')
 	{
-		if (mlx_info->map[index_y][index_x] == '2')
-		{
-			ft_lstadd_back(&cast->sprites, new_sprite(mlx_info, ray_x, ray_y, get_sprite_length(mlx_info, (float)index_x * 50.f, (float)index_y * 50.f), cast->direction, angle));
-			mlx_info->map[index_y][index_x] = '3';
-		}
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / fabsf(sinf(to_rad(angle)));
@@ -102,11 +97,6 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 			index_x < (int)ft_strlen(mlx_info->map[index_y]) &&
 			mlx_info->map[index_y][index_x] != '1')
 	{
-		if (mlx_info->map[index_y][index_x] == '2')
-		{
-			ft_lstadd_back(&cast->sprites, new_sprite(mlx_info, ray_x, ray_y, get_sprite_length(mlx_info, (float)(index_x + (cosf(to_rad(angle) < 0))) * 50.f, (float)(index_y - (sinf(to_rad(angle) > 0))) * 50.f), cast->direction, angle));
-			mlx_info->map[index_y][index_x] = '3';
-		}
 		ray_x += x_delta;
 		ray_y -= y_delta;
 		cast->length += 50.f / fabsf(cosf(to_rad(angle)));
@@ -119,8 +109,8 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 
 int		sprites_cmp(t_sprite *s1, t_sprite *s2)
 {
-	if (s1->length < s2->length)
-		return (1);
+//	if (s1->length < s2->length)
+//		return (1);
 	return (-1);
 }
 
@@ -133,8 +123,6 @@ void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
 	ft_bzero(&vertical, sizeof(t_ray));
 	ray_cast_horizontal(mlx_info, &horizontal, angle);
 	ray_cast_vertical(mlx_info, &vertical, angle);
-	ft_lstmerge(&horizontal.sprites, vertical.sprites);
-	cast->sprites = horizontal.sprites;
 	if (horizontal.length < 0 ||
 		(vertical.length < horizontal.length && vertical.length >= 0))
 	{

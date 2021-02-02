@@ -54,7 +54,7 @@ typedef struct	s_rectangle
 {
 	t_point		start;
 	int			width;
-	int			heigth;
+	int			height;
 }				t_rectangle;
 
 typedef struct	s_player
@@ -76,15 +76,13 @@ typedef struct	s_img
 
 typedef struct	s_sprite
 {
-	t_point		coordinate;
-	float		length;
-	float		x_start;
+	int			x_index;
+	int			y_index;
 }				t_sprite;
 
 typedef struct	s_ray
 {
 	float		length;
-	t_list		*sprites;
 	t_point		end;
 	t_direction	direction;
 }				t_ray;
@@ -118,10 +116,12 @@ typedef struct	s_mlx
 	int			map_width;
 	int			map_height;
 	t_keys		active_keys;
-	t_list		*sprites;
+	int			sprites_count;
+	t_sprite	*sprites;
 }				t_mlx;
 
 float			to_rad(float degrees);
+float			to_deg(float radians);
 int				img_pixel_put(t_img *img_data, int x, int y,
 								unsigned int color);
 int				img_get_pixel(t_img *img_data, int x, int y);
@@ -138,11 +138,7 @@ void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void			parse_config(t_mlx *mlx_info, char *file);
 int				usage_error(char **argv);
 void			main_render(t_mlx *mlx_info);
-t_list			*new_sprite(t_mlx *mlx_info, float x, float y, float length, t_direction direction, float angle);
-void			put_sprites(t_mlx *mlx_info, t_list *sprites,
-					const float lengths[mlx_info->width]);
+void			put_sprites(t_mlx *mlx_info, const float lengths[mlx_info->width]);
 int				sprites_cmp(t_sprite *s1, t_sprite *s2);
-float			get_sprite_length(t_mlx *mlx_info, float x, float y);
-void			sprite_add_xtmp(void *sprite, void *data);
 
 #endif

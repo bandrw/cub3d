@@ -39,17 +39,17 @@ static void		put_map(t_mlx *mlx_info, t_img *img_data)
 				rectangle.start.x = (float)j * 50.f - mlx_info->player.position.x + mlx_info->width / 2.f;
 				rectangle.start.y = (float)i * 50.f - mlx_info->player.position.y + mlx_info->height / 2.f;
 				rectangle.width = 50;
-				rectangle.heigth = 1;
+				rectangle.height = 1;
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
 				rectangle.width = 1;
-				rectangle.heigth = 50;
+				rectangle.height = 50;
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
 				rectangle.start.x += 50;
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
 				rectangle.start.y += 50.f;
 				rectangle.start.x -= 50.f;
 				rectangle.width = 50;
-				rectangle.heigth = 1;
+				rectangle.height = 1;
 				put_rectangle(img_data, &rectangle, 0x3B3B3B);
 			}
 			j += 1;
@@ -68,10 +68,10 @@ static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 	t_sprite *item;
 	t_list *tmp;
 
-	player.heigth = 8;
+	player.height = 8;
 	player.width = 8;
 	player.start.x = (float)mlx_info->width / 2.f - player.width / 2.f;
-	player.start.y = (float)mlx_info->height / 2.f - player.heigth / 2.f;
+	player.start.y = (float)mlx_info->height / 2.f - player.height / 2.f;
 	angle = mlx_info->player.angle - 33.f;
 	while (angle < mlx_info->player.angle + 33.f)
 	{
@@ -86,7 +86,7 @@ static void		render_2d(t_mlx *mlx_info, t_img *img_data)
 		{
 			item = tmp->content;
 			sprite.width = 5;
-			sprite.heigth = 5;
+			sprite.height = 5;
 			sprite.start.x = (float)mlx_info->width / 2.f + item->length * cosf(ft_to_radians(angle));
 			sprite.start.y = (float)mlx_info->height / 2.f - item->length * sinf(to_rad(angle));
 			put_rectangle(img_data, &sprite, 0xFF0000);
@@ -105,7 +105,7 @@ void			put_ceilling_and_floor(t_mlx *mlx_info)
 	t_rectangle rectangle;
 
 	rectangle.width = mlx_info->width;
-	rectangle.heigth = mlx_info->height / 2;
+	rectangle.height = mlx_info->height / 2;
 	rectangle.start.x = 0;
 	rectangle.start.y = 0;
 	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->ceiling_color);
@@ -153,7 +153,6 @@ void		normalize_map(t_mlx *mlx_info)
 void		main_render(t_mlx *mlx_info)
 {
 	float	lengths[mlx_info->width];
-	t_list	*sprites;
 	int x_tmp;
 	float angle;
 	t_ray cast;
@@ -162,7 +161,6 @@ void		main_render(t_mlx *mlx_info)
 	int x_src;
 	int i;
 
-	sprites = 0;
 	mlx_mouse_hide();
 	mlx_clear_window(mlx_info->init, mlx_info->window);
 	clear_stage(&mlx_info->stage);
@@ -199,16 +197,11 @@ void		main_render(t_mlx *mlx_info)
 				img_pixel_put(&mlx_info->stage, x_tmp, (int)((float)(mlx_info->height - height) / 2.f) + i, img_get_pixel(&texture, x_src, (int)((float)i / (float)height * (float)texture.height)));
 		}
 		lengths[x_tmp] = cast.length;
-		ft_lstiter(cast.sprites, sprite_add_xtmp, &x_tmp);
-		ft_lstmerge(&sprites, cast.sprites);
 		angle -= 66.f / (float)mlx_info->width;
 		x_tmp++;
 	}
-	ft_lstsort(&sprites, sprites_cmp);
-	put_sprites(mlx_info, sprites, lengths);
+	put_sprites(mlx_info, lengths);
 	mlx_put_image_to_window(mlx_info->init, mlx_info->window, mlx_info->stage.img, 0, 0);
-	ft_lstclear(&sprites, free);
-	normalize_map(mlx_info);
 }
 
 static int		key_press(int key, t_mlx *mlx_info)
@@ -303,7 +296,6 @@ int				main(int argc, char **argv)
 	if (argc != 2)
 		return (usage_error(argv));
 	new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D");
-	main_render(&mlx_info);
 	mlx_mouse_move(mlx_info.window, mlx_info.width / 2, mlx_info.height / 2);
 	mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
 	mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);

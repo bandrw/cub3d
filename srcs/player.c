@@ -18,6 +18,10 @@ void	change_direction(t_mlx *mlx_info, int key, float step)
 		mlx_info->player.angle -= step;
 	else if (key == KEY_LEFT)
 		mlx_info->player.angle += step;
+	while (mlx_info->player.angle > 180.f)
+		mlx_info->player.angle -= 360.f;
+	while (mlx_info->player.angle < -180.f)
+		mlx_info->player.angle += 360.f;
 }
 
 void	move(t_mlx *mlx_info, int key, float step)

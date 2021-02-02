@@ -13,8 +13,9 @@
 #include "cub3d.h"
 #include "../includes/cub3d.h"
 #include "../libft/includes/libft.h"
+//todo rm "../shit.h"
 
-static char **get_config_array(int fd)
+static char **read_config(int fd)
 {
 	char **arr;
 	char *line;
@@ -132,43 +133,72 @@ static void	color_parse(t_mlx *mlx_info, const char *str)
 	free(arr);
 }
 
-int		check_map(t_mlx *mlx_info, char **arr)
+void	read_sprites(t_mlx *mlx_info, char **map)
+{
+	int i;
+	int j;
+	int k;
+
+	mlx_info->sprites = (t_sprite*)ft_calloc(mlx_info->sprites_count, sizeof(t_sprite));
+	i = 0;
+	k = 0;
+	while (i < mlx_info->map_height)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] == '2')
+			{
+				mlx_info->sprites[k].y_index = i;
+				mlx_info->sprites[k].x_index = j;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int		check_map(t_mlx *mlx_info, char **map)
 {
 	int len;
 	int i;
 	int j;
 
 	len = 0;
-	while (arr[len] != 0)
+	while (map[len] != 0)
 		len++;
 	mlx_info->map_height = len;
 	mlx_info->map_width = 0;
 	i = 0;
-	while (arr[i] != 0)
+	while (map[i] != 0)
 	{
 		j = 0;
-		len = (int)ft_strlen(arr[i]);
+		len = (int)ft_strlen(map[i]);
 		if (len > mlx_info->map_width)
 			mlx_info->map_width = len;
-		while (arr[i][j] != '\0')
+		while (map[i][j] != '\0')
 		{
-			if (arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'W' || arr[i][j] == 'E')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 			{
 				mlx_info->player.position.x = (float)j * 50.f;
 				mlx_info->player.position.y = (float)i * 50.f;
-				if (arr[i][j] == 'N')
+				if (map[i][j] == 'N')
 					mlx_info->player.angle = 90.f;
-				else if (arr[i][j] == 'S')
+				else if (map[i][j] == 'S')
 					mlx_info->player.angle = -90.f;
-				else if (arr[i][j] == 'W')
+				else if (map[i][j] == 'W')
 					mlx_info->player.angle = 180.f;
 				else
 					mlx_info->player.angle = 0.f;
 			}
+			if (map[i][j] == '2')
+				mlx_info->sprites_count++;
 			j++;
 		}
 		i++;
 	}
+	read_sprites(mlx_info, map);
 	return (1);
 }
 
@@ -202,7 +232,7 @@ void	map_copy(t_mlx *mlx_info, char **arr)
 void	parse_config(t_mlx *mlx_info, char *file)
 {
 	int fd;
-	char **all;
+	char **config;
 	int i;
 	int count;
 
@@ -213,33 +243,33 @@ void	parse_config(t_mlx *mlx_info, char *file)
 		perror(file);
 		exit(2);
 	}
-	all = get_config_array(fd);
+	config = read_config(fd);
 	i = 0;
 	count = 0;
-	while (all[i] != 0)
+	while (config[i] != 0)
 	{
 		if (count == 8)
 		{
-			while (all[i][0] == '\0')
+			while (config[i][0] == '\0')
 				i++;
-			map_copy(mlx_info, all + i);
+			map_copy(mlx_info, config + i);
 			break ;
 		}
 		count++;
-		if (ft_strncmp(all[i], "R ", 2) == 0)
-			render_size_parse(mlx_info, all[i]);
-		else if (is_texture_config(all[i]))
-			texture_parse(mlx_info, all[i]);
-		else if (ft_strncmp(all[i], "F ", 2) == 0 ||
-					ft_strncmp(all[i], "C ", 2) == 0)
-			color_parse(mlx_info, all[i]);
+		if (ft_strncmp(config[i], "R ", 2) == 0)
+			render_size_parse(mlx_info, config[i]);
+		else if (is_texture_config(config[i]))
+			texture_parse(mlx_info, config[i]);
+		else if (ft_strncmp(config[i], "F ", 2) == 0 ||
+				 ft_strncmp(config[i], "C ", 2) == 0)
+			color_parse(mlx_info, config[i]);
 		else
 		{
-			free(all[i]);
+			free(config[i]);
 			count--;
 		}
 		i++;
 	}
-	free(all);
+	free(config);
 	close(fd);
 }
