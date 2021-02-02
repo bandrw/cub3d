@@ -121,7 +121,6 @@ typedef struct	s_mlx
 	t_list		*sprites;
 }				t_mlx;
 
-float			ft_absf(float a);
 float			to_rad(float degrees);
 int				img_pixel_put(t_img *img_data, int x, int y,
 								unsigned int color);

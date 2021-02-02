@@ -184,9 +184,9 @@ void		main_render(t_mlx *mlx_info)
 		height = (int)((float)mlx_info->width * 40.f / (cast.length * cosf(
 				to_rad(mlx_info->player.angle - angle))));
 		if (cast.direction == West || cast.direction == East)
-			x_src = (int)((float)texture.width * (float)(cast.end.y - (float)((int)cast.end.y / 50 * 50)) / 50.f);
+			x_src = (int)((float)texture.width * fmodf(cast.end.y, 50.f) / 50.f);
 		else
-			x_src = (int)((float)texture.width * (float)(cast.end.x - (float)((int)cast.end.x / 50 * 50)) / 50.f);
+			x_src = (int)((float)texture.width * fmodf(cast.end.x, 50.f) / 50.f);
 		i = -1;
 		if (height > mlx_info->height)
 		{

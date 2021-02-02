@@ -31,40 +31,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="промежуточный">
-      <change afterPath="$PROJECT_DIR$/minilibx/font.xcf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_init_loop.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_int.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_int_str_to_wordtab.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_mouse.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_new_image.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_new_window.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_new_window.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_opengl.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_opengl.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_png.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/mlx_shaders.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/font.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/interface.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/man/man3/mlx.3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/man/man3/mlx_loop.3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/man/man3/mlx_new_image.3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/man/man3/mlx_new_window.3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/man/man3/mlx_pixel_put.3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_image.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_init.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_png.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_rgb.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_string_put.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_window.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_xpm.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/mlx_put.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/mlx_put.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/ray_cast.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ray_cast.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,13 +100,6 @@
       <recent name="$PROJECT_DIR$/maps" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -146,6 +112,8 @@
       <workItem from="1609801472375" duration="20191000" />
       <workItem from="1609885684733" duration="20585000" />
       <workItem from="1610101214104" duration="20813000" />
+      <workItem from="1612212176338" duration="9080000" />
+      <workItem from="1612269661344" duration="3114000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -224,10 +192,10 @@
     </state>
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1609843981039" />
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1610104361814" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1610191811888">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612212814929">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1610191811888" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1610185561436" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1612212814929" />
   </component>
 </project>

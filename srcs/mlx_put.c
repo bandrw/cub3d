@@ -12,13 +12,6 @@
 
 #include "cub3d.h"
 
-float	ft_absf(float a)
-{
-	if (a < 0)
-		return (-a);
-	return (a);
-}
-
 int		img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
 {
 	char *dst;
@@ -90,8 +83,8 @@ void	put_line(t_img *img_data, t_line *line, int color)
 	float x_projection;
 	float y_projection;
 
-	x_projection = ft_absf(line->length * cosf(to_rad(line->angle)));
-	y_projection = ft_absf(line->length * sinf(to_rad(line->angle)));
+	x_projection = fabsf(line->length * cosf(to_rad(line->angle)));
+	y_projection = fabsf(line->length * sinf(to_rad(line->angle)));
 	k = tanf(to_rad(line->angle));
 	p2.x = line->coordinate.x + line->length * cosf(to_rad(line->angle));
 	p2.y = line->coordinate.y - line->length * sinf(to_rad(line->angle));
@@ -101,9 +94,9 @@ void	put_line(t_img *img_data, t_line *line, int color)
 		tmp = (int)line->coordinate.x;
 		if (p2.x < line->coordinate.x)
 			delta = -1;
-		while (ft_absf((float)tmp - line->coordinate.x) < x_projection)
+		while (fabsf((float)tmp - line->coordinate.x) < x_projection)
 		{
-			img_pixel_put(img_data, tmp, (int)(line->coordinate.y - (ft_absf((float)tmp) - line->coordinate.x) * k), color);
+			img_pixel_put(img_data, tmp, (int)(line->coordinate.y - (fabsf((float)tmp) - line->coordinate.x) * k), color);
 			tmp += delta;
 		}
 	}
@@ -112,7 +105,7 @@ void	put_line(t_img *img_data, t_line *line, int color)
 		tmp = (int)line->coordinate.y;
 		if (p2.y < line->coordinate.y)
 			delta = -1;
-		while (ft_absf((float)tmp - line->coordinate.y) < y_projection)
+		while (fabsf((float)tmp - line->coordinate.y) < y_projection)
 		{
 			img_pixel_put(img_data, (int)(line->coordinate.x - ((float)tmp - line->coordinate.y) / k), tmp, color);
 			tmp += delta;
