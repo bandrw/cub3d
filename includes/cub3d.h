@@ -137,9 +137,9 @@ void			change_direction(t_mlx *mlx_info, int key, float step);
 char			**new_map(void);
 void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void			parse_config(t_mlx *mlx_info, char *file);
-int				usage_error(char **argv);
+int				usage_error(char *program_name);
+void			simple_error(char *message);
 void			main_render(t_mlx *mlx_info);
 void			put_sprites(t_mlx *mlx_info, const float lengths[mlx_info->width]);
-int				sprites_cmp(t_sprite *s1, t_sprite *s2);
 
 #endif

@@ -107,13 +107,6 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 	cast->end.y = ray_y;
 }
 
-int		sprites_cmp(t_sprite *s1, t_sprite *s2)
-{
-//	if (s1->length < s2->length)
-//		return (1);
-	return (-1);
-}
-
 void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
 {
 	t_ray horizontal;

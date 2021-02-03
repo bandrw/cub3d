@@ -277,31 +277,74 @@ static int		mouse_movement(int x, int y, t_mlx *mlx_info)
 	return (0);
 }
 
-static void		new_mlx(t_mlx *mlx_info, char *file, char *title)
+static void		new_mlx(t_mlx *mlx_info, char *file, char *title, int out)
 {
 	ft_bzero(mlx_info, sizeof(*mlx_info));
 	mlx_info->init = mlx_init();
 	parse_config(mlx_info, file);
-	mlx_info->window = mlx_new_window(mlx_info->init, mlx_info->width, mlx_info->height, title);
+	if (out)
+		mlx_info->window = mlx_new_window(mlx_info->init, mlx_info->width, mlx_info->height, title);
 	mlx_info->stage.width = mlx_info->width;
 	mlx_info->stage.height = mlx_info->height;
 	mlx_info->stage.img = mlx_new_image(mlx_info->init, mlx_info->width, mlx_info->height);
 	mlx_info->stage.addr = mlx_get_data_addr(mlx_info->stage.img, &mlx_info->stage.bits_per_pixel, &mlx_info->stage.line_length, &mlx_info->stage.endian);
 }
 
+void			check_arg(int argc, char **argv)
+{
+	char *p;
+
+	if (argc == 2 || argc == 3)
+	{
+		p = ft_strrchr(argv[1], '.');
+		if (!p || ft_strncmp(p, ".cub\0", 5))
+			simple_error("Invalid arguments");
+		if (argc == 3)
+		{
+			if (ft_strncmp(argv[2], "--save\0", 7) != 0)
+				simple_error("Invalid arguments");
+		}
+	}
+	else
+		usage_error(argv[0]);
+}
+
+void			save_image(t_mlx *mlx_info, char *file)
+{
+	int		fd;
+	char	*out_file;
+
+	out_file = ft_strdup("out.bmp");
+	new_mlx(mlx_info, file, "Kfriese's Cub 3D", 0);
+	fd = open(out_file, O_CREAT);
+	if (fd == -1)
+		simple_error("Can't create a file");
+	close(fd);
+	fd = open(out_file, O_WRONLY);
+	if (fd == -1)
+		simple_error("File error");
+	ft_putendl_fd("000000000000000", fd);
+	close(fd);
+	free(out_file);
+}
+
 int				main(int argc, char **argv)
 {
 	t_mlx mlx_info;
 
-	if (argc != 2)
-		return (usage_error(argv));
-	new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D");
-	mlx_mouse_move(mlx_info.window, mlx_info.width / 2, mlx_info.height / 2);
-	mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
-	mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
-	mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
-	mlx_hook(mlx_info.window, 17, 1L << 17, close_app, &mlx_info);
-	mlx_loop_hook(mlx_info.init, key_handle, &mlx_info);
-	mlx_loop(mlx_info.init);
+	check_arg(argc, argv);
+	if (argc == 2)
+	{
+		new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D", 1);
+		mlx_mouse_move(mlx_info.window, mlx_info.width / 2, mlx_info.height / 2);
+		mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
+		mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
+		mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
+		mlx_hook(mlx_info.window, 17, 1L << 17, close_app, &mlx_info);
+		mlx_loop_hook(mlx_info.init, key_handle, &mlx_info);
+		mlx_loop(mlx_info.init);
+	}
+	else if (argc == 3)
+		save_image(&mlx_info, argv[1]);
 	return (0);
 }

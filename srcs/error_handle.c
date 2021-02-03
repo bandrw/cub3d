@@ -12,11 +12,18 @@
 
 #include "cub3d.h"
 
-int		usage_error(char **argv)
+int		usage_error(char *program_name)
 {
 	ft_putendl_fd("Error", 2);
 	ft_putstr_fd("Usage: ", 2);
-	ft_putstr_fd(argv[0], 2);
+	ft_putstr_fd(program_name, 2);
 	ft_putstr_fd(" map.cub\n", 2);
-	return (1);
+	exit(1);
+}
+
+void	simple_error(char *message)
+{
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(message, 2);
+	exit(1);
 }
