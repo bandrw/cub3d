@@ -33,24 +33,6 @@ unsigned int	img_get_pixel(t_img *img_data, int x, int y)
 	return (0);
 }
 
-void	put_square(t_img *img_data, t_point p, float size, int color)
-{
-	float i;
-	float j;
-
-	i = p.x;
-	while (i < p.x + size)
-	{
-		j = p.y;
-		while (j < p.y + size)
-		{
-			img_pixel_put(img_data, (int)i, (int)j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
 void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
 {
 	int start_x;
@@ -71,44 +53,5 @@ void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
 			j++;
 		}
 		i++;
-	}
-}
-
-void	put_line(t_img *img_data, t_line *line, int color)
-{
-	t_point p2;
-	int tmp;
-	int delta;
-	float k;
-	float x_projection;
-	float y_projection;
-
-	x_projection = fabsf(line->length * cosf(to_rad(line->angle)));
-	y_projection = fabsf(line->length * sinf(to_rad(line->angle)));
-	k = tanf(to_rad(line->angle));
-	p2.x = line->coordinate.x + line->length * cosf(to_rad(line->angle));
-	p2.y = line->coordinate.y - line->length * sinf(to_rad(line->angle));
-	delta = 1;
-	if (x_projection > y_projection)
-	{
-		tmp = (int)line->coordinate.x;
-		if (p2.x < line->coordinate.x)
-			delta = -1;
-		while (fabsf((float)tmp - line->coordinate.x) < x_projection)
-		{
-			img_pixel_put(img_data, tmp, (int)(line->coordinate.y - (fabsf((float)tmp) - line->coordinate.x) * k), color);
-			tmp += delta;
-		}
-	}
-	else
-	{
-		tmp = (int)line->coordinate.y;
-		if (p2.y < line->coordinate.y)
-			delta = -1;
-		while (fabsf((float)tmp - line->coordinate.y) < y_projection)
-		{
-			img_pixel_put(img_data, (int)(line->coordinate.x - ((float)tmp - line->coordinate.y) / k), tmp, color);
-			tmp += delta;
-		}
 	}
 }

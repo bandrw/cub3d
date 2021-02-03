@@ -25,6 +25,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "bmp.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -42,13 +43,6 @@ typedef struct	s_point
 	float		x;
 	float		y;
 }				t_point;
-
-typedef struct	s_line
-{
-	t_point		coordinate;
-	float		length;
-	float		angle;
-}				t_line;
 
 typedef struct	s_rectangle
 {
@@ -121,25 +115,22 @@ typedef struct	s_mlx
 	t_sprite	*sprites;
 }				t_mlx;
 
+void			new_mlx(t_mlx *mlx_info, char *file, char *title, int out);
 float			to_rad(float degrees);
 float			to_deg(float radians);
 int				img_pixel_put(t_img *img_data, int x, int y,
 								unsigned int color);
 unsigned int	img_get_pixel(t_img *img_data, int x, int y);
-void			put_square(t_img *img_data, t_point p, float size, int color);
 void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
 								int color);
-void			put_line(t_img *img_data, t_line *line, int color);
-int				is_moveable(int key);
-int				is_arrow(int key);
 void			move(t_mlx *mlx_info, int key, float step);
 void			change_direction(t_mlx *mlx_info, int key, float step);
-char			**new_map(void);
 void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void			parse_config(t_mlx *mlx_info, char *file);
 int				usage_error(char *program_name);
 void			simple_error(char *message);
 void			main_render(t_mlx *mlx_info);
 void			put_sprites(t_mlx *mlx_info, const float lengths[mlx_info->width]);
+void			save_image(t_mlx *mlx_info, char *out_file);
 
 #endif

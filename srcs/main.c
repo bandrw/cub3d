@@ -113,7 +113,7 @@ void			put_ceilling_and_floor(t_mlx *mlx_info)
 	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->floor_color);
 }
 
-void		clear_stage(t_img *stage)
+void			clear_stage(t_img *stage)
 {
 	int i;
 	int j;
@@ -131,26 +131,7 @@ void		clear_stage(t_img *stage)
 	}
 }
 
-void		normalize_map(t_mlx *mlx_info)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < mlx_info->map_width)
-	{
-		j = 0;
-		while (j < mlx_info->map_height)
-		{
-			if (mlx_info->map[j][i] == '3')
-				mlx_info->map[j][i] = '2';
-			j++;
-		}
-		i++;
-	}
-}
-
-void		main_render(t_mlx *mlx_info)
+void			main_render(t_mlx *mlx_info)
 {
 	float	lengths[mlx_info->width];
 	int x_tmp;
@@ -281,7 +262,7 @@ static int		mouse_movement(int x, int y, t_mlx *mlx_info)
 	return (0);
 }
 
-static void		new_mlx(t_mlx *mlx_info, char *file, char *title, int out)
+void			new_mlx(t_mlx *mlx_info, char *file, char *title, int out)
 {
 	ft_bzero(mlx_info, sizeof(*mlx_info));
 	mlx_info->init = mlx_init();
@@ -311,84 +292,6 @@ void			check_arg(int argc, char **argv)
 		usage_error(argv[0]);
 }
 
-typedef struct		s_bmp_header
-{
-	unsigned int	size;
-	unsigned int	reserved_bytes;
-	unsigned int	pixel_data_offset;
-	unsigned int	header_size;
-	int				width;
-	int				height;
-	unsigned short	color_planes;
-	unsigned short	color_depth;
-	unsigned int	compression_method;
-	unsigned int	raw_bitmap_data_size;
-	int				horizontal_resolution;
-	int				vertical_resolution;
-	unsigned int	color_table_entries;
-	unsigned int	important_colors;
-}					t_bmp_header;
-
-typedef struct		s_pixel
-{
-	unsigned char	blue;
-	unsigned char	green;
-	unsigned char	red;
-}					t_pixel;
-
-void			bmp_init(t_mlx *mlx_info, t_bmp_header *bmp_header)
-{
-	bmp_header->size = 54 + mlx_info->width * mlx_info->height * 3;
-	bmp_header->reserved_bytes = 0;
-	bmp_header->pixel_data_offset = 54;
-	bmp_header->header_size = 40;
-	bmp_header->width = mlx_info->width;
-	bmp_header->height = mlx_info->height;
-	bmp_header->color_planes = 1;
-	bmp_header->color_depth = 3 * 8;
-	bmp_header->compression_method = 0;
-	bmp_header->raw_bitmap_data_size = 0;
-	bmp_header->horizontal_resolution = 3780;
-	bmp_header->vertical_resolution = 3780;
-	bmp_header->color_table_entries = 0;
-	bmp_header->important_colors = 0;
-}
-
-void			save_image(t_mlx *mlx_info, char *file, char *out_file)
-{
-	int				i;
-	int				j;
-	int				fd;
-	t_pixel			pixel;
-	unsigned int	color;
-	t_bmp_header	bmp_header;
-
-	new_mlx(mlx_info, file, "Kfriese's Cub 3D", 0);
-	fd = open(out_file, O_CREAT | O_WRONLY | O_TRUNC, S_IWRITE);
-	if (fd == -1)
-		simple_error("File output error");
-	bmp_init(mlx_info, &bmp_header);
-	write(fd, "BM", 2);
-	write(fd, &bmp_header, sizeof(bmp_header));
-	main_render(mlx_info);
-	i = bmp_header.height - 1;
-	while (i >= 0)
-	{
-		j = 0;
-		while (j < bmp_header.width)
-		{
-			color = img_get_pixel(&mlx_info->stage, j, i);
-			pixel.red = color << (unsigned int)16;
-			pixel.green = color << (unsigned int)8;
-			pixel.blue = color << (unsigned int)0;
-			write(fd, &pixel, sizeof(pixel));
-			j++;
-		}
-		i--;
-	}
-	close(fd);
-}
-
 int				main(int argc, char **argv)
 {
 	t_mlx mlx_info;
@@ -406,6 +309,9 @@ int				main(int argc, char **argv)
 		mlx_loop(mlx_info.init);
 	}
 	else if (argc == 3)
-		save_image(&mlx_info, argv[1], "out.bmp");
+	{
+		new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D", 0);
+		save_image(&mlx_info, "out.bmp");
+	}
 	return (0);
 }
