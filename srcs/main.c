@@ -316,14 +316,10 @@ void			save_image(t_mlx *mlx_info, char *file)
 
 	out_file = ft_strdup("out.bmp");
 	new_mlx(mlx_info, file, "Kfriese's Cub 3D", 0);
-	fd = open(out_file, O_CREAT);
+	fd = open(out_file, O_CREAT | O_WRONLY | O_TRUNC, S_IWRITE);
 	if (fd == -1)
-		simple_error("Can't create a file");
-	close(fd);
-	fd = open(out_file, O_WRONLY);
-	if (fd == -1)
-		simple_error("File error");
-	ft_putendl_fd("000000000000000", fd);
+		simple_error("File output error");
+	printf("%d\n", ft_putendl_fd("12345678", fd));
 	close(fd);
 	free(out_file);
 }

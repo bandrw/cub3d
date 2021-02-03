@@ -14,17 +14,19 @@
 
 static int		get_x_start(int width, float sprite, float player)
 {
-	if (player < 180 && player > 114 && sprite < -114 && sprite > -180)
+	if (player <= 180 && player > 114 && sprite < -114 && sprite >= -180)
 		return ((int)((player + 33.f - (sprite + 360)) / 66.f * (float)width));
-	if (player < -114 && player > -180 && sprite < 180 && sprite > 114)
+	if (player < -114 && player >= -180 && sprite <= 180 && sprite > 114)
 		return ((int)((player + 360.f + 33.f - sprite) / 66.f * (float)width));
 	return ((int)((player + 33.f - sprite) / 66.f * (float)width));
 }
 
 static float	get_sprite_length(t_mlx *mlx_info, int index)
 {
-	return (sqrtf(powf((float)mlx_info->sprites[index].x_index * 50.f + 25.f - mlx_info->player.position.x, 2) +
-			powf((float)mlx_info->sprites[index].y_index * 50.f + 25.f - mlx_info->player.position.y, 2)));
+	return (sqrtf(powf((float)mlx_info->sprites[index].x_index * 50.f + 25.f -
+			mlx_info->player.position.x, 2) +
+			powf((float)mlx_info->sprites[index].y_index * 50.f + 25.f -
+			mlx_info->player.position.y, 2)));
 }
 
 static void		draw_sprite(t_mlx *mlx_info, float length, float sprite, const float lengths[mlx_info->width])
@@ -36,7 +38,8 @@ static void		draw_sprite(t_mlx *mlx_info, float length, float sprite, const floa
 	int				y_start;
 	unsigned int	color;
 
-	size = 30.f * (float)mlx_info->width / length;
+	size = 40.f * (float)mlx_info->width / length /
+			cosf(to_rad(mlx_info->player.angle - sprite));
 	x_start = get_x_start(mlx_info->width, sprite, mlx_info->player.angle) - size / 2;
 	y_start = mlx_info->height / 2 - (int)size / 2;
 	i = -1;
