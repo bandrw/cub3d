@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int		img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
+int				img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
 {
 	char *dst;
 
@@ -23,7 +23,7 @@ int		img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
 	return (0);
 }
 
-int		img_get_pixel(t_img *img_data, int x, int y)
+unsigned int	img_get_pixel(t_img *img_data, int x, int y)
 {
 	char *dst;
 

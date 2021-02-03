@@ -125,7 +125,7 @@ float			to_rad(float degrees);
 float			to_deg(float radians);
 int				img_pixel_put(t_img *img_data, int x, int y,
 								unsigned int color);
-int				img_get_pixel(t_img *img_data, int x, int y);
+unsigned int	img_get_pixel(t_img *img_data, int x, int y);
 void			put_square(t_img *img_data, t_point p, float size, int color);
 void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
 								int color);
