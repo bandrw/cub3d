@@ -23,7 +23,7 @@ SRCS_DIR = srcs
 HEADER_FILES = cub3d.h bmp.h
 HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADER_FILES))
 
-FLAGS = -Wall -Wextra# -Werror
+FLAGS = -Wall -Wextra -Werror
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft -I$(LIBFT_DIR)/includes
 LIBMLX_FLAGS = -L$(LIBMLX_DIR) -lmlx -I$(LIBMLX_DIR) -framework OpenGL -framework AppKit
 
