@@ -261,11 +261,11 @@ static int		mouse_movement(int x, int y, t_mlx *mlx_info)
 	return (0);
 }
 
-void			new_mlx(t_mlx *mlx_info, char *file, char *title, int out)
+void			new_mlx(t_mlx *mlx_info, char *file, char *title, void *out)
 {
 	ft_bzero(mlx_info, sizeof(*mlx_info));
 	mlx_info->init = mlx_init();
-	mlx_info->window = (void *)out;
+	mlx_info->window = out;
 	parse_config(mlx_info, file);
 	if (out)
 		mlx_info->window = mlx_new_window(mlx_info->init, mlx_info->width, mlx_info->height, title);
@@ -282,10 +282,9 @@ void			check_arg(int argc, char **argv)
 	if (argc == 2 || argc == 3)
 	{
 		p = ft_strrchr(argv[1], '.');
-		if (!p || ft_strncmp(p, ".cub", 5))
-			simple_error("Invalid arguments");
-		if (argc == 3 && ft_strncmp(argv[2], "--save", 7) != 0)
-			simple_error("Invalid arguments");
+		if (!p || ft_strncmp(p, ".cub", 5) ||
+				(argc == 3 && ft_strncmp(argv[2], "--save", 7) != 0))
+			throw_error("Invalid arguments");
 	}
 	else
 		usage_error(argv[0]);
@@ -298,7 +297,7 @@ int				main(int argc, char **argv)
 	check_arg(argc, argv);
 	if (argc == 2)
 	{
-		new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D", 1);
+		new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D", (void*)1);
 		mlx_mouse_move(mlx_info.window, mlx_info.width / 2, mlx_info.height / 2);
 		mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
 		mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);

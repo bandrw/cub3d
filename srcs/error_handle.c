@@ -21,9 +21,16 @@ int		usage_error(char *program_name)
 	exit(1);
 }
 
-void	simple_error(char *message)
+void	throw_error(char *message)
 {
 	ft_putendl_fd("Error", 2);
 	ft_putendl_fd(message, 2);
+	exit(1);
+}
+
+void	throw_perror(char *message)
+{
+	ft_putendl_fd("Error", 2);
+	perror(message);
 	exit(1);
 }

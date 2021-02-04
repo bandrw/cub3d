@@ -26,7 +26,7 @@ void	change_direction(t_mlx *mlx_info, int key, float step)
 
 void	move(t_mlx *mlx_info, int key, float step)
 {
-	t_point tmp;
+	t_pointf tmp;
 
 	if (key == KEY_A)
 	{

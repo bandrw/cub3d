@@ -29,7 +29,7 @@ void			save_image(t_mlx *mlx_info, char *out_file)
 
 	fd = open(out_file, O_CREAT | O_WRONLY | O_TRUNC, S_IWRITE);
 	if (fd == -1)
-		simple_error("File output error");
+		throw_error("File output error");
 	bmp_init(mlx_info, &bmp_header);
 	write(fd, "BM", 2);
 	write(fd, &bmp_header, sizeof(bmp_header));

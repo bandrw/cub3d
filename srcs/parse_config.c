@@ -13,24 +13,28 @@
 #include "cub3d.h"
 #include "../includes/cub3d.h"
 #include "../libft/includes/libft.h"
-//todo rm "../shit.h"
+//todo rm "../that_shit.h"
 
 static char **read_config(int fd)
 {
-	char **arr;
-	char *line;
-	t_list *config;
-	int i;
+	int		i;
+	int		n;
+	char	*line;
+	char	**arr;
+	t_list	*config;
+	t_list	*tmp;
 
 	config = 0;
-	while (get_next_line(fd, &line) == 1)
-		ft_lstadd_back(&config, ft_lstnew(line));
-	arr = (char**)malloc(sizeof(char*) * (ft_lstsize(config) + 1));
-	if (!arr)
+	while ((n = get_next_line(fd, &line)))
 	{
-		ft_putendl_fd("Error", 2);
-		exit(3);
+		if (n == -1)
+			throw_error("Can't read config");
+		if ((tmp = ft_lstnew(line)) == 0)
+			throw_error("Can't create t_list");
+		ft_lstadd_back(&config, tmp);
 	}
+	if (!(arr = (char**)malloc(sizeof(char*) * (ft_lstsize(config) + 1))))
+		throw_error("Can't allocate map");
 	i = 0;
 	while (config)
 	{
@@ -45,26 +49,30 @@ static char **read_config(int fd)
 
 static int	is_texture_config(char *str)
 {
-	return (ft_strncmp(str, "NO ", 3) == 0 ||
-			ft_strncmp(str, "SO ", 3) == 0 ||
-			ft_strncmp(str, "WE ", 3) == 0 ||
-			ft_strncmp(str, "EA ", 3) == 0 ||
-			ft_strncmp(str, "S ", 2) == 0);
+	return (*str == 'S' ||
+			ft_strncmp(str, "NO", 2) == 0 ||
+			ft_strncmp(str, "SO", 2) == 0 ||
+			ft_strncmp(str, "WE", 2) == 0 ||
+			ft_strncmp(str, "EA", 2) == 0);
 }
-//todo: handle 0 width and so on
+
 static void render_size_parse(t_mlx *mlx_info, char *str)
 {
 	int i;
 
-	i = 2;
+	i = 1;
 	while (str[i] == ' ')
 		i++;
+	if (str[i] == '\0')
+		throw_error("Map error: Resolution");
 	mlx_info->width = ft_atoi(str + i);
 	i += ft_nbrlen(mlx_info->width);
 	if (mlx_info->window && mlx_info->width > 2560)
 		mlx_info->width = 2560;
 	while (str[i] == ' ')
 		i++;
+	if (str[i] == '\0')
+		throw_error("Map error: Resolution");
 	mlx_info->height = ft_atoi(str + i);
 	if (mlx_info->window && mlx_info->height > 1440)
 		mlx_info->height = 1440;
@@ -75,12 +83,7 @@ static void	new_texture(t_mlx *mlx_info, t_img *texture, char *file)
 {
 	texture->img = mlx_xpm_file_to_image(mlx_info->init, file, &texture->width, &texture->height);
 	if (texture->img == 0)
-	{
-		ft_putstr_fd(file, 2);
-		ft_putstr_fd(": ", 2);
-		perror(0);
-		exit(2);
-	}
+		throw_perror(file);
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->line_length, &texture->endian);
 }
 
@@ -88,9 +91,13 @@ static void texture_parse(t_mlx *mlx_info, char *str)
 {
 	int i;
 
+	if (str[1] == '\0')
+		throw_error("Map error: Sprite");
 	i = 2;
 	while (str[i] == ' ')
 		i++;
+	if (str[i] == '\0')
+		throw_error("Map error: Bad textures");
 	if (ft_strncmp(str, "NO", 2) == 0)
 		new_texture(mlx_info, &mlx_info->north_texture, str + i);
 	else if (ft_strncmp(str, "SO", 2) == 0)
@@ -99,7 +106,7 @@ static void texture_parse(t_mlx *mlx_info, char *str)
 		new_texture(mlx_info, &mlx_info->west_texture, str + i);
 	else if (ft_strncmp(str, "EA", 2) == 0)
 		new_texture(mlx_info, &mlx_info->east_texture, str + i);
-	else if (ft_strncmp(str, "S ", 2) == 0)
+	else if (*str == 'S')
 		new_texture(mlx_info, &mlx_info->sprite_texture, str + i);
 	free(str);
 }
@@ -110,9 +117,11 @@ static void	color_parse(t_mlx *mlx_info, const char *str)
 	char **arr;
 	int color;
 
-	i = 2;
+	i = 1;
 	while (str[i] == ' ')
 		i++;
+	if (str[i] == '\0')
+		throw_error("Can't parse color");
 	arr = ft_split(str + i, ',');
 	i = 0;
 	while (arr[i] != 0)
@@ -139,7 +148,8 @@ void	read_sprites(t_mlx *mlx_info, char **map)
 	int j;
 	int k;
 
-	mlx_info->sprites = (t_sprite*)ft_calloc(mlx_info->sprites_count, sizeof(t_sprite));
+	if (!(mlx_info->sprites = (t_sprite*)ft_calloc(mlx_info->sprites_count, sizeof(t_sprite))))
+		throw_error("Can't allocate sprites");
 	i = 0;
 	k = 0;
 	while (i < mlx_info->map_height)
@@ -159,7 +169,83 @@ void	read_sprites(t_mlx *mlx_info, char **map)
 	}
 }
 
+int		point_exists(t_mlx *mlx_info, char **map, int x, int y)
+{
+	return (y >= 0 && y < mlx_info->map_height &&
+				x < (int)ft_strlen(map[y]) && x >= 0 &&
+				map[y][x] != ' ');
+}
+
+t_list	*new_point(int x, int y)
+{
+	t_list	*list;
+	t_point	*point;
+
+	if ((point = (t_point*)malloc(sizeof(t_point))) == 0)
+		throw_error("Can't allocate point");
+	point->x = x;
+	point->y = y;
+	if ((list = ft_lstnew(point)) == 0)
+		throw_error("Can't allocate list");
+	return (list);
+}
+
+void	normalize_map(t_mlx *mlx_info, char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < mlx_info->map_height)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] < 0)
+				map[i][j] *= -1;
+			j++;
+		}
+		i++;
+	}
+}
+
 int		check_map(t_mlx *mlx_info, char **map)
+{
+	t_list	*queue;
+	t_list	*tmp;
+	t_point	*point;
+
+	queue = 0;
+	ft_lstadd_back(&queue, new_point((int)(mlx_info->player.position.x / 50.f), (int)(mlx_info->player.position.y / 50.f)));
+	while (queue)
+	{
+		point = queue->content;
+		if (map[point->y][point->x] > 0)
+		{
+			map[point->y][point->x] = map[point->y][point->x] * -1;
+			if (!point_exists(mlx_info, map, point->x, point->y - 1) ||
+					!point_exists(mlx_info, map, point->x, point->y + 1) ||
+					!point_exists(mlx_info, map, point->x + 1, point->y) ||
+					!point_exists(mlx_info, map, point->x - 1, point->y))
+				return (1);
+			if (map[point->y - 1][point->x] > 0 && map[point->y - 1][point->x] != '1')
+				ft_lstadd_back(&queue, new_point(point->x, point->y - 1));
+			if (map[point->y + 1][point->x] > 0 && map[point->y + 1][point->x] != '1')
+				ft_lstadd_back(&queue, new_point(point->x, point->y + 1));
+			if (map[point->y][point->x - 1] > 0 && map[point->y][point->x - 1] != '1')
+				ft_lstadd_back(&queue, new_point(point->x - 1, point->y));
+			if (map[point->y][point->x + 1] > 0 && map[point->y][point->x + 1] != '1')
+				ft_lstadd_back(&queue, new_point(point->x + 1, point->y));
+		}
+		tmp = queue;
+		queue = queue->next;
+		ft_lstdelone(tmp, free);
+	}
+	normalize_map(mlx_info, map);
+	return (0);
+}
+
+int		parse_map(t_mlx *mlx_info, char **map)
 {
 	int len;
 	int i;
@@ -181,6 +267,8 @@ int		check_map(t_mlx *mlx_info, char **map)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 			{
+				if (mlx_info->player.position.x != 0.f || mlx_info->player.position.y != 0.f)
+					return (1);
 				mlx_info->player.position.x = (float)j * 50.f + 25.f;
 				mlx_info->player.position.y = (float)i * 50.f + 25.f;
 				if (map[i][j] == 'N')
@@ -199,28 +287,20 @@ int		check_map(t_mlx *mlx_info, char **map)
 		}
 		i++;
 	}
+	if (check_map(mlx_info, map) != 0)
+		return (2);
 	read_sprites(mlx_info, map);
-	return (1);
+	return (0);
 }
 
 void	map_copy(t_mlx *mlx_info, char **arr)
 {
 	int i;
 
-	if (!check_map(mlx_info, arr))
-	{
-		ft_putendl_fd("Error", 2);
-		exit(2);
-	}
-	i = 0;
-	while (arr[i] != 0)
-		i++;
-	mlx_info->map = (char**)malloc(sizeof(char*) * (i + 1));
-	if (!mlx_info->map)
-	{
-		ft_putendl_fd("Error", 2);
-		exit(2);
-	}
+	if (parse_map(mlx_info, arr) != 0)
+		throw_error("Invalid map");
+	if (!(mlx_info->map = (char**)malloc(sizeof(char*) * (mlx_info->map_height + 1))))
+		throw_error("Can't allocate map");
 	i = 0;
 	while (arr[i] != 0)
 	{
@@ -232,10 +312,10 @@ void	map_copy(t_mlx *mlx_info, char **arr)
 
 void	parse_config(t_mlx *mlx_info, char *file)
 {
-	int fd;
-	char **config;
-	int i;
-	int count;
+	int		i;
+	int		fd;
+	int		count;
+	char	**config;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -257,12 +337,11 @@ void	parse_config(t_mlx *mlx_info, char *file)
 			break ;
 		}
 		count++;
-		if (ft_strncmp(config[i], "R ", 2) == 0)
+		if (config[i][0] == 'R')
 			render_size_parse(mlx_info, config[i]);
 		else if (is_texture_config(config[i]))
 			texture_parse(mlx_info, config[i]);
-		else if (ft_strncmp(config[i], "F ", 2) == 0 ||
-				 ft_strncmp(config[i], "C ", 2) == 0)
+		else if (config[i][0] == 'F' || config[i][0] == 'C')
 			color_parse(mlx_info, config[i]);
 		else
 		{

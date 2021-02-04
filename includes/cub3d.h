@@ -38,22 +38,28 @@ typedef enum	e_direction
 	West
 }				t_direction;
 
-typedef struct	s_point
+typedef struct	s_pointf
 {
 	float		x;
 	float		y;
+}				t_pointf;
+
+typedef struct	s_point
+{
+	int			x;
+	int			y;
 }				t_point;
 
 typedef struct	s_rectangle
 {
-	t_point		start;
+	t_pointf		start;
 	int			width;
 	int			height;
 }				t_rectangle;
 
 typedef struct	s_player
 {
-	t_point		position;
+	t_pointf		position;
 	float		angle;
 }				t_player;
 
@@ -78,7 +84,7 @@ typedef struct	s_sprite
 typedef struct	s_ray
 {
 	float		length;
-	t_point		end;
+	t_pointf		end;
 	t_direction	direction;
 }				t_ray;
 
@@ -115,7 +121,7 @@ typedef struct	s_mlx
 	t_sprite	*sprites;
 }				t_mlx;
 
-void			new_mlx(t_mlx *mlx_info, char *file, char *title, int out);
+void			new_mlx(t_mlx *mlx_info, char *file, char *title, void *out);
 float			to_rad(float degrees);
 float			to_deg(float radians);
 int				img_pixel_put(t_img *img_data, int x, int y,
@@ -128,7 +134,8 @@ void			change_direction(t_mlx *mlx_info, int key, float step);
 void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void			parse_config(t_mlx *mlx_info, char *file);
 int				usage_error(char *program_name);
-void			simple_error(char *message);
+void			throw_error(char *message);
+void			throw_perror(char *message);
 void			main_render(t_mlx *mlx_info);
 void			put_sprites(t_mlx *mlx_info, const float lengths[mlx_info->width]);
 void			save_image(t_mlx *mlx_info, char *out_file);
