@@ -191,6 +191,7 @@ int		check_map(t_mlx *mlx_info, char **map)
 					mlx_info->player.angle = 180.f;
 				else
 					mlx_info->player.angle = 0.f;
+				map[i][j] = '0';
 			}
 			if (map[i][j] == '2')
 				mlx_info->sprites_count++;

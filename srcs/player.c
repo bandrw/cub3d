@@ -32,36 +32,36 @@ void	move(t_mlx *mlx_info, int key, float step)
 	{
 		tmp.x = mlx_info->player.position.x + step * cosf(to_rad(mlx_info->player.angle + 90.f));
 		tmp.y = mlx_info->player.position.y - step * sinf(to_rad(mlx_info->player.angle + 90.f));
-		if (mlx_info->map[(int)((tmp.y + (cosf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] != '1')
+		if (mlx_info->map[(int)((tmp.y + (cosf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] == '0')
 			mlx_info->player.position.y = tmp.y;
-		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (sinf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)] != '1')
+		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (sinf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)] == '0')
 			mlx_info->player.position.x = tmp.x;
 	}
 	else if (key == KEY_D)
 	{
 		tmp.x = mlx_info->player.position.x + step * cosf(to_rad(mlx_info->player.angle - 90.f));
 		tmp.y = mlx_info->player.position.y - step * sinf(to_rad(mlx_info->player.angle - 90.f));
-		if (mlx_info->map[(int)((tmp.y + (cosf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] != '1')
+		if (mlx_info->map[(int)((tmp.y + (cosf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] == '0')
 			mlx_info->player.position.y = tmp.y;
-		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (sinf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)] != '1')
+		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (sinf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)] == '0')
 			mlx_info->player.position.x = tmp.x;
 	}
 	else if (key == KEY_W)
 	{
 		tmp.x = mlx_info->player.position.x + step * cosf(to_rad(mlx_info->player.angle));
 		tmp.y = mlx_info->player.position.y - step * sinf(to_rad(mlx_info->player.angle));
-		if (mlx_info->map[(int)((tmp.y + (sinf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] != '1')
+		if (mlx_info->map[(int)((tmp.y + (sinf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] == '0')
 			mlx_info->player.position.y = tmp.y;
-		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (cosf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)] != '1')
+		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (cosf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)] == '0')
 			mlx_info->player.position.x = tmp.x;
 	}
 	else if (key == KEY_S)
 	{
 		tmp.x = mlx_info->player.position.x - step * cosf(to_rad(mlx_info->player.angle));
 		tmp.y = mlx_info->player.position.y + step * sinf(to_rad(mlx_info->player.angle));
-		if (mlx_info->map[(int)((tmp.y + (sinf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] != '1')
+		if (mlx_info->map[(int)((tmp.y + (sinf(to_rad(mlx_info->player.angle)) > 0 ? 15.f : -15.f)) / 50.f)][(int)(mlx_info->player.position.x / 50.f)] == '0')
 			mlx_info->player.position.y = tmp.y;
-		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (cosf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)] != '1')
+		if (mlx_info->map[(int)(mlx_info->player.position.y / 50.f)][(int)((tmp.x + (cosf(to_rad(mlx_info->player.angle)) > 0 ? -15.f : 15.f)) / 50.f)] == '0')
 			mlx_info->player.position.x = tmp.x;
 	}
 }
