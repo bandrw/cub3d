@@ -30,13 +30,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="--save handled">
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="-O3 flag added, so it flies">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/sprites.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/sprites.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/player.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/player.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +120,7 @@
       <workItem from="1612269661344" duration="27223000" />
       <workItem from="1612314328891" duration="510000" />
       <workItem from="1612353177559" duration="10202000" />
-      <workItem from="1612377428849" duration="13448000" />
+      <workItem from="1612377428849" duration="18270000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -208,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612387658997</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="-O3 flag added, so it flies">
+      <created>1612397650767</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1612397650768</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,7 +244,8 @@
     <MESSAGE value="more sprites + fish eye on sprites fixed" />
     <MESSAGE value="--save handled with blue image out" />
     <MESSAGE value="--save handled" />
-    <option name="LAST_COMMIT_MESSAGE" value="--save handled" />
+    <MESSAGE value="-O3 flag added, so it flies" />
+    <option name="LAST_COMMIT_MESSAGE" value="-O3 flag added, so it flies" />
   </component>
   <component name="WindowStateProjectService">
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612097665304">
@@ -252,10 +258,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1609741053340" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612387660958">
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612397653465">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612387660958" />
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612397653465" />
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1612367232706" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612384320169">
       <screen x="0" y="0" width="1440" height="900" />
