@@ -147,7 +147,6 @@ void			main_render(t_mlx *mlx_info)
 		mlx_mouse_hide();
 		mlx_clear_window(mlx_info->init, mlx_info->window);
 	}
-	clear_stage(&mlx_info->stage);
 	put_ceilling_and_floor(mlx_info);
 	angle = mlx_info->player.angle + 33.f;
 	x_tmp = 0;

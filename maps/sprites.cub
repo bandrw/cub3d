@@ -1,10 +1,10 @@
-R 7680 4320
+R 1000 600
 NO img/cobblestone.xpm
 SO img/stone.xpm
 WE img/bricks.xpm
 EA img/tile.xpm
 
-S img/sprite_lantern.xpm
+S img/sprite_barrel.xpm
 F 255,228,205
 C 0,191,255
 

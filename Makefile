@@ -48,7 +48,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(LIBFT_NAME) $(LIBMLX_NAME) $(OBJ)
-	gcc -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ)
+	gcc -O3 -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ)
 
 build_libft:
 	@echo "\n\033[44m ⏤  Building libft ⏤  \033[0m"
@@ -64,7 +64,7 @@ build_cub3D:
 	@echo "\033[44m ⏤  Building cub3D ⏤  \033[0m"
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
-	gcc $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR) -c $< -o $@
+	gcc -O3 $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR) -c $< -o $@
 
 clean:
 	@make clean -C $(LIBFT_DIR)
