@@ -30,13 +30,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="63 norm errors">
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="normed">
+      <change afterPath="$PROJECT_DIR$/includes/parse.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/parse_map.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcs/parse_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/main_render.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main_render.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/math_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/math_utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/mlx_put.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/mlx_put.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/ray_cast.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ray_cast.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/save_image.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/save_image.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/hooks.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/hooks.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/player.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/player.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +88,7 @@
     </option>
   </component>
   <component name="OCResolveContextSettings">
-    <option name="configuration" value="$PROJECT_DIR$/srcs/main.c" />
+    <option name="configuration" value="$PROJECT_DIR$/srcs/parse_map.c" />
   </component>
   <component name="ProjectId" id="1maJSVQtXkYdShvmXaSE4pjQD2b" />
   <component name="ProjectViewState">
@@ -101,6 +106,13 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/maps" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -122,7 +134,8 @@
       <workItem from="1612444822808" duration="18446000" />
       <workItem from="1612482095013" duration="796000" />
       <workItem from="1612482909000" duration="291000" />
-      <workItem from="1612483223512" duration="7051000" />
+      <workItem from="1612483223512" duration="7135000" />
+      <workItem from="1612534296467" duration="16589000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -250,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612487255062</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="normed">
+      <created>1612492256086</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1612492256086</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +307,8 @@
     <MESSAGE value="ready flood fill" />
     <MESSAGE value="Readme updated" />
     <MESSAGE value="63 norm errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="63 norm errors" />
+    <MESSAGE value="normed" />
+    <option name="LAST_COMMIT_MESSAGE" value="normed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612097665304">
@@ -302,15 +323,15 @@
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612483259259" />
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1609741053340" />
     <state x="229" y="102" key="SettingsEditor/0.25.1440.806/848.-1055.1920.1055@0.25.1440.806" timestamp="1612483232943" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612487262829">
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612492262556">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612487262829" />
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612492262556" />
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1612477611991" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612473664687">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612555187469">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612384320169" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1612473664687" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1612555187469" />
   </component>
 </project>

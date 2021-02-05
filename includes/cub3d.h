@@ -131,7 +131,10 @@ unsigned int	img_get_pixel(t_img *img_data, int x, int y);
 void			put_ceilling_and_floor(t_mlx *mlx_info);
 void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
 								int color);
-void			move(t_mlx *mlx_info, int key, float step);
+void			move_forward(t_mlx *mlx_info, float step);
+void			move_backward(t_mlx *mlx_info, float step);
+void			move_left(t_mlx *mlx_info, float step);
+void			move_right(t_mlx *mlx_info, float step);
 void			change_direction(t_mlx *mlx_info, int key, float step);
 void			ray_cast(t_mlx *mlx_info, t_ray *cast, float angle);
 void			parse_config(t_mlx *mlx_info, char *file);

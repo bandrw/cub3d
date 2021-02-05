@@ -21,7 +21,7 @@ LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.a
 HEADERS_DIR = includes
 OBJ_DIR = obj
 SRCS_DIR = srcs
-HEADER_FILES = cub3d.h bmp.h hooks.h
+HEADER_FILES = cub3d.h bmp.h hooks.h parse.h
 HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADER_FILES))
 
 FLAGS = -Wall -Wextra -Werror
@@ -38,7 +38,10 @@ FILES = main.c \
 		sprite.c \
 		save_image.c \
 		hooks.c \
-		main_render.c
+		main_render.c \
+		parse_map.c \
+		parse_utils.c \
+		parse_info.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))

@@ -23,51 +23,57 @@ static float	get_angle_diff(float a1, float a2)
 	return (a2 - a1);
 }
 
-static float	get_sprite_length(t_mlx *mlx_info, int index)
-{
-	return (sqrtf(powf((float)mlx_info->sprites[index].x_index * 50.f + 25.f -
-			mlx_info->player.position.x, 2) +
-			powf((float)mlx_info->sprites[index].y_index * 50.f + 25.f -
-			mlx_info->player.position.y, 2)));
-}
-
-static void		draw_sprite(t_mlx *mlx_info, float length, float sprite, const float lengths[mlx_info->width])
+static void		put_sprite(t_mlx *mlx_info, t_pointf trick, t_point start,
+						const float lengths[mlx_info->width])
 {
 	int				i;
 	int				j;
-	float			size;
-	int				x_start;
-	int				y_start;
 	unsigned int	color;
 
-	if (fabsf(get_angle_diff(mlx_info->player.angle, sprite)) > 66.f)
-		return ;
-	if (fabsf(cosf(to_rad(mlx_info->player.angle - sprite))) < 0.001f)
-		return ;
-	size = 40.f * (float)mlx_info->width / length;
-	x_start = (int)((get_angle_diff(sprite, mlx_info->player.angle) + 33.f) / 66.f * (float)mlx_info->width - size / 2.f);
-	if (size + x_start < 0 || x_start > mlx_info->width)
-		return ;
-	size /= cosf(to_rad(get_angle_diff(mlx_info->player.angle, sprite)));
-	x_start = (int)((get_angle_diff(sprite, mlx_info->player.angle) + 33.f) / 66.f * (float)mlx_info->width - size / 2.f);
-	y_start = mlx_info->height / 2 - (int)size / 2;
 	i = -1;
-	while ((float)++i < size)
+	while ((float)++i < trick.x)
 	{
-		if (i + x_start >= 0 && i + x_start < mlx_info->width &&
-			length <= lengths[i + x_start])
+		if (i + start.x >= 0 && i + start.x < mlx_info->width &&
+			trick.y <= lengths[i + start.x])
 		{
 			j = -1;
-			if (y_start < 0)
-				j = size / 2 - mlx_info->height / 2;
-			while ((float)++j < size && j + y_start < mlx_info->height)
+			if (start.y < 0)
+				j = (int)((trick.x - (float)mlx_info->height) / 2.f);
+			while ((float)++j < trick.x && j + start.y < mlx_info->height)
 			{
-				color = img_get_pixel(&mlx_info->sprite_texture, i * (mlx_info->sprite_texture.width / size), j * (mlx_info->sprite_texture.height / size));
+				color = img_get_pixel(&mlx_info->sprite_texture, i *
+						(mlx_info->sprite_texture.width / trick.x),
+						j * (mlx_info->sprite_texture.height / trick.x));
 				if (color != 0xFF000000)
-					img_pixel_put(&mlx_info->stage, i + x_start, j + y_start, color);
+					img_pixel_put(&mlx_info->stage, i + start.x, j + start.y,
+						color);
 			}
 		}
 	}
+}
+
+static void		draw_sprite(t_mlx *mlx_info, float length, float sprite,
+								const float lengths[mlx_info->width])
+{
+	float		size;
+	t_point		start;
+	t_pointf	trick;
+
+	if (fabsf(get_angle_diff(mlx_info->player.angle, sprite)) > 66.f ||
+			fabsf(cosf(to_rad(mlx_info->player.angle - sprite))) < 0.001f)
+		return ;
+	size = 40.f * (float)mlx_info->width / length;
+	start.x = (int)((get_angle_diff(sprite, mlx_info->player.angle) + 33.f) /
+			66.f * (float)mlx_info->width - size / 2.f);
+	if (size + (float)start.x < 0 || start.x > mlx_info->width)
+		return ;
+	size /= cosf(to_rad(get_angle_diff(mlx_info->player.angle, sprite)));
+	start.x = (int)((get_angle_diff(sprite, mlx_info->player.angle) + 33.f) /
+					66.f * (float)mlx_info->width - size / 2.f);
+	start.y = (mlx_info->height - (int)size) / 2;
+	trick.x = size;
+	trick.y = length;
+	put_sprite(mlx_info, trick, start, lengths);
 }
 
 static void		sort_sprites(t_mlx *mlx_info)
@@ -98,14 +104,19 @@ static void		sort_sprites(t_mlx *mlx_info)
 	}
 }
 
-void			put_sprites(t_mlx *mlx_info, const float lengths[mlx_info->width])
+void			put_sprites(t_mlx *mlx_info,
+									const float lengths[mlx_info->width])
 {
 	int		i;
 	float	sprite;
 
 	i = -1;
 	while (++i < mlx_info->sprites_count)
-		mlx_info->sprites[i].length = get_sprite_length(mlx_info, i);
+		mlx_info->sprites[i].length = sqrtf(powf(
+			(float)mlx_info->sprites[i].x_index * 50.f + 25.f -
+			mlx_info->player.position.x, 2) +
+			powf((float)mlx_info->sprites[i].y_index * 50.f + 25.f -
+			mlx_info->player.position.y, 2));
 	i = -1;
 	sort_sprites(mlx_info);
 	while (++i < mlx_info->sprites_count)

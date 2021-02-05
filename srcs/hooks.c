@@ -59,13 +59,13 @@ int		key_handle(t_mlx *mlx_info)
 	if (count == 2)
 		step /= 1.7f;
 	if (mlx_info->active_keys.w)
-		move(mlx_info, KEY_W, step);
+		move_forward(mlx_info, step);
 	if (mlx_info->active_keys.a)
-		move(mlx_info, KEY_A, step);
+		move_left(mlx_info, step);
 	if (mlx_info->active_keys.s)
-		move(mlx_info, KEY_S, step);
+		move_backward(mlx_info, step);
 	if (mlx_info->active_keys.d)
-		move(mlx_info, KEY_D, step);
+		move_right(mlx_info, step);
 	if (mlx_info->active_keys.left_arrow)
 		change_direction(mlx_info, KEY_LEFT, 1.25f);
 	if (mlx_info->active_keys.right_arrow)
