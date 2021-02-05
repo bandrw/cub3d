@@ -18,7 +18,8 @@ int				img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
 
 	if (x >= img_data->width || x < 0 || y >= img_data->height || y < 0)
 		return (1);
-	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
+	dst = img_data->addr + (y * img_data->line_length + x *
+			(img_data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	return (0);
 }
@@ -27,13 +28,15 @@ unsigned int	img_get_pixel(t_img *img_data, int x, int y)
 {
 	char *dst;
 
-	dst = img_data->addr + (y * img_data->line_length + x * (img_data->bits_per_pixel / 8));
+	dst = img_data->addr + (y * img_data->line_length + x *
+			(img_data->bits_per_pixel / 8));
 	if (dst)
 		return (*(int*)dst);
 	return (0);
 }
 
-void			put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
+void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
+								int color)
 {
 	int start_x;
 	int start_y;

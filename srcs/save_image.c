@@ -30,13 +30,31 @@ static void		bmp_init(t_mlx *mlx_info, t_bmp_header *bmp_header)
 	bmp_header->important_colors = 0;
 }
 
-void			save_image(t_mlx *mlx_info, char *out_file)
+static void		write_image(t_mlx *mlx_info, int fd, t_bmp_header *bmp_header)
 {
 	int				i;
 	int				j;
-	int				fd;
 	t_pixel			pixel[mlx_info->width];
 	unsigned int	color;
+
+	i = bmp_header->height;
+	while (--i >= 0)
+	{
+		j = -1;
+		while (++j < bmp_header->width)
+		{
+			color = img_get_pixel(&mlx_info->stage, j, i);
+			pixel[j].red = color >> (unsigned int)16;
+			pixel[j].green = color >> (unsigned int)8;
+			pixel[j].blue = color >> (unsigned int)0;
+		}
+		write(fd, pixel, sizeof(t_pixel) * mlx_info->width);
+	}
+}
+
+void			save_image(t_mlx *mlx_info, char *out_file)
+{
+	int				fd;
 	t_bmp_header	bmp_header;
 
 	fd = open(out_file, O_CREAT | O_WRONLY | O_TRUNC, S_IWRITE);
@@ -46,20 +64,6 @@ void			save_image(t_mlx *mlx_info, char *out_file)
 	write(fd, "BM", 2);
 	write(fd, &bmp_header, sizeof(bmp_header));
 	main_render(mlx_info);
-	i = bmp_header.height - 1;
-	while (i >= 0)
-	{
-		j = 0;
-		while (j < bmp_header.width)
-		{
-			color = img_get_pixel(&mlx_info->stage, j, i);
-			pixel[j].red = color >> (unsigned int)16;
-			pixel[j].green = color >> (unsigned int)8;
-			pixel[j].blue = color >> (unsigned int)0;
-			j++;
-		}
-		write(fd, pixel, sizeof(t_pixel) * mlx_info->width);
-		i--;
-	}
+	write_image(mlx_info, fd, &bmp_header);
 	close(fd);
 }

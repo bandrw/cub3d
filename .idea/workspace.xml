@@ -30,22 +30,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="Readme updated">
-      <change afterPath="$PROJECT_DIR$/includes/hooks.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/hooks.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/main_render.c" afterDir="false" />
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="63 norm errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/bmp.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/bmp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/main_render.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main_render.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/math_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/math_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/mlx_put.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/mlx_put.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/new_map.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/ray_cast.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ray_cast.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/save_image.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/save_image.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +122,7 @@
       <workItem from="1612444822808" duration="18446000" />
       <workItem from="1612482095013" duration="796000" />
       <workItem from="1612482909000" duration="291000" />
-      <workItem from="1612483223512" duration="2124000" />
+      <workItem from="1612483223512" duration="7051000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -252,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612477609202</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="63 norm errors">
+      <created>1612487255062</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1612487255062</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,7 +286,8 @@
     <MESSAGE value="+ sprite collisions" />
     <MESSAGE value="ready flood fill" />
     <MESSAGE value="Readme updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readme updated" />
+    <MESSAGE value="63 norm errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="63 norm errors" />
   </component>
   <component name="WindowStateProjectService">
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612097665304">
@@ -303,10 +302,10 @@
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612483259259" />
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1609741053340" />
     <state x="229" y="102" key="SettingsEditor/0.25.1440.806/848.-1055.1920.1055@0.25.1440.806" timestamp="1612483232943" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612477611991">
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612487262829">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612397653465" />
+    <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612487262829" />
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1612477611991" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612473664687">
       <screen x="0" y="0" width="1440" height="900" />
