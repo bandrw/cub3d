@@ -107,7 +107,7 @@ static void	ray_cast_vertical(t_mlx *mlx_info, t_ray *cast, float angle)
 	cast->end.y = ray_y;
 }
 
-void	ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
+void		ray_cast(t_mlx *mlx_info, t_ray *cast, float angle)
 {
 	t_ray horizontal;
 	t_ray vertical;

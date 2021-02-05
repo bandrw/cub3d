@@ -14,13 +14,14 @@ NAME = cub3D
 
 LIBFT_DIR = libft
 LIBFT_NAME = $(LIBFT_DIR)/libft.a
+
 LIBMLX_DIR = minilibx
 LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.a
 
 HEADERS_DIR = includes
 OBJ_DIR = obj
 SRCS_DIR = srcs
-HEADER_FILES = cub3d.h bmp.h
+HEADER_FILES = cub3d.h bmp.h hooks.h
 HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADER_FILES))
 
 FLAGS = -Wall -Wextra -Werror
@@ -29,14 +30,15 @@ LIBMLX_FLAGS = -L$(LIBMLX_DIR) -lmlx -I$(LIBMLX_DIR) -framework OpenGL -framewor
 
 FILES = main.c \
 		mlx_put.c \
-		new_map.c \
 		player.c \
 		ray_cast.c \
 		math_utils.c \
 		parse_config.c \
 		error_handle.c \
 		sprite.c \
-		save_image.c
+		save_image.c \
+		hooks.c \
+		main_render.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))

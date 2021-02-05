@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_utils.c                                       :+:      :+:    :+:   */
+/*   hooks.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/05 03:28:39 by kfriese           #+#    #+#             */
-/*   Updated: 2021/02/05 03:28:41 by kfriese          ###   ########.fr       */
+/*   Created: 2021/02/05 03:12:14 by kfriese           #+#    #+#             */
+/*   Updated: 2021/02/05 03:12:18 by kfriese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#ifndef HOOKS_H
+# define HOOKS_H
 
-float	to_rad(float degrees)
-{
-	return (degrees * (float)M_PI / 180.f);
-}
+int		key_press(int key, t_mlx *mlx_info);
+int		key_release(int key, t_mlx *mlx_info);
+int		key_handle(t_mlx *mlx_info);
+int		mouse_movement(int x, int y, t_mlx *mlx_info);
 
-float	to_deg(float radians)
-{
-	return (radians * 180.f / (float)M_PI);
-}
+#endif

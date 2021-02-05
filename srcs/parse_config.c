@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "../includes/cub3d.h"
-#include "../libft/includes/libft.h"
-//todo rm "../that_shit.h"
 
-static char **read_config(int fd)
+static char	**read_config(int fd)
 {
 	int		i;
 	int		n;
@@ -87,7 +84,7 @@ static void	new_texture(t_mlx *mlx_info, t_img *texture, char *file)
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->line_length, &texture->endian);
 }
 
-static void texture_parse(t_mlx *mlx_info, char *str)
+static void	texture_parse(t_mlx *mlx_info, char *str)
 {
 	int i;
 
@@ -113,9 +110,9 @@ static void texture_parse(t_mlx *mlx_info, char *str)
 
 static void	color_parse(t_mlx *mlx_info, const char *str)
 {
-	int i;
-	char **arr;
-	int color;
+	int		i;
+	int		color;
+	char	**arr;
 
 	i = 1;
 	while (str[i] == ' ')
@@ -142,7 +139,7 @@ static void	color_parse(t_mlx *mlx_info, const char *str)
 	free(arr);
 }
 
-void	read_sprites(t_mlx *mlx_info, char **map)
+void		read_sprites(t_mlx *mlx_info, char **map)
 {
 	int i;
 	int j;
@@ -169,14 +166,14 @@ void	read_sprites(t_mlx *mlx_info, char **map)
 	}
 }
 
-int		point_exists(t_mlx *mlx_info, char **map, int x, int y)
+int			point_exists(t_mlx *mlx_info, char **map, int x, int y)
 {
 	return (y >= 0 && y < mlx_info->map_height &&
 				x < (int)ft_strlen(map[y]) && x >= 0 &&
 				map[y][x] != ' ');
 }
 
-t_list	*new_point(int x, int y)
+t_list		*new_point(int x, int y)
 {
 	t_list	*list;
 	t_point	*point;
@@ -190,7 +187,7 @@ t_list	*new_point(int x, int y)
 	return (list);
 }
 
-void	normalize_map(t_mlx *mlx_info, char **map)
+void		normalize_map(t_mlx *mlx_info, char **map)
 {
 	int i;
 	int j;
@@ -209,7 +206,7 @@ void	normalize_map(t_mlx *mlx_info, char **map)
 	}
 }
 
-int		check_map(t_mlx *mlx_info, char **map)
+int			check_map(t_mlx *mlx_info, char **map)
 {
 	t_list	*queue;
 	t_list	*tmp;
@@ -245,7 +242,7 @@ int		check_map(t_mlx *mlx_info, char **map)
 	return (0);
 }
 
-int		parse_map(t_mlx *mlx_info, char **map)
+int			parse_map(t_mlx *mlx_info, char **map)
 {
 	int len;
 	int i;
@@ -281,8 +278,10 @@ int		parse_map(t_mlx *mlx_info, char **map)
 					mlx_info->player.angle = 0.f;
 				map[i][j] = '0';
 			}
-			if (map[i][j] == '2')
+			else if (map[i][j] == '2')
 				mlx_info->sprites_count++;
+			else if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0')
+				throw_error("Invalid map");
 			j++;
 		}
 		i++;
@@ -293,7 +292,7 @@ int		parse_map(t_mlx *mlx_info, char **map)
 	return (0);
 }
 
-void	map_copy(t_mlx *mlx_info, char **arr)
+void		map_copy(t_mlx *mlx_info, char **arr)
 {
 	int i;
 
@@ -310,7 +309,7 @@ void	map_copy(t_mlx *mlx_info, char **arr)
 	mlx_info->map[i] = 0;
 }
 
-void	parse_config(t_mlx *mlx_info, char *file)
+void		parse_config(t_mlx *mlx_info, char *file)
 {
 	int		i;
 	int		fd;

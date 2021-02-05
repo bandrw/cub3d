@@ -33,7 +33,7 @@ unsigned int	img_get_pixel(t_img *img_data, int x, int y)
 	return (0);
 }
 
-void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
+void			put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
 {
 	int start_x;
 	int start_y;
@@ -54,4 +54,17 @@ void	put_rectangle(t_img *img_data, t_rectangle *rectangle, int color)
 		}
 		i++;
 	}
+}
+
+void			put_ceilling_and_floor(t_mlx *mlx_info)
+{
+	t_rectangle rectangle;
+
+	rectangle.width = mlx_info->width;
+	rectangle.height = mlx_info->height / 2;
+	rectangle.start.x = 0;
+	rectangle.start.y = 0;
+	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->ceiling_color);
+	rectangle.start.y = (float)mlx_info->height / 2.f;
+	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->floor_color);
 }

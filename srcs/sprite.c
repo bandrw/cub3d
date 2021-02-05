@@ -72,8 +72,8 @@ static void		draw_sprite(t_mlx *mlx_info, float length, float sprite, const floa
 
 static void		sort_sprites(t_mlx *mlx_info)
 {
-	int 		i;
-	int 		j;
+	int			i;
+	int			j;
 	t_sprite	tmp;
 
 	i = 0;
