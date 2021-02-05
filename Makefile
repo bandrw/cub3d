@@ -53,7 +53,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(LIBFT_NAME) $(LIBMLX_NAME) $(OBJ)
-	gcc -O3 -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ)
+	gcc -O3 -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ) libmlx.dylib
 
 build_libft:
 	@echo "\n\033[44m ⏤  Building libft ⏤  \033[0m"

@@ -14,8 +14,10 @@
 
 void	parse_render_size(t_mlx *mlx_info, char *str)
 {
-	int i;
+	int		i;
+	t_point	max;
 
+	mlx_get_screen_size(mlx_info->init, &max.x, &max.y);
 	i = 1;
 	while (str[i] == ' ')
 		i++;
@@ -23,15 +25,15 @@ void	parse_render_size(t_mlx *mlx_info, char *str)
 		throw_error("Map error: Resolution");
 	mlx_info->width = ft_atoi(str + i);
 	i += ft_nbrlen(mlx_info->width);
-	if (mlx_info->window && mlx_info->width > 2560)
-		mlx_info->width = 2560;
+	if (mlx_info->window && mlx_info->width > max.x)
+		mlx_info->width = max.x;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '\0')
 		throw_error("Map error: Resolution");
 	mlx_info->height = ft_atoi(str + i);
-	if (mlx_info->window && mlx_info->height > 1440)
-		mlx_info->height = 1440;
+	if (mlx_info->window && mlx_info->height > max.y)
+		mlx_info->height = max.y;
 }
 
 void	parse_texture(t_mlx *mlx_info, char *str)

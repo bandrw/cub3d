@@ -1,7 +1,6 @@
 cub3D
 **/obj
 **/*.a
-**/*.dylib
 **/*.o
 **/*.swiftmodule
 **/*.swiftdoc

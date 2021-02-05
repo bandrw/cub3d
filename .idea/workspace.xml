@@ -31,17 +31,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="normed">
-      <change afterPath="$PROJECT_DIR$/includes/parse.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/parse_map.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srcs/parse_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/hooks.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/hooks.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/player.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/player.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/mlx.h" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/mlx.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_info.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,20 +94,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/minilibx" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/minilibx" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/minilibx" />
       <recent name="$PROJECT_DIR$/maps" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -136,6 +129,7 @@
       <workItem from="1612482909000" duration="291000" />
       <workItem from="1612483223512" duration="7135000" />
       <workItem from="1612534296467" duration="16589000" />
+      <workItem from="1612562233720" duration="5489000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
