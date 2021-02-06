@@ -4,6 +4,9 @@ SO img/stone.xpm
 WE img/bricks.xpm
 EA img/tile.xpm
 
+
+
+
 S img/sprite_lantern.xpm
 F 255,228,205
 C 0,191,255

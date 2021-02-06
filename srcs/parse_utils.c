@@ -62,8 +62,8 @@ void		read_sprites(t_mlx *mlx_info, char **map)
 	if (!(mlx_info->sprites = (t_sprite*)ft_calloc(mlx_info->sprites_count,
 													sizeof(t_sprite))))
 		throw_error("Can't allocate sprites");
-	i = 0;
 	k = 0;
+	i = 0;
 	while (i < mlx_info->map_height)
 	{
 		j = 0;

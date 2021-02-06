@@ -57,7 +57,7 @@ void			save_image(t_mlx *mlx_info, char *out_file)
 	int				fd;
 	t_bmp_header	bmp_header;
 
-	fd = open(out_file, O_CREAT | O_WRONLY | O_TRUNC, S_IWRITE);
+	fd = open(out_file, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
 	if (fd == -1)
 		throw_error("File output error");
 	bmp_init(mlx_info, &bmp_header);

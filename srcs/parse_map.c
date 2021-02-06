@@ -94,8 +94,8 @@ static int	parse_map_line(t_mlx *mlx_info, char **map, int i)
 
 int			parse_map(t_mlx *mlx_info, char **map)
 {
-	int len;
 	int i;
+	int len;
 
 	len = 0;
 	while (map[len] != 0)

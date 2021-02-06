@@ -49,6 +49,8 @@ static char	**read_file(int fd)
 			throw_error("Can't create t_list");
 		ft_lstadd_back(&config, tmp);
 	}
+	if (line)
+		free(line);
 	arr = array_from_list(config);
 	ft_lstclear(&config, 0);
 	return (arr);
@@ -61,7 +63,7 @@ static void	map_copy(t_mlx *mlx_info, char **arr)
 	if (parse_map(mlx_info, arr) != 0)
 		throw_error("Invalid map");
 	if (!(mlx_info->map = (char**)malloc(sizeof(char*) *
-			(mlx_info->map_height))))
+			mlx_info->map_height)))
 		throw_error("Can't allocate map");
 	i = 0;
 	while (arr[i] != 0)

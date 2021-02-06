@@ -82,7 +82,7 @@ void	parse_color(t_mlx *mlx_info, const char *str)
 		mlx_info->floor_color = color;
 	else
 		mlx_info->ceiling_color = color;
-	while (i-- < 3)
+	while (--i >= 0)
 		free(arr[i]);
 	free(arr);
 }

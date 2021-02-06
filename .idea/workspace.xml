@@ -30,46 +30,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="normed">
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/font.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/interface.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/man/man3/mlx.3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/man/man3/mlx_loop.3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/man/man3/mlx_new_image.3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/man/man3/mlx_new_window.3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/man/man3/mlx_pixel_put.3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx_image.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx_init.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx_png.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx_string_put.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx_window.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx_xpm.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/minilibx/static/mlx_rgb.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmlx.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libmlx.dylib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/font.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/font.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/font.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/font.xcf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx.h" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_init_loop.m" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_init_loop.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_int.h" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_int.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_int_str_to_wordtab.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_int_str_to_wordtab.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_mouse.m" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_mouse.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_new_image.m" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_new_image.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_new_window.h" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_new_window.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_new_window.m" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_new_window.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_opengl.h" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_opengl.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_opengl.m" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_opengl.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_png.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_png.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_png.h" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_png.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_rgb.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/dynamic/mlx_rgb.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_shaders.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_shaders.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/mlx_xpm.c" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/static/mlx_xpm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_info.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_map.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_map.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/save_image.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/save_image.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -305,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612492256086</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="dynamic lib added">
+      <created>1612592819376</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1612592819376</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,7 +319,8 @@
     <MESSAGE value="Readme updated" />
     <MESSAGE value="63 norm errors" />
     <MESSAGE value="normed" />
-    <option name="LAST_COMMIT_MESSAGE" value="normed" />
+    <MESSAGE value="dynamic lib added" />
+    <option name="LAST_COMMIT_MESSAGE" value="dynamic lib added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612097665304">
@@ -352,17 +329,22 @@
     <state x="434" y="256" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1609803093029" />
     <state x="434" y="256" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1609902989402" />
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1349@0.23.2560.1349" timestamp="1612097665304" />
+    <state x="867" y="271" key="CommitChangelistDialog2" timestamp="1612592819156">
+      <screen x="0" y="23" width="2560" height="1349" />
+    </state>
+    <state x="867" y="271" key="CommitChangelistDialog2/0.23.2560.1349@0.23.2560.1349" timestamp="1612592819156" />
     <state x="229" y="86" key="SettingsEditor" timestamp="1612483259259">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612483259259" />
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1609741053340" />
     <state x="229" y="102" key="SettingsEditor/0.25.1440.806/848.-1055.1920.1055@0.25.1440.806" timestamp="1612483232943" />
-    <state x="354" y="201" key="Vcs.Push.Dialog.v2" timestamp="1612492262556">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="629" y="324" key="Vcs.Push.Dialog.v2" timestamp="1612592822616">
+      <screen x="0" y="23" width="2560" height="1349" />
     </state>
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612492262556" />
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1612477611991" />
+    <state x="629" y="324" key="Vcs.Push.Dialog.v2/0.23.2560.1349@0.23.2560.1349" timestamp="1612592822616" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1612555187469">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
