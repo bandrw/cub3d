@@ -30,10 +30,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="parser fixed">
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="color parse improved">
+      <change afterPath="$PROJECT_DIR$/bonus/main_bonus.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bonus/main_render_bonus.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bonus/sprite_bonus.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bonus/to_dark_bonus.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/bonus.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_info.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +88,9 @@
     <option name="configuration" value="$PROJECT_DIR$/srcs/parse_map.c" />
   </component>
   <component name="ProjectId" id="1maJSVQtXkYdShvmXaSE4pjQD2b" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -290,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612599428438</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="color parse improved">
+      <created>1612602798786</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1612602798786</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,7 +346,8 @@
     <MESSAGE value="dynamic lib added" />
     <MESSAGE value="leak fixed" />
     <MESSAGE value="parser fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="parser fixed" />
+    <MESSAGE value="color parse improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="color parse improved" />
   </component>
   <component name="WindowStateProjectService">
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612097665304">
@@ -340,27 +356,27 @@
     <state x="434" y="256" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1609803093029" />
     <state x="434" y="256" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1609902989402" />
     <state x="772" y="407" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1349@0.23.2560.1349" timestamp="1612097665304" />
-    <state x="867" y="271" key="CommitChangelistDialog2" timestamp="1612599560924">
+    <state x="867" y="271" key="CommitChangelistDialog2" timestamp="1612603056476">
       <screen x="0" y="23" width="2560" height="1349" />
     </state>
-    <state x="867" y="271" key="CommitChangelistDialog2/0.23.2560.1349@0.23.2560.1349" timestamp="1612599560924" />
+    <state x="867" y="271" key="CommitChangelistDialog2/0.23.2560.1349@0.23.2560.1349" timestamp="1612603056476" />
     <state x="229" y="86" key="SettingsEditor" timestamp="1612483259259">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612483259259" />
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1609741053340" />
     <state x="229" y="102" key="SettingsEditor/0.25.1440.806/848.-1055.1920.1055@0.25.1440.806" timestamp="1612483232943" />
-    <state x="629" y="324" key="Vcs.Push.Dialog.v2" timestamp="1612599429763">
+    <state x="629" y="324" key="Vcs.Push.Dialog.v2" timestamp="1612602802844">
       <screen x="0" y="23" width="2560" height="1349" />
     </state>
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612492262556" />
     <state x="354" y="201" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1612477611991" />
-    <state x="629" y="324" key="Vcs.Push.Dialog.v2/0.23.2560.1349@0.23.2560.1349" timestamp="1612599429763" />
-    <state x="684" y="317" width="1192" height="1014" key="search.everywhere.popup" timestamp="1612598845281">
+    <state x="629" y="324" key="Vcs.Push.Dialog.v2/0.23.2560.1349@0.23.2560.1349" timestamp="1612602802844" />
+    <state x="684" y="317" width="1192" height="1014" key="search.everywhere.popup" timestamp="1612606768368">
       <screen x="0" y="23" width="2560" height="1349" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900/848.-1080.1920.1080@0.0.1440.900" timestamp="1612384320169" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1612555187469" />
-    <state x="684" y="317" width="1192" height="1014" key="search.everywhere.popup/0.23.2560.1349@0.23.2560.1349" timestamp="1612598845281" />
+    <state x="684" y="317" width="1192" height="1014" key="search.everywhere.popup/0.23.2560.1349@0.23.2560.1349" timestamp="1612606768368" />
   </component>
 </project>
