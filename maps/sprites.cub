@@ -1,11 +1,11 @@
-R 2000 780
+R 1920 1080
 NO img/cobblestone.xpm
 SO img/stone.xpm
 WE img/bricks.xpm
 EA img/tile.xpm
 
 S img/sprite_barrel.xpm
-F 255,228,205
+F 0,176,145
 C 0,191,255
 
 11111111111111111111111111

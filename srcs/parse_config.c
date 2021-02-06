@@ -83,15 +83,16 @@ static int	parse_config_line(t_mlx *mlx_info, char **config, int i)
 		return (count + 1);
 	}
 	count++;
-	if (config[i][0] == 'R')
+	if (ft_strncmp(config[i], "R ", 2) == 0)
 		parse_render_size(mlx_info, config[i]);
-	else if (*config[i] == 'S' ||
-				ft_strncmp(config[i], "NO", 2) == 0 ||
-				ft_strncmp(config[i], "SO", 2) == 0 ||
-				ft_strncmp(config[i], "WE", 2) == 0 ||
-				ft_strncmp(config[i], "EA", 2) == 0)
+	else if (ft_strncmp(config[i], "S ", 2) == 0 ||
+				ft_strncmp(config[i], "NO ", 3) == 0 ||
+				ft_strncmp(config[i], "SO ", 3) == 0 ||
+				ft_strncmp(config[i], "WE ", 3) == 0 ||
+				ft_strncmp(config[i], "EA ", 3) == 0)
 		parse_texture(mlx_info, config[i]);
-	else if (config[i][0] == 'F' || config[i][0] == 'C')
+	else if (ft_strncmp(config[i], "F ", 2) == 0 ||
+				ft_strncmp(config[i], "C ", 2) == 0)
 		parse_color(mlx_info, config[i]);
 	else
 		count--;
