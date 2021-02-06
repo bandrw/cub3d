@@ -33,21 +33,20 @@ static void		put_sprite(t_mlx *mlx_info, t_pointf trick, t_point start,
 	i = -1;
 	while ((float)++i < trick.x)
 	{
-		if (i + start.x >= 0 && i + start.x < mlx_info->width &&
-			trick.y <= lengths[i + start.x])
+		if (!(i + start.x >= 0 && i + start.x < mlx_info->width &&
+			trick.y <= lengths[i + start.x]))
+			continue ;
+		j = -1;
+		if (start.y < 0)
+			j = (int)((trick.x - (float)mlx_info->height) / 2.f);
+		while ((float)++j < trick.x && j + start.y < mlx_info->height)
 		{
-			j = -1;
-			if (start.y < 0)
-				j = (int)((trick.x - (float)mlx_info->height) / 2.f);
-			while ((float)++j < trick.x && j + start.y < mlx_info->height)
-			{
-				color = img_get_pixel(&mlx_info->sprite_texture, i *
-						(mlx_info->sprite_texture.width / trick.x),
-						j * (mlx_info->sprite_texture.height / trick.x));
-				if (color != 0xFF000000)
-					img_pixel_put(&mlx_info->stage, i + start.x, j + start.y,
-						color);
-			}
+			color = img_get_pixel(&mlx_info->sprite_texture, i *
+					(mlx_info->sprite_texture.width / trick.x),
+					j * (mlx_info->sprite_texture.height / trick.x));
+			if (color != 0xFF000000)
+				img_pixel_put(&mlx_info->stage, i + start.x, j + start.y,
+					color);
 		}
 	}
 }

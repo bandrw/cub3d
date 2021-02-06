@@ -61,7 +61,8 @@ BONUS_FILES = main_bonus.c \
 		parse_map.c \
 		parse_utils.c \
 		parse_info.c \
-		to_dark_bonus.c
+		to_dark_bonus.c \
+		mlx_put_bonus.c
 
 BONUS_HEADER_FILES = cub3d.h bmp.h hooks.h parse.h bonus.h
 BONUS_HEADERS = $(addprefix $(HEADERS_DIR)/, $(BONUS_HEADER_FILES))
@@ -69,7 +70,7 @@ BONUS_SRCS = $(addprefix bonus/, $(FILES))
 BONUS_OBJ = $(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
 
 all: $(OBJ_DIR) build_libft build_libmlx build_cub3D $(NAME)
-	@echo "\033[44m ✔︎      Done      ✔︎ \033[0m\n"
+	@echo "\033[44m ✔︎      Done      ✔︎ \033[0m"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -78,7 +79,7 @@ $(NAME): $(LIBFT_NAME) $(LIBMLX_STATIC_NAME) $(LIBMLX_DYNAMIC_NAME) $(OBJ)
 	gcc -O3 -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ) libmlx.dylib
 
 build_libft:
-	@echo "\n\033[44m ⏤  Building libft ⏤  \033[0m"
+	@echo "\033[44m ⏤  Building libft ⏤  \033[0m"
 	@make -C $(LIBFT_DIR)
 	@echo "\033[44m ✔︎      Done      ✔︎ \033[0m\n"
 
@@ -92,14 +93,14 @@ build_cub3D:
 	@echo "\033[44m ⏤  Building cub3D ⏤  \033[0m"
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
-	gcc -O3 $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR) -c $< -o $@
+	gcc -O3 $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR)/static -c $< -o $@
 
 bonus: $(OBJ_DIR) build_libft build_libmlx build_cub3D $(BONUS_OBJ)
 	gcc -O3 -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(BONUS_OBJ) libmlx.dylib
-	@echo "\033[44m ✔︎      Done      ✔︎ \033[0m\n"
+	@echo "\033[44m ✔︎      Done      ✔︎ \033[0m"
 
 $(OBJ_DIR)/%.o: bonus/%.c $(BONUS_HEADERS)
-	gcc -O3 $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR) -c $< -o $@
+	gcc -O3 $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR)/static -c $< -o $@
 
 clean:
 	@make clean -C $(LIBFT_DIR)

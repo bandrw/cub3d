@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "bonus.h"
 
 static float	get_angle_diff(float a1, float a2)
@@ -46,7 +45,7 @@ static void		put_sprite(t_mlx *mlx_info, t_pointf trick, t_point start,
 					(mlx_info->sprite_texture.width / trick.x),
 					j * (mlx_info->sprite_texture.height / trick.x));
 				if (color != 0xFF000000)
-					color = to_dark(color, trick.x);
+					color = to_dark(mlx_info, color, trick.x);
 				if (color != 0xFF000000)
 					img_pixel_put(&mlx_info->stage, i + start.x, j + start.y,
 								  color);

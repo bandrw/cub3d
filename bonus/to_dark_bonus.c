@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus.h"
 
-unsigned int	to_dark(unsigned int color, int height)
+unsigned int	to_dark(t_mlx *mlx_info, unsigned int color, int height)
 {
 	t_pixel pixel;
 
 	pixel.red = color >> 16;
 	pixel.green = color >> 8;
 	pixel.blue = color >> 0;
-	if (65.f / height > 1)
+	if ((mlx_info->height / height) * 0.075f > 1)
 	{
-		pixel.red /= 65.f / height;
-		pixel.green /= 65.f / height;
-		pixel.blue /= 65.f / height;
+		pixel.red /= (mlx_info->height / height) * 0.075f;
+		pixel.green /= (mlx_info->height / height) * 0.075f;
+		pixel.blue /= (mlx_info->height / height) * 0.075f;
 	}
 	return ((pixel.red << 16) | (pixel.green << 8) | (pixel.blue << 0));
 }

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "bonus.h"
 
 static t_img	*get_texture(t_mlx *mlx_info, t_direction direction)
@@ -40,7 +39,7 @@ static void		draw_line(t_mlx *mlx_info, t_ray *cast, int height, int x_tmp)
 	if (height > mlx_info->height)
 	{
 		while (++i < mlx_info->height)
-			img_pixel_put(&mlx_info->stage, x_tmp, i, to_dark(img_get_pixel(texture,
+			img_pixel_put(&mlx_info->stage, x_tmp, i, to_dark(mlx_info, img_get_pixel(texture,
 				x_src, (int)((float)texture->height / ((float)height /
 				((float)i + (float)(height - mlx_info->height) / 2.f)))), height));
 	}
@@ -49,7 +48,7 @@ static void		draw_line(t_mlx *mlx_info, t_ray *cast, int height, int x_tmp)
 		while (++i < height)
 			img_pixel_put(&mlx_info->stage, x_tmp,
 				(int)((float)(mlx_info->height - height) / 2.f) + i,
-				to_dark(img_get_pixel(texture, x_src, (int)((float)i / (float)height *
+				to_dark(mlx_info, img_get_pixel(texture, x_src, (int)((float)i / (float)height *
 				(float)texture->height)), height));
 	}
 }

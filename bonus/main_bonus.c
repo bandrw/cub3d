@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "bonus.h"
 #include "hooks.h"
 
 int				close_app(t_mlx *mlx_info)
@@ -41,19 +41,18 @@ void			new_mlx(t_mlx *mlx_info, char *file, char *title, void *out)
 		throw_error("mlx init");
 	mlx_info->window = out;
 	parse_config(mlx_info, file);
-	if (out)
-	{
-		if ((mlx_info->window = mlx_new_window(mlx_info->init, mlx_info->width,
-											   mlx_info->height, title)) == 0)
-			throw_error("mlx window");
-	}
+	if (out && (mlx_info->window = mlx_new_window(mlx_info->init,
+			mlx_info->width, mlx_info->height, title)) == 0)
+		throw_error("mlx window");
 	mlx_info->stage.width = mlx_info->width;
 	mlx_info->stage.height = mlx_info->height;
 	mlx_info->stage.img = mlx_new_image(mlx_info->init, mlx_info->width,
 										mlx_info->height);
 	mlx_info->stage.addr = mlx_get_data_addr(mlx_info->stage.img,
-											 &mlx_info->stage.bits_per_pixel, &mlx_info->stage.line_length,
-											 &mlx_info->stage.endian);
+			&mlx_info->stage.bits_per_pixel, &mlx_info->stage.line_length,
+			&mlx_info->stage.endian);
+	new_texture(mlx_info, &mlx_info->skybox_texture.img, "img/skybox.xpm");
+	printf("%p\n", mlx_info->skybox_texture.img);
 }
 
 static void		check_arguments(int argc, char **argv)

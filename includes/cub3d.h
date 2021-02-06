@@ -24,7 +24,7 @@
 # define KEY_ESC 53
 
 # include "libft.h"
-# include "static/mlx.h"
+# include "mlx.h"
 # include "bmp.h"
 # include <math.h>
 # include <fcntl.h>
