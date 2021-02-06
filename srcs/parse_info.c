@@ -59,30 +59,45 @@ void	parse_texture(t_mlx *mlx_info, char *str)
 		new_texture(mlx_info, &mlx_info->sprite_texture, str + i);
 }
 
-void	parse_color(t_mlx *mlx_info, const char *str)
+static int	read_color(const char *str)
 {
 	int		i;
-	int		color;
+	int		red;
+	int		green;
+	int		blue;
 	char	**arr;
+
+	arr = ft_split(str, ',');
+	i = 0;
+	while (arr[i] != 0)
+		i++;
+	if (i != 3)
+		throw_perror("Can't parse color");
+	red = ft_atoi(arr[0]);
+	green = ft_atoi(arr[1]);
+	blue = ft_atoi(arr[2]);
+	if (red > 255 || red < 0 || green < 0 || green > 255 ||
+			blue < 0 || blue > 255)
+		throw_error("Bad color");
+	while (--i >= 0)
+		free(arr[i]);
+	free(arr);
+	return ((red << 16) | (green << 8) | (blue << 0));
+}
+
+void	parse_color(t_mlx *mlx_info, const char *str)
+{
+	int i;
+	int color;
 
 	i = 1;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '\0')
 		throw_error("Can't parse color");
-	arr = ft_split(str + i, ',');
-	i = 0;
-	while (arr[i] != 0)
-		i++;
-	if (i != 3)
-		throw_perror("Can't parse color");
-	color = (ft_atoi(arr[0]) << 16) | (ft_atoi(arr[1]) << 8) |
-			(ft_atoi(arr[2]) << 0);
+	color = read_color(str + i);
 	if (*str == 'F')
 		mlx_info->floor_color = color;
 	else
 		mlx_info->ceiling_color = color;
-	while (--i >= 0)
-		free(arr[i]);
-	free(arr);
 }

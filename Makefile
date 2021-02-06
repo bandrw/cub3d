@@ -73,6 +73,8 @@ build_cub3D:
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	gcc -O3 $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR) -c $< -o $@
 
+#bonus: fclean
+
 clean:
 	@make clean -C $(LIBFT_DIR)
 	@make clean -C $(LIBMLX_DIR)/static
