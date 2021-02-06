@@ -60,6 +60,10 @@ static void	map_copy(t_mlx *mlx_info, char **arr)
 {
 	int i;
 
+	if (!(mlx_info->east_texture.img && mlx_info->west_texture.img &&
+			mlx_info->north_texture.img && mlx_info->south_texture.img &&
+			mlx_info->sprite_texture.img))
+		throw_error("Invalid config");
 	if (parse_map(mlx_info, arr) != 0)
 		throw_error("Invalid map");
 	if (!(mlx_info->map = (char**)malloc(sizeof(char*) *
@@ -94,6 +98,8 @@ static int	parse_config_line(t_mlx *mlx_info, char **config, int i)
 	else if (ft_strncmp(config[i], "F ", 2) == 0 ||
 				ft_strncmp(config[i], "C ", 2) == 0)
 		parse_color(mlx_info, config[i]);
+	else if (config[i][0] != '\0')
+		throw_error("Invalid config");
 	else
 		count--;
 	free(config[i]);

@@ -86,7 +86,7 @@ static int	parse_map_line(t_mlx *mlx_info, char **map, int i)
 		else if (map[i][j] == '2')
 			mlx_info->sprites_count++;
 		else if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0')
-			throw_error("Invalid map");
+			throw_error("Invalid config");
 		j++;
 	}
 	return (0);

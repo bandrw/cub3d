@@ -12,7 +12,7 @@
 
 #include "parse.h"
 
-void	parse_render_size(t_mlx *mlx_info, char *str)
+void		parse_render_size(t_mlx *mlx_info, char *str)
 {
 	int		i;
 	t_point	max;
@@ -36,7 +36,7 @@ void	parse_render_size(t_mlx *mlx_info, char *str)
 		mlx_info->height = max.y;
 }
 
-void	parse_texture(t_mlx *mlx_info, char *str)
+void		parse_texture(t_mlx *mlx_info, char *str)
 {
 	int i;
 
@@ -85,7 +85,7 @@ static int	read_color(const char *str)
 	return ((red << 16) | (green << 8) | (blue << 0));
 }
 
-void	parse_color(t_mlx *mlx_info, const char *str)
+void		parse_color(t_mlx *mlx_info, const char *str)
 {
 	int i;
 	int color;
