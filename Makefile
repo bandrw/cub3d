@@ -16,7 +16,8 @@ LIBFT_DIR = libft
 LIBFT_NAME = $(LIBFT_DIR)/libft.a
 
 LIBMLX_DIR = minilibx
-LIBMLX_NAME = $(LIBMLX_DIR)/libmlx.a
+LIBMLX_STATIC_NAME = $(LIBMLX_DIR)/static/libmlx.a
+LIBMLX_DYNAMIC_NAME = $(LIBMLX_DIR)/dynamic/libmlx.dylib
 
 HEADERS_DIR = includes
 OBJ_DIR = obj
@@ -26,7 +27,7 @@ HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADER_FILES))
 
 FLAGS = -Wall -Wextra -Werror
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft -I$(LIBFT_DIR)/includes
-LIBMLX_FLAGS = -L$(LIBMLX_DIR) -lmlx -I$(LIBMLX_DIR) -framework OpenGL -framework AppKit
+LIBMLX_FLAGS = -L$(LIBMLX_DIR)/static -lmlx -I$(LIBMLX_DIR)/static -framework OpenGL -framework AppKit
 
 FILES = main.c \
 		mlx_put.c \
@@ -52,7 +53,7 @@ all: $(OBJ_DIR) build_libft build_libmlx build_cub3D $(NAME)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LIBFT_NAME) $(LIBMLX_NAME) $(OBJ)
+$(NAME): $(LIBFT_NAME) $(LIBMLX_STATIC_NAME) $(LIBMLX_DYNAMIC_NAME) $(OBJ)
 	gcc -O3 -o $(NAME) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(OBJ) libmlx.dylib
 
 build_libft:
@@ -62,7 +63,8 @@ build_libft:
 
 build_libmlx:
 	@echo "\033[44m ⏤  Building libmlx ⏤  \033[0m"
-	@make -C $(LIBMLX_DIR)
+	@make -C $(LIBMLX_DIR)/static
+	@make -C $(LIBMLX_DIR)/dynamic && cp $(LIBMLX_DIR)/dynamic/libmlx.dylib .
 	@echo "\033[44m ✔︎      Done       ✔︎ \033[0m\n"
 
 build_cub3D:
@@ -73,12 +75,15 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 
 clean:
 	@make clean -C $(LIBFT_DIR)
-	@make clean -C $(LIBMLX_DIR)
+	@make clean -C $(LIBMLX_DIR)/static
+	@make clean -C $(LIBMLX_DIR)/dynamic
 	/bin/rm -f $(OBJ)
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
-	@make fclean -C $(LIBMLX_DIR)
+	@make fclean -C $(LIBMLX_DIR)/static
+	@make fclean -C $(LIBMLX_DIR)/dynamic
+	/bin/rm -f libmlx.dylib
 	/bin/rm -f $(NAME)
 
 re: fclean all
