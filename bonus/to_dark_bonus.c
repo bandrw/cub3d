@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus.h"
+#include "cub3d.h"
 
 unsigned int	to_dark(t_mlx *mlx_info, unsigned int color, int height)
 {

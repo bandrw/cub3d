@@ -1,4 +1,16 @@
-#include "bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_put_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kfriese <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/07 03:45:19 by kfriese           #+#    #+#             */
+/*   Updated: 2021/02/07 03:45:20 by kfriese          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
 
 int				img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
 {
@@ -7,7 +19,7 @@ int				img_pixel_put(t_img *img_data, int x, int y, unsigned int color)
 	if (x >= img_data->width || x < 0 || y >= img_data->height || y < 0)
 		return (1);
 	dst = img_data->addr + (y * img_data->line_length + x *
-														(img_data->bits_per_pixel / 8));
+							(img_data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	return (0);
 }
@@ -17,7 +29,7 @@ unsigned int	img_get_pixel(t_img *img_data, int x, int y)
 	char *dst;
 
 	dst = img_data->addr + (y * img_data->line_length + x *
-														(img_data->bits_per_pixel / 8));
+							(img_data->bits_per_pixel / 8));
 	if (dst)
 		return (*(int*)dst);
 	return (0);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus.h"
+#include "cub3d.h"
 
 static float	get_angle_diff(float a1, float a2)
 {

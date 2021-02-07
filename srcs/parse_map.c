@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 static void	append_neighbors(t_list **queue, char **map, t_point *point)
 {

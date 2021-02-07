@@ -146,4 +146,18 @@ void			put_sprites(t_mlx *mlx_info,
 								const float lengths[mlx_info->width]);
 void			save_image(t_mlx *mlx_info, char *out_file);
 
+int				parse_map(t_mlx *mlx_info, char **map);
+int				point_exists(t_mlx *mlx_info, char **map, int x, int y);
+int				normalize_map(t_mlx *mlx_info, char **map);
+void			read_sprites(t_mlx *mlx_info, char **map);
+t_list			*new_point(int x, int y);
+void			new_texture(t_mlx *mlx_info, t_img *texture, char *file);
+void			parse_color(t_mlx *mlx_info, const char *str);
+void			parse_texture(t_mlx *mlx_info, char *str);
+void			parse_render_size(t_mlx *mlx_info, char *str);
+
+#ifdef BONUS
+unsigned int	to_dark(t_mlx *mlx_info, unsigned int color, int height);
+#endif
+
 #endif

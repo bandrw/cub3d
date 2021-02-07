@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 void		parse_render_size(t_mlx *mlx_info, char *str)
 {

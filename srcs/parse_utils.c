@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 int			normalize_map(t_mlx *mlx_info, char **map)
 {

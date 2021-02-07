@@ -29,9 +29,9 @@
       <config projectName="cub3d" targetName="obj" />
       <config projectName="cub3d" targetName="build_libft" />
       <config projectName="cub3d" targetName="build_libmlx" />
-      <config projectName="cub3d" targetName="all" />
       <config projectName="cub3d" targetName="build_cub3D" />
       <config projectName="cub3d" targetName="re" />
+      <config projectName="cub3d" targetName="all" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -41,19 +41,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/skybox.xpm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cub3d.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cub3d.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/main_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/main_bonus.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/main_render_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/main_render_bonus.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/sprite_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/sprite_bonus.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/to_dark_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/to_dark_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/bonus.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/bonus.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/bonus.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/sprite.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sprite.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/parse.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minilibx/dynamic/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/dynamic/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_info.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_map.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_map.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,11 +132,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Makefile Application.bonus">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3d" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -179,6 +177,11 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -220,6 +223,7 @@
       <workItem from="1612534296467" duration="16589000" />
       <workItem from="1612562233720" duration="5489000" />
       <workItem from="1612613030468" duration="2789000" />
+      <workItem from="1612652161409" duration="6566000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>

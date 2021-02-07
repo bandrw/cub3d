@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 static char	**array_from_list(t_list *config)
 {
@@ -70,7 +70,7 @@ static void	map_copy(t_mlx *mlx_info, char **arr)
 			mlx_info->map_height)))
 		throw_error("Can't allocate map");
 	i = 0;
-	while (arr[i] != 0)
+	while (i < mlx_info->map_height)
 	{
 		mlx_info->map[i] = arr[i];
 		i++;

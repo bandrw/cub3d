@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus.h"
+#include "cub3d.h"
 
 static t_img	*get_texture(t_mlx *mlx_info, t_direction direction)
 {
