@@ -31,7 +31,7 @@ unsigned int	img_get_pixel(t_img *img_data, int x, int y)
 	dst = img_data->addr + (y * img_data->line_length + x *
 							(img_data->bits_per_pixel / 8));
 	if (dst)
-		return (*(int*)dst);
+		return (*(unsigned int*)dst);
 	return (0);
 }
 

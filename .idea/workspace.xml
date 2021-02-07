@@ -41,18 +41,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="skybox added">
-      <change afterPath="$PROJECT_DIR$/bonus/shooter_bonus.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/maps/example_low_sprites.cub" afterDir="false" />
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/img/sprite_target.xpm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/main_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/main_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/main_render_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/main_render_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/sprite_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/sprite_bonus.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/shooter_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/shooter_bonus.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/example.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/example.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/hooks.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/hooks.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_info.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/subject.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/subject.cub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/mlx_put.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/mlx_put.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parse_map.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_map.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +227,7 @@
       <workItem from="1612562233720" duration="5489000" />
       <workItem from="1612613030468" duration="2789000" />
       <workItem from="1612652161409" duration="17050000" />
-      <workItem from="1612676822775" duration="11326000" />
+      <workItem from="1612676822775" duration="17837000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -418,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612668821065</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="gun and bad guys added">
+      <created>1612688666404</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1612688666404</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,7 +444,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="map parser, map extension (todo)" />
     <MESSAGE value="dynamic map walking with any render size" />
     <MESSAGE value="промежуточный" />
     <MESSAGE value="attempt to draw sprites with ray casting" />
@@ -462,6 +468,7 @@
     <MESSAGE value="perfect mandatory part" />
     <MESSAGE value="removed bonus.h" />
     <MESSAGE value="skybox added" />
-    <option name="LAST_COMMIT_MESSAGE" value="skybox added" />
+    <MESSAGE value="gun and bad guys added" />
+    <option name="LAST_COMMIT_MESSAGE" value="gun and bad guys added" />
   </component>
 </project>

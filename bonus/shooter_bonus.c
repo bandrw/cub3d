@@ -62,6 +62,6 @@ void		put_shooting_stuff(t_mlx *mlx_info)
 void		delete_sprite(t_mlx *mlx_info, int i)
 {
 	mlx_info->map[mlx_info->sprites[i].y_index]
-	[mlx_info->sprites[i].x_index] = '0';
+			[mlx_info->sprites[i].x_index] = '0';
 	mlx_info->sprites[i].x_index = -1;
 }

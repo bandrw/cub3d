@@ -13,7 +13,7 @@
 #include "cub3d.h"
 #include "hooks.h"
 
-int				mouse_click(int key, int x, int y, t_mlx *mlx_info)
+static int		mouse_click(int key, int x, int y, t_mlx *mlx_info)
 {
 	float	diff;
 	float	angle;

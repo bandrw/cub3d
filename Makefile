@@ -78,15 +78,15 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	gcc -O3 $(FLAGS) -I$(HEADERS_DIR) -I$(LIBFT_DIR)/includes -I$(LIBMLX_DIR)/static -c $< -o $@
 
 clean:
-	@#make clean -C $(LIBFT_DIR)
-	@#make clean -C $(LIBMLX_DIR)/static
-	@#make clean -C $(LIBMLX_DIR)/dynamic
+	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(LIBMLX_DIR)/static
+	@make clean -C $(LIBMLX_DIR)/dynamic
 	/bin/rm -f $(OBJ) $(BONUS_OBJ)
 
 fclean: clean
-	@#make fclean -C $(LIBFT_DIR)
-	@#make fclean -C $(LIBMLX_DIR)/static
-	@#make fclean -C $(LIBMLX_DIR)/dynamic
+	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(LIBMLX_DIR)/static
+	@make fclean -C $(LIBMLX_DIR)/dynamic
 	/bin/rm -f libmlx.dylib
 	/bin/rm -f $(NAME)
 

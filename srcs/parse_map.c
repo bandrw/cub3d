@@ -105,7 +105,7 @@ int			parse_map(t_mlx *mlx_info, char **map)
 	while (map[i] != 0)
 	{
 		len = (int)ft_strlen(map[i]);
-		if (len == 0 || !(ft_strchr(map[i], '0') ||
+		if (len == 0 || !(ft_strchr(map[i], ' ') || ft_strchr(map[i], '0') ||
 				ft_strchr(map[i], '1') || ft_strchr(map[i], '2')))
 			throw_error("Invalid map");
 		if (len > mlx_info->map_width)
