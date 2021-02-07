@@ -13,6 +13,13 @@
 #include "cub3d.h"
 #include "hooks.h"
 
+int				mouse_click(t_mlx *mlx_info)
+{
+	(void)mlx_info;
+	system("afplay sound/shot.mp3 -t 1 -v 0.5 &");
+	return (0);
+}
+
 int				close_app(t_mlx *mlx_info)
 {
 	int i;
@@ -41,7 +48,6 @@ void			new_mlx(t_mlx *mlx_info, char *file, char *title, void *out)
 		throw_error("mlx init");
 	mlx_info->window = out;
 	parse_config(mlx_info, file);
-	printf("new_mlx: %d\n", mlx_info->map_height);
 	if (out && (mlx_info->window = mlx_new_window(mlx_info->init,
 			mlx_info->width, mlx_info->height, title)) == 0)
 		throw_error("mlx window");
@@ -82,6 +88,7 @@ int				main(int argc, char **argv)
 						mlx_info.height / 2);
 		mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
 		mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
+		mlx_mouse_hook(mlx_info.window, mouse_click, &mlx_info);
 		mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
 		mlx_hook(mlx_info.window, 17, 1L << 17, close_app, &mlx_info);
 		mlx_loop_hook(mlx_info.init, key_handle, &mlx_info);

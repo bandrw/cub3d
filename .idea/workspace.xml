@@ -40,17 +40,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="removed bonus.h">
-      <change afterPath="$PROJECT_DIR$/img/gun.xpm" afterDir="false" />
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="skybox added">
+      <change afterPath="$PROJECT_DIR$/sound/shot.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/main_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/main_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/main_render_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/main_render_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/sprite_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/sprite_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/to_dark_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/to_dark_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/skybox.xpm" beforeDir="false" afterPath="$PROJECT_DIR$/img/skybox.xpm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,13 +109,14 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/minilibx" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sound" />
       <recent name="$PROJECT_DIR$/minilibx/static" />
       <recent name="$PROJECT_DIR$/minilibx" />
       <recent name="$PROJECT_DIR$/maps" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/minilibx" />
     </key>
   </component>
   <component name="RunManager" selected="Makefile Application.bonus">
@@ -217,7 +211,7 @@
       <workItem from="1612534296467" duration="16589000" />
       <workItem from="1612562233720" duration="5489000" />
       <workItem from="1612613030468" duration="2789000" />
-      <workItem from="1612652161409" duration="15124000" />
+      <workItem from="1612652161409" duration="17050000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -401,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612658777307</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="skybox added">
+      <created>1612668821065</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1612668821065</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,7 +421,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="textured 3d view + can't walk through the walls" />
     <MESSAGE value="map parser, map extension (todo)" />
     <MESSAGE value="dynamic map walking with any render size" />
     <MESSAGE value="промежуточный" />
@@ -445,6 +445,7 @@
     <MESSAGE value="A distance related shadow effect added" />
     <MESSAGE value="perfect mandatory part" />
     <MESSAGE value="removed bonus.h" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed bonus.h" />
+    <MESSAGE value="skybox added" />
+    <option name="LAST_COMMIT_MESSAGE" value="skybox added" />
   </component>
 </project>
