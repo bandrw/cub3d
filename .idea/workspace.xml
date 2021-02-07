@@ -40,7 +40,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="">
+    <list default="true" id="972b5bd4-1ad0-4991-9b2f-baf4125db06e" name="Default Changelist" comment="removed bonus.h">
+      <change afterPath="$PROJECT_DIR$/img/gun.xpm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/main_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/main_bonus.c" afterDir="false" />
@@ -48,15 +49,8 @@
       <change beforePath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/mlx_put_bonus.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/sprite_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/sprite_bonus.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/to_dark_bonus.c" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/to_dark_bonus.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/bonus.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/skybox.xpm" beforeDir="false" afterPath="$PROJECT_DIR$/img/skybox.xpm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/parse.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minilibx/dynamic/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/minilibx/dynamic/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_config.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_info.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_info.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_map.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_map.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/parse_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parse_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +217,7 @@
       <workItem from="1612534296467" duration="16589000" />
       <workItem from="1612562233720" duration="5489000" />
       <workItem from="1612613030468" duration="2789000" />
-      <workItem from="1612652161409" duration="6566000" />
+      <workItem from="1612652161409" duration="15124000" />
     </task>
     <task id="LOCAL-00001" summary="good 3d view + movement">
       <created>1609735368540</created>
@@ -400,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612611424580</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="removed bonus.h">
+      <created>1612658777307</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1612658777307</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,7 +420,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="good 3d view + movement" />
     <MESSAGE value="textured 3d view + can't walk through the walls" />
     <MESSAGE value="map parser, map extension (todo)" />
     <MESSAGE value="dynamic map walking with any render size" />
@@ -444,6 +444,7 @@
     <MESSAGE value="color parse improved" />
     <MESSAGE value="A distance related shadow effect added" />
     <MESSAGE value="perfect mandatory part" />
-    <option name="LAST_COMMIT_MESSAGE" value="perfect mandatory part" />
+    <MESSAGE value="removed bonus.h" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed bonus.h" />
   </component>
 </project>

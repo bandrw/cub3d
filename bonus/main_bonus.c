@@ -52,8 +52,7 @@ void			new_mlx(t_mlx *mlx_info, char *file, char *title, void *out)
 	mlx_info->stage.addr = mlx_get_data_addr(mlx_info->stage.img,
 			&mlx_info->stage.bits_per_pixel, &mlx_info->stage.line_length,
 			&mlx_info->stage.endian);
-//	new_texture(mlx_info, &mlx_info->skybox_texture, "img/skybox.xpm");
-//	printf("%p\n", mlx_info->skybox_texture.img);
+	new_texture(mlx_info, &mlx_info->skybox_texture, "img/skybox.xpm");
 }
 
 static void		check_arguments(int argc, char **argv)
@@ -80,7 +79,7 @@ int				main(int argc, char **argv)
 	{
 		new_mlx(&mlx_info, argv[1], "Kfriese's Cub 3D", (void*)1);
 		mlx_mouse_move(mlx_info.window, mlx_info.width / 2,
-					   mlx_info.height / 2);
+						mlx_info.height / 2);
 		mlx_hook(mlx_info.window, 2, 1L << 1, key_press, &mlx_info);
 		mlx_hook(mlx_info.window, 3, 0, key_release, &mlx_info);
 		mlx_hook(mlx_info.window, 6, 0, mouse_movement, &mlx_info);
@@ -95,4 +94,3 @@ int				main(int argc, char **argv)
 	}
 	return (0);
 }
-

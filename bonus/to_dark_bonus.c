@@ -19,11 +19,11 @@ unsigned int	to_dark(t_mlx *mlx_info, unsigned int color, int height)
 	pixel.red = color >> 16;
 	pixel.green = color >> 8;
 	pixel.blue = color >> 0;
-	if ((mlx_info->height / height) * 0.075f > 1)
+	if (((float)mlx_info->height / (float)height) * 0.125f > 1.f)
 	{
-		pixel.red /= (mlx_info->height / height) * 0.075f;
-		pixel.green /= (mlx_info->height / height) * 0.075f;
-		pixel.blue /= (mlx_info->height / height) * 0.075f;
+		pixel.red /= ((float)mlx_info->height / (float)height) * 0.125f;
+		pixel.green /= ((float)mlx_info->height / (float)height) * 0.125f;
+		pixel.blue /= ((float)mlx_info->height / (float)height) * 0.125f;
 	}
 	return ((pixel.red << 16) | (pixel.green << 8) | (pixel.blue << 0));
 }

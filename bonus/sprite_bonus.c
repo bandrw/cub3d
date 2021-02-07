@@ -24,7 +24,7 @@ static float	get_angle_diff(float a1, float a2)
 }
 
 static void		put_sprite(t_mlx *mlx_info, t_pointf trick, t_point start,
-							  const float lengths[mlx_info->width])
+							const float lengths[mlx_info->width])
 {
 	int				i;
 	int				j;
@@ -45,17 +45,15 @@ static void		put_sprite(t_mlx *mlx_info, t_pointf trick, t_point start,
 					(mlx_info->sprite_texture.width / trick.x),
 					j * (mlx_info->sprite_texture.height / trick.x));
 				if (color != 0xFF000000)
-					color = to_dark(mlx_info, color, trick.x);
-				if (color != 0xFF000000)
 					img_pixel_put(&mlx_info->stage, i + start.x, j + start.y,
-								  color);
+									to_dark(mlx_info, color, trick.x));
 			}
 		}
 	}
 }
 
 static void		draw_sprite(t_mlx *mlx_info, float length, float sprite,
-							   const float lengths[mlx_info->width])
+								const float lengths[mlx_info->width])
 {
 	float		size;
 	t_point		start;
@@ -117,16 +115,16 @@ void			put_sprites(t_mlx *mlx_info,
 		mlx_info->sprites[i].length = sqrtf(powf(
 				(float)mlx_info->sprites[i].x_index * 50.f + 25.f -
 				mlx_info->player.position.x, 2) +
-											powf((float)mlx_info->sprites[i].y_index * 50.f + 25.f -
-												 mlx_info->player.position.y, 2));
+				powf((float)mlx_info->sprites[i].y_index * 50.f + 25.f -
+				mlx_info->player.position.y, 2));
 	i = -1;
 	sort_sprites(mlx_info);
 	while (++i < mlx_info->sprites_count)
 	{
 		sprite = to_deg(atan2f(mlx_info->player.position.y -
-							   (float)mlx_info->sprites[i].y_index * 50.f - 25.f,
-							   (float)mlx_info->sprites[i].x_index * 50.f -
-							   mlx_info->player.position.x + 25.f));
+				(float)mlx_info->sprites[i].y_index * 50.f - 25.f,
+				(float)mlx_info->sprites[i].x_index * 50.f -
+				mlx_info->player.position.x + 25.f));
 		draw_sprite(mlx_info, mlx_info->sprites[i].length, sprite, lengths);
 	}
 }

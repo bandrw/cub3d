@@ -112,6 +112,12 @@ typedef struct	s_mlx
 	t_img		west_texture;
 	t_img		east_texture;
 	t_img		sprite_texture;
+# ifdef BONUS
+
+	t_img		skybox_texture;
+
+# endif
+
 	int			floor_color;
 	int			ceiling_color;
 	int			map_width;
@@ -156,8 +162,10 @@ void			parse_color(t_mlx *mlx_info, const char *str);
 void			parse_texture(t_mlx *mlx_info, char *str);
 void			parse_render_size(t_mlx *mlx_info, char *str);
 
-#ifdef BONUS
+# ifdef BONUS
+
 unsigned int	to_dark(t_mlx *mlx_info, unsigned int color, int height);
-#endif
+
+# endif
 
 #endif

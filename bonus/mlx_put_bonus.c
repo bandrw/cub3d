@@ -36,7 +36,7 @@ unsigned int	img_get_pixel(t_img *img_data, int x, int y)
 }
 
 void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
-							  int color)
+								int color)
 {
 	int start_x;
 	int start_y;
@@ -59,15 +59,42 @@ void			put_rectangle(t_img *img_data, t_rectangle *rectangle,
 	}
 }
 
+static void		put_skybox(t_mlx *mlx_info)
+{
+	int				i;
+	int				j;
+	unsigned int	color;
+	t_point			point;
+
+	i = -1;
+	while (++i < mlx_info->width)
+	{
+		j = -1;
+		while (++j < mlx_info->height / 2)
+		{
+			point.x = -mlx_info->player.angle * mlx_info->skybox_texture.width /
+				60.f + i * mlx_info->skybox_texture.width /
+				(float)mlx_info->width;
+			point.y = j * 2 * mlx_info->skybox_texture.height /
+				(float)mlx_info->height;
+			while (point.x < 0)
+				point.x += mlx_info->skybox_texture.width;
+			while (point.x > mlx_info->skybox_texture.width)
+				point.x -= mlx_info->skybox_texture.width;
+			color = img_get_pixel(&mlx_info->skybox_texture, point.x, point.y);
+			img_pixel_put(&mlx_info->stage, i, j, color);
+		}
+	}
+}
+
 void			put_ceilling_and_floor(t_mlx *mlx_info)
 {
 	t_rectangle rectangle;
 
+	put_skybox(mlx_info);
 	rectangle.width = mlx_info->width;
 	rectangle.height = mlx_info->height / 2;
 	rectangle.start.x = 0;
-	rectangle.start.y = 0;
-	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->ceiling_color);
 	rectangle.start.y = (float)mlx_info->height / 2.f;
 	put_rectangle(&mlx_info->stage, &rectangle, mlx_info->floor_color);
 }
