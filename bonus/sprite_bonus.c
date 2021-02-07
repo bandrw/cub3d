@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static float	get_angle_diff(float a1, float a2)
+float			get_angle_diff(float a1, float a2)
 {
 	if (cosf(to_rad(a2)) > 0 || cosf(to_rad(a1)) > 0)
 		return (a2 - a1);
@@ -121,6 +121,8 @@ void			put_sprites(t_mlx *mlx_info,
 	sort_sprites(mlx_info);
 	while (++i < mlx_info->sprites_count)
 	{
+		if (mlx_info->sprites[i].x_index == -1)
+			continue ;
 		sprite = to_deg(atan2f(mlx_info->player.position.y -
 				(float)mlx_info->sprites[i].y_index * 50.f - 25.f,
 				(float)mlx_info->sprites[i].x_index * 50.f -

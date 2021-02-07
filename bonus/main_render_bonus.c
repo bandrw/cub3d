@@ -70,7 +70,6 @@ void			main_render(t_mlx *mlx_info)
 {
 	int		x_tmp;
 	float	angle;
-	float	lengths[mlx_info->width];
 
 	if (mlx_info->window)
 		mlx_mouse_hide();
@@ -79,11 +78,12 @@ void			main_render(t_mlx *mlx_info)
 	x_tmp = 0;
 	while (x_tmp < mlx_info->width)
 	{
-		render_line(mlx_info, x_tmp, lengths, angle);
+		render_line(mlx_info, x_tmp, mlx_info->lengths, angle);
 		angle -= 66.f / (float)mlx_info->width;
 		x_tmp++;
 	}
-	put_sprites(mlx_info, lengths);
+	put_sprites(mlx_info, mlx_info->lengths);
+	put_shooting_stuff(mlx_info);
 	if (mlx_info->window)
 		mlx_put_image_to_window(mlx_info->init, mlx_info->window,
 								mlx_info->stage.img, 0, 0);

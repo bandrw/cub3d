@@ -21,6 +21,7 @@ LIBMLX_DYNAMIC_NAME = $(LIBMLX_DIR)/dynamic/libmlx.dylib
 
 HEADERS_DIR = includes
 OBJ_DIR = obj
+BONUS_OBJ_DIR = bonus_obj
 SRCS_DIR = srcs
 HEADER_FILES = cub3d.h bmp.h hooks.h
 HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADER_FILES))
@@ -106,12 +107,12 @@ BONUS_FILES = main_bonus.c \
 		parse_map.c \
 		parse_utils.c \
 		parse_info.c \
-		to_dark_bonus.c
+		to_dark_bonus.c \
+		shooter_bonus.c
 
 BONUS_HEADER_FILES = bmp.h hooks.h cub3d.h
 BONUS_HEADERS = $(addprefix $(HEADERS_DIR)/, $(BONUS_HEADER_FILES))
 BONUS_SRCS = $(addprefix bonus/, $(FILES))
-BONUS_OBJ_DIR = bonus_obj
 BONUS_OBJ = $(addprefix $(BONUS_OBJ_DIR)/, $(BONUS_FILES:.c=.o))
 
 bonus: $(BONUS_OBJ_DIR) build_libft build_libmlx build_cub3D $(BONUS_OBJ)

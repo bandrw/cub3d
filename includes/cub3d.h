@@ -22,6 +22,7 @@
 # define KEY_D 2
 # define KEY_W 13
 # define KEY_ESC 53
+# define LEFT_SHIFT 257
 
 # include "libft.h"
 # include "mlx.h"
@@ -96,6 +97,7 @@ typedef struct	s_keys
 	int			d;
 	int			left_arrow;
 	int			right_arrow;
+	int			left_shift;
 }				t_keys;
 
 typedef struct	s_mlx
@@ -112,9 +114,12 @@ typedef struct	s_mlx
 	t_img		west_texture;
 	t_img		east_texture;
 	t_img		sprite_texture;
+
 # ifdef BONUS
 
 	t_img		skybox_texture;
+	t_img		gun_texture;
+	float		*lengths;
 
 # endif
 
@@ -165,6 +170,9 @@ void			parse_render_size(t_mlx *mlx_info, char *str);
 # ifdef BONUS
 
 unsigned int	to_dark(t_mlx *mlx_info, unsigned int color, int height);
+void			put_shooting_stuff(t_mlx *mlx_info);
+float			get_angle_diff(float a1, float a2);
+void			delete_sprite(t_mlx *mlx_info, int i);
 
 # endif
 

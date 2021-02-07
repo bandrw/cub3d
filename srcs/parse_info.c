@@ -22,7 +22,7 @@ void		parse_render_size(t_mlx *mlx_info, char *str)
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '\0')
-		throw_error("Map error: Resolution");
+		throw_error("Bad resolution");
 	mlx_info->width = ft_atoi(str + i);
 	i += ft_nbrlen(mlx_info->width);
 	if (mlx_info->window && mlx_info->width > max.x)
@@ -30,10 +30,12 @@ void		parse_render_size(t_mlx *mlx_info, char *str)
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '\0')
-		throw_error("Map error: Resolution");
+		throw_error("Bad resolution");
 	mlx_info->height = ft_atoi(str + i);
 	if (mlx_info->window && mlx_info->height > max.y)
 		mlx_info->height = max.y;
+	if (mlx_info->width <= 0 || mlx_info->height <= 0)
+		throw_error("Bad resolution");
 }
 
 void		parse_texture(t_mlx *mlx_info, char *str)

@@ -16,6 +16,8 @@ int		key_press(int key, t_mlx *mlx_info)
 {
 	if (key == KEY_ESC)
 		close_app(mlx_info);
+	if (key == LEFT_SHIFT)
+		mlx_info->active_keys.left_shift = 1;
 	if (key == KEY_W)
 		mlx_info->active_keys.w = 1;
 	if (key == KEY_A)
@@ -33,6 +35,8 @@ int		key_press(int key, t_mlx *mlx_info)
 
 int		key_release(int key, t_mlx *mlx_info)
 {
+	if (key == LEFT_SHIFT)
+		mlx_info->active_keys.left_shift = 0;
 	if (key == KEY_W)
 		mlx_info->active_keys.w = 0;
 	if (key == KEY_A)
@@ -58,6 +62,8 @@ int		key_handle(t_mlx *mlx_info)
 			mlx_info->active_keys.a + mlx_info->active_keys.d;
 	if (count == 2)
 		step /= 1.7f;
+	if (mlx_info->active_keys.left_shift)
+		step /= 2.f;
 	if (mlx_info->active_keys.w)
 		move_forward(mlx_info, step);
 	if (mlx_info->active_keys.a)
