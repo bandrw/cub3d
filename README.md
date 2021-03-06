@@ -5,7 +5,7 @@
 
 ### Usage
 > #### Build
-> - `make`
+> - `make` or `make bonus`
 > #### Run
 > - `./cub3D maps/example.cub`
 > #### Render first frame (out.bmp)
