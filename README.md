@@ -10,3 +10,6 @@
 > - `./cub3D maps/example.cub`
 > #### Render first frame (out.bmp)
 > - `./cub3D maps/example.cub --save`
+
+### Demo
+https://youtu.be/HfjRl2w9xX4
